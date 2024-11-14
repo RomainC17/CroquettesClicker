@@ -16,6 +16,8 @@ Projet personnel d'un jeu incrémental sur le thème des croquettes pour chat.
 ### Langages utilisés
 
 * ![Javascript]
+* ![HTML]
+* ![CSS]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
