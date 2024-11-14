@@ -18,7 +18,6 @@ let continentCroquettesCost = 750000;
 let planeteCroquettesCost = 1200000;
 let galaxieCroquettesCost = 1750000;
 let trouNoirCroquettesCost = 10000000;
-let test;
 
 let gamelleDecorationCost = 100;
 let gamellePurchased = false;
