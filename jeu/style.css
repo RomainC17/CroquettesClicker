@@ -1,0 +1,173 @@
+body, html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background-color: #aea79b; /* Couleur de fond douce */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Utilise toute la hauteur de la fenêtre */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  height: 100%; /* Prend toute la hauteur disponible dans le conteneur */
+}
+
+.cat-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#clickImage {
+  width: 300px;
+  cursor: pointer;
+}
+
+#bowlImage {
+  width: 150px; /* Ajuste la taille de la gamelle */
+  position: absolute;
+  top: 250px; /* Ajuste cette valeur pour placer la gamelle sous le chat */
+  left: 50%; /* Centre horizontalement par rapport au chat */
+  transform: translateX(-50%); /* Centre la gamelle en fonction de sa largeur */
+}
+
+/* Styles de base pour l'image d'animation */
+#fadeImage {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 103px; /* Ajustez la taille de l'image */
+  pointer-events: none; /* Empêche toute interaction avec l'image */
+}
+
+/* Classe pour le fondu en entrée */
+.fade-in {
+  animation: fadeInEffect 2s ease-in forwards;
+}
+
+@keyframes fadeInEffect {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.upgrade-buttons {
+  position: fixed; /* Fixe les boutons sur le côté droit de l'écran */
+  top: 50%;
+  right: 20px; /* Distance par rapport au côté droit de l'écran */
+  transform: translateY(-50%); /* Centrer verticalement */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espace entre les boutons */
+  font-size: 13px;
+}
+
+.decoration-buttons {
+  position: fixed; /* Fixe les boutons sur le côté droit de l'écran */
+  top: 50%;
+  left: 20px; /* Distance par rapport au côté droit de l'écran */
+  transform: translateY(-50%); /* Centrer verticalement */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espace entre les boutons */
+  font-size: 13px;
+}
+
+/* Style général des boutons */
+button {
+  background-color: #f4c842; /* Couleur de croquette ou de gamelle */
+  color: #4a3c29; /* Couleur brune pour rappeler la nourriture de chat */
+  font-size: 1.2em;
+  font-family: "Comic Sans MS", cursive, sans-serif; /* Police un peu fun */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); /* Ombre pour un effet 3D */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  white-space: nowrap;
+  display: none; /* Masquée par défaut */
+  z-index: 1000; /* Élévation pour rester au-dessus */
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -5px; /* Positionne la flèche sur le côté droit de l'infobulle */
+  transform: translateY(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent #333;
+}
+
+/* Effet visuel au survol */
+button:hover {
+  background-color: #e3b735;
+  transform: scale(1.05); /* Légère agrandissement */
+}
+
+/* Effet pour les boutons désactivés */
+button:disabled {
+  background-color: #d9d9d9;
+  color: #8c8c8c;
+  cursor: not-allowed;
+}
+
+button.purchased {
+  position: relative;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+button.purchased::after {
+  content: "✔";
+  color: green;
+  font-size: 1.5em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  position: relative;
+}
+
+.disabled::after {
+  content: "🔒";
+  position: absolute;
+  right: 10px;
+  color: #555;
+}

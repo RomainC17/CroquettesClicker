@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Clicker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+      <h1>Croquettes Clicker</h1>
+      <div id="scoreTotal">Croquettes totales : 0</div>
+      <div id="scoreSeconde">Croquettes par seconde : 0</div>
+      <button onclick="resetGame()">Réinitialiser le jeu</button>
+
+    <!-- Conteneur principal pour l'image et les boutons -->
+    <div class="game-area">
+      <div class="cat-container">
+          <img id="clickImage" src="images/ZezeDessin.png" alt="Chat">
+          <img id="bowlImage" src="images/GamelleZeze.png" alt="Gamelle">
+      </div>
+  </div>
+
+  <!-- Image pour l'animation de fondu, invisible par défaut -->  
+<img id="fadeImage" src="images/Croquettes.png" alt="Animation" class="fade-effect" style="display: none;">
+<img id="couverturefadeImage" src="images/Couverture.png" alt="Animation" class="fade-effect" style="display: none;">
+<img id="distributeurfadeImage" src="images/Distributeur.png" alt="Animation" class="fade-effect" style="display: none;">
+
+
+    <!-- Colonne pour les boutons d'amélioration, alignée à droite -->
+    <div class="upgrade-buttons">
+      <h1>Améliorations</h1>
+      <button id="maitresseCroquettes" data-title="Une maîtresse" data-description="Mhhhh, des croquettes au poulet fait maison ! C'est mes préférés !">
+        Maîtresse (coût: 2) : +1 croq./sec
+      </button>
+      <button id="sacCroquettes" data-title="Sac de croquettes" data-description="Un petit sac de croquettes. Miam !">
+        Sac (coût: 10) : +3 croq./sec
+      </button>
+      <button id="colisCroquettes" data-title="Colis de croquettes" data-description="Un chouette colis de croquettes.">
+        Colis (coût: 100) : +5 croq./sec
+      </button>
+      <button id="champsCroquettes" data-title="Champ de croquettes" data-description="Cultiver des hectares de croquettes... quelle bonne idée !">
+        Champ (coût: 1 500) : +7 croq./sec
+      </button>
+      <button id="minesCroquettes" data-title="Mine de croquettes" data-description="Des croquettes sous-terraines ? J'ai hâte de les goûter !">
+        Mine (coût: 5 000) : +12 croq./sec
+      </button>
+      <button id="usineCroquettes" data-title="Usine de croquettes" data-description="Une ligne de production rien que pour moi !">
+        Usine (coût: 15 000) : +15 croq./sec
+      </button>
+      <button id="convoiCroquettes" data-title="Convoi exceptionnel de croquettes" data-description="Une armée de camions remplis de croquettes !">
+        Convoi exceptionnel (coût: 30 000) : +17 croq./sec
+      </button>
+      <button id="affretementCroquettes" data-title="Affrètement de croquettes" data-description="Tous les plus gros avions cargos prêts à ravitailler ma gamelle !">
+        Affrètement (coût: 100 000) : +20 croq./sec
+      </button>
+      <button id="teleporteurCroquettes" data-title="Téléporteur de croquettes" data-description="Faire venir toutes les croquettes du monde pour moi ? Chouette !">
+        Téléporteur (coût: 165 000) : +25 croq./sec
+      </button>
+      <button id="developpeurCroquettes" data-title="Développeur de croquettes" data-description="Imaginez... un programme qui me fabrique les meilleures croquettes selon mes humeurs...">
+        Développeur (coût: 215 000) : +29 croq./sec
+      </button>
+      <button id="cgmCroquettes" data-title="Croquettes Génétiquement Modifiées" data-description="Des croquettes qui se dédoublent et changent de goût rien qu'a ma pensée !">
+        C.G.M (coût: 350 000) : +32 croq./sec
+      </button>
+      <button id="patrouilleCroquettes" data-title="Patrouilles de croquettes" data-description="Un groupe d'hommes armées jusqu'au dents, prêts à défendre et chercher tout ce dont j'ai besoin !">
+        Patrouilles (coût: 500 000) : +35 croq./sec
+      </button>
+      <button id="continentCroquettes" data-title="Continent de croquettes" data-description="Une montagne de croquettes... sur le continent Américain !">
+        Continent (coût: 750 000 ) : +40 croq./sec
+      </button>
+      <button id="planeteCroquettes" data-title="Planète de croquettes" data-description="Croc'Planet1, Croc'Planet2...">
+        Planète (coût: 1 200 000) : +42 croq./sec
+      </button>
+      <button id="galaxieCroquettes" data-title="Galaxie de croquettes" data-description="Il y en a à perte de vue">
+        Galaxie (coût: 1 750 000) : +45 croq./sec
+      </button>
+      <button id="trouNoirCroquettes" data-title="Trou noir de croquettes" data-description="Une infinité de croquettes au goût si divin...">
+        Trou noir (coût: 10 000 000) : +100 croq./sec
+      </button>
+    </div>
+
+    <div class="decoration-buttons">
+      <h1>Boutique</h1>
+      <button id="gamelleDecoration" data-title="Remplir la gamelle" data-description="Merci ! ">
+        Remplir la gamelle (coût : 100 croquettes)
+      </button>
+      <button id="couvertureDecoration" data-title="Donner une couverture" data-description="Manger sur une petite couverture... c'est royal ! ">
+        Donner une couverture (coût : 1 000 croquettes)
+      </button>
+      <button id="jouetDecoration" data-title="Remplir la gamelle" data-description="Merci ! ">
+        Donner un jouet (coût : 50 000 croquettes)
+      </button>
+      <button id="distributeurDecoration" data-title="Donner une couverture" data-description="Manger sur une petite couverture... c'est royal ! ">
+        Placer un distributeur automatique (coût : 150 000 croquettes)
+      </button>
+      <button id="arbreDecoration" data-title="Remplir la gamelle" data-description="Merci ! ">
+        Installer un arbre à chat (coût : 500 000 croquettes)
+      </button>
+      <button id="pieceDecoration" data-title="Remplir la gamelle" data-description="Merci ! ">
+        Décorer la pièce (coût : 100 croquettes)
+      </button>
+      <button id="gamelleDecoration" data-title="Remplir la gamelle" data-description="Merci ! ">
+        Placer un coffre de croquettes (coût : 2 000 000 croquettes)
+      </button>
+      <button id="chemineeDecoration" data-title="Installer une cheminée" data-description="Quoi de mieux que la chaleur naturelle d'une cheminée !">
+        Installer une cheminée (coût : 1 350 000 croquettes)
+      </button>
+      <button id="gamelleDecoration" data-title="Remplir la gamelle" data-description="Merci ! ">
+        Remplir la gamelle (coût : 100 croquettes)
+      </button>
+      <button id="gamelleDecoration" data-title="Remplir la gamelle" data-description="Merci ! ">
+        Remplir la gamelle (coût : 100 croquettes)
+      </button>
+      <button id="gamelleDecoration" data-title="Remplir la gamelle" data-description="Merci ! ">
+        Remplir la gamelle (coût : 100 croquettes)
+      </button>
+      <button id="gamelleDecoration" data-title="Remplir la gamelle" data-description="Merci ! ">
+        Remplir la gamelle (coût : 100 croquettes)
+      </button>
+      <button id="gamelleDecoration" data-title="Remplir la gamelle" data-description="Merci ! ">
+        Remplir la gamelle (coût : 100 croquettes)
+      </button>
+      <button id="gamelleDecoration" data-title="Remplir la gamelle" data-description="Merci ! ">
+        Remplir la gamelle (coût : 100 croquettes)
+      </button>
+      <button id="gamelleDecoration" data-title="Remplir la gamelle" data-description="Merci ! ">
+        ++++
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
