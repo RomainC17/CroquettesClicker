@@ -97,6 +97,8 @@ Project Link: [https://github.com/RomainC17/CroquettesClicker](https://github.co
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [Javascript]: https://img.shields.io/badge/logo-javascript-blue?logo=javascript
+[HTML]: https://img.shields.io/badge/logo-HTML-blue?logo=HTML
+[CSS]: https://img.shields.io/badge/logo-CSS-blue?logo=CSS
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
