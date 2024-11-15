@@ -26,6 +26,12 @@ const tooltip = document.createElement("div");
 tooltip.classList.add("tooltip");
 document.body.appendChild(tooltip);
 
+const backgroundMusic = new Audio('sons/Fabrice-Tonnellier.mp3');
+backgroundMusic.volume = 0.2; // Volume réduit pour ne pas gêner
+backgroundMusic.loop = true; // Boucle
+backgroundMusic.play();
+
+
 // Mise à jour du score affiché
 function updateScore() {
   document.getElementById("scoreTotal").textContent = "Croquettes totales : " + score;

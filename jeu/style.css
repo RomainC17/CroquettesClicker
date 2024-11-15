@@ -172,3 +172,36 @@ button.purchased::after {
   right: 10px;
   color: #555;
 }
+
+/* Fond noir pour l'animation des étoiles */
+#background-stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: -1; /* Derrière tout le reste */
+  display: none; /* Caché par défaut */
+  overflow: hidden;
+}
+
+/* Style pour les étoiles */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite ease-in-out;
+}
+
+/* Animation de scintillement */
+@keyframes twinkle {
+  0%, 100% {
+      opacity: 0;
+  }
+  50% {
+      opacity: 1;
+  }
+}
