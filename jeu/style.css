@@ -60,6 +60,16 @@ body, html {
   pointer-events: none; /* Empêche toute interaction avec l'image */
 }
 
+/* Styles de base pour l'image d'animation */
+#EauImage {
+  position: absolute;
+  top: 70%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  width: 103px; /* Ajustez la taille de l'image */
+  pointer-events: none; /* Empêche toute interaction avec l'image */
+}
+
 /* Classe pour le fondu en entrée */
 .fade-in {
   animation: fadeInEffect 2s ease-in forwards;

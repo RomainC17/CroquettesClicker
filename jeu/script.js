@@ -21,6 +21,8 @@ let trouNoirCroquettesCost = 10000000;
 
 let gamelleDecorationCost = 100;
 let gamellePurchased = false;
+let eauDecorationCost = 10;
+let eauPurchased = false;
 
 const tooltip = document.createElement("div");
 tooltip.classList.add("tooltip");
@@ -227,6 +229,18 @@ document.getElementById("gamelleDecoration").addEventListener("click", () => {
   }
 });
 
+// Fonction pour gérer l'achat de la décoration de gamelle
+document.getElementById("eauDecoration").addEventListener("click", () => {
+  if (!eauPurchased && score >= eauDecorationCost) {
+    score -= eauDecorationCost;
+    eauPurchased = true;
+    updateScore();
+    updateButtons();
+    markAsPurchased("eauDecoration");
+    showEauImage();
+  }
+});
+
 // Fonction pour marquer un bouton comme acheté
 function markAsPurchased(buttonId) {
   const button = document.getElementById(buttonId);
@@ -253,6 +267,7 @@ function updateButtons() {
   const trouNoirCroquettesButton = document.getElementById("trouNoirCroquettes");
 
   const gamelleButton = document.getElementById("gamelleDecoration");
+  const eauButton = document.getElementById("eauDecoration");
 
   // Mise à jour du bouton Sac de croquettes
   maitresseCroquettesButton.textContent = `Maîtresse (coût: ${maitresseCroquettesCost}) : +1 croq./sec`;
@@ -424,6 +439,16 @@ function updateButtons() {
     gamelleButton.classList.remove("disabled");
     gamelleButton.disabled = false;
   }
+
+  // Mise à jour du bouton Gamelle (décoration)
+  eauButton.textContent = `Installer et remplir la gamelle d'eau (coût : ${eauDecorationCost} croquettes)`;
+  if (eauPurchased || score < eauDecorationCost) {
+    eauButton.classList.add("disabled");
+    eauButton.disabled = true;
+  } else {
+    eauButton.classList.remove("disabled");
+    eauButton.disabled = false;
+  }
 }
 
 // Fonction pour afficher l'infobulle
@@ -488,11 +513,16 @@ function loadGame() {
     galaxieCroquettesCost = data.galaxieCroquettesCost || 17500000;
     trouNoirCroquettesCost = data.trouNoirCroquettesCost || 10000000;
     gamellePurchased = data.gamellePurchased || false;
+    eauPurchased = data.eauPurchased || false;
     updateScore();
     updateButtons();
     if (gamellePurchased) {
       markAsPurchased("gamelleDecoration");
       showFadeImage();
+    }
+    if (eauPurchased) {
+      markAsPurchased("eauDecoration");
+      showEauImage();
     }
   }
 }
@@ -518,7 +548,8 @@ function saveGame() {
     planeteCroquettesCost: planeteCroquettesCost,
     galaxieCroquettesCost: galaxieCroquettesCost,
     trouNoirCroquettesCost: trouNoirCroquettesCost,
-    gamellePurchased: gamellePurchased
+    gamellePurchased: gamellePurchased,
+    eauPurchased: eauPurchased
   };
   localStorage.setItem("clickerGameSave", JSON.stringify(data));
 }
@@ -540,6 +571,7 @@ function resetGame() {
   champCroquettesCost = 1500;
   mineCroquettesCost = 5000;
   gamellePurchased = false;
+  eauPurchased = false;
   updateScore();
   updateButtons();
 }
@@ -560,6 +592,13 @@ setInterval(autoCroquettes, 1000);
 // Fonction pour afficher une animation de fade quand une amélioration est achetée
 function showFadeImage() {
   const fadeImage = document.getElementById("fadeImage");
+  fadeImage.style.display = "block";
+  fadeImage.classList.add("fade-in");
+}
+
+// Fonction pour afficher une animation de fade quand une amélioration est achetée
+function showEauImage() {
+  const fadeImage = document.getElementById("EauImage");
   fadeImage.style.display = "block";
   fadeImage.classList.add("fade-in");
 }
