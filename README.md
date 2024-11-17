@@ -7,19 +7,12 @@ Projet personnel d'un jeu incrémental sur le thème des croquettes pour chat.
 <!-- ABOUT THE PROJECT -->
 ## A propos du projet
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 ### Langages utilisés
 
 * ![Javascript]
 * ![HTML]
 * ![CSS]
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 ### Installation
 
@@ -35,30 +28,22 @@ Projet personnel d'un jeu incrémental sur le thème des croquettes pour chat.
    ```sh
    npm run start
    ```
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
 Le projet ne peux être utilisé à des fins commerciales snas l'accord de l'auteur, au titre de la propriété intellectuelle. L'usage personnel y est libre.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- ROADMAP -->
 ## Roadmap
 
 - [x] Ajouter README.md
-- [x] Paramétrer les boutons d'amélioration & la boutique
+- [/] Paramétrer les boutons d'amélioration & la boutique
 - [ ] Optimisation du code et des traitements
 - [ ] Support Multi-langues
     - [ ] Anglais
     - [ ] Espagnol
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Top contributors:
 
@@ -66,16 +51,12 @@ Le projet ne peux être utilisé à des fins commerciales snas l'accord de l'aut
   <img src="https://contrib.rocks/image?repo=RomainC17/CroquettesClicker" alt="contrib.rocks image" />
 </a>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- CONTACT -->
 ## Contact
 
 Romain CARTIER - romaincartier@laposte.net
 
 Project Link: [https://github.com/RomainC17/CroquettesClicker](https://github.com/RomainC17/CroquettesClicker)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
