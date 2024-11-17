@@ -9,10 +9,10 @@
 <body>
   <div class="container">
     <div id="background-stars"></div>
-      <h1>Croquettes Clicker</h1>
+      <h1 id="titre">Croquettes Clicker</h1>
       <div id="scoreTotal">Croquettes totales : 0</div>
       <div id="scoreSeconde">Croquettes par seconde : 0</div>
-      <button onclick="resetGame()">Réinitialiser le jeu</button>
+      <button id="resetGame" onclick="resetGame()">Réinitialiser le jeu</button>
 
     <!-- Conteneur principal pour l'image et les boutons -->
     <div class="game-area">
@@ -79,6 +79,9 @@
       <button id="trouNoirCroquettes" data-title="Trou noir de croquettes" data-description="Une infinité de croquettes au goût si divin...">
         Trou noir (coût: 10 000 000) : +100 croq./sec
       </button>
+      <br>
+      <br>
+      <button id="quitButton">Quitter le jeu</button>
     </div>
 
     <div class="decoration-buttons">
@@ -86,8 +89,8 @@
       <button id="gamelleDecoration" data-title="Remplir la gamelle" data-description="Merci ! (il était temps)">
         Remplir la gamelle (coût : 100 croquettes)
       </button>
-      <button id="distributeurDecoration" data-title="Placer un distributeur automatique" data-description="Enfin quelqu'un qui me sert en temps et en heure ! ">
-        Placer un distributeur automatique (coût : 5 000 croquettes)
+      <button id="nuitDecoration" data-title="La nuit des chats" data-description="C'est mon moment préféré ! ">
+        La nuit des chats (coût : 5 000 croquettes)
       </button>
       <button id="eauDecoration" data-title="Installer et remplir la gamelle d'eau" data-description="C'est presque une aberration de ne pas y avoir pensé avant ! ">
         Installer et remplir la gamelle d'eau (coût : 100 croquettes)
@@ -109,7 +112,7 @@
       </button>
     </div>
   </div>
-
   <script src="script.js"></script>
+  <div id="fin">Double Echap pour quitter</div>
 </body>
 </html>

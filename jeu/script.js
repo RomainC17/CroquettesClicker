@@ -23,6 +23,8 @@ let gamelleDecorationCost = 100;
 let gamellePurchased = false;
 let eauDecorationCost = 10;
 let eauPurchased = false;
+let nuitDecorationCost = 10;
+let nuitPurchased = false;
 
 const tooltip = document.createElement("div");
 tooltip.classList.add("tooltip");
@@ -241,6 +243,20 @@ document.getElementById("eauDecoration").addEventListener("click", () => {
   }
 });
 
+// Activer l'effet des étoiles lors d'une amélioration
+document.getElementById('nuitDecoration').addEventListener('click', () => {
+  if (score >= nuitDecorationCost) {
+    console.log('Amélioration Galaxie achetée');
+    score -= nuitDecorationCost;
+    nuitPurchased = true;
+    updateScore();
+    updateButtons();
+
+    // Active l'effet des étoiles
+    createStars();
+  }
+});
+
 // Fonction pour marquer un bouton comme acheté
 function markAsPurchased(buttonId) {
   const button = document.getElementById(buttonId);
@@ -268,6 +284,7 @@ function updateButtons() {
 
   const gamelleButton = document.getElementById("gamelleDecoration");
   const eauButton = document.getElementById("eauDecoration");
+  const nuitButton = document.getElementById("nuitDecoration");
 
   // Mise à jour du bouton Sac de croquettes
   maitresseCroquettesButton.textContent = `Maîtresse (coût: ${maitresseCroquettesCost}) : +1 croq./sec`;
@@ -449,6 +466,16 @@ function updateButtons() {
     eauButton.classList.remove("disabled");
     eauButton.disabled = false;
   }
+
+  // Mise à jour du bouton Gamelle (décoration)
+  nuitButton.textContent = `nuit (coût : ${nuitDecorationCost} croquettes)`;
+  if (nuitPurchased || score < nuitDecorationCost) {
+    nuitButton.classList.add("disabled");
+    nuitButton.disabled = true;
+  } else {
+    nuitButton.classList.remove("disabled");
+    nuitButton.disabled = false;
+  }
 }
 
 // Fonction pour afficher l'infobulle
@@ -514,6 +541,7 @@ function loadGame() {
     trouNoirCroquettesCost = data.trouNoirCroquettesCost || 10000000;
     gamellePurchased = data.gamellePurchased || false;
     eauPurchased = data.eauPurchased || false;
+    nuitPurchased = data.nuitPurchased || false;
     updateScore();
     updateButtons();
     if (gamellePurchased) {
@@ -523,6 +551,10 @@ function loadGame() {
     if (eauPurchased) {
       markAsPurchased("eauDecoration");
       showEauImage();
+    }
+    if (nuitPurchased) {
+      markAsPurchased("nuitDecoration");
+      createStars();
     }
   }
 }
@@ -549,7 +581,8 @@ function saveGame() {
     galaxieCroquettesCost: galaxieCroquettesCost,
     trouNoirCroquettesCost: trouNoirCroquettesCost,
     gamellePurchased: gamellePurchased,
-    eauPurchased: eauPurchased
+    eauPurchased: eauPurchased,
+    nuitPurchased: nuitPurchased
   };
   localStorage.setItem("clickerGameSave", JSON.stringify(data));
 }
@@ -572,6 +605,7 @@ function resetGame() {
   mineCroquettesCost = 5000;
   gamellePurchased = false;
   eauPurchased = false;
+  nuitPurchased = false;
   updateScore();
   updateButtons();
 }
@@ -626,3 +660,28 @@ document.addEventListener("keydown", function(event) {
 document.getElementById("quitButton").addEventListener("click", () => {
   ipcRenderer.send("close-app");
 });
+
+// Fonction pour créer les étoiles
+function createStars() {
+  const background = document.getElementById('background-stars');
+  background.style.display = 'block'; // Rendre visible le fond noir
+  console.log('createStars: display:', getComputedStyle(background).display);
+  console.log('createStars: dimensions:', background.offsetWidth, background.offsetHeight);
+  background.innerHTML = ''; // Réinitialise le contenu
+
+  for (let i = 0; i < 100; i++) { // Nombre d'étoiles
+    const star = document.createElement('div');
+    star.classList.add('star');
+    
+    // Position aléatoire
+    star.style.left = Math.random() * 100 + 'vw';
+    star.style.top = Math.random() * 100 + 'vh';
+    
+    // Taille aléatoire
+    const size = Math.random() * 3 + 1; // Entre 1px et 4px
+    star.style.width = `${size}px`;
+    star.style.height = `${size}px`;
+
+    background.appendChild(star);
+  }
+}

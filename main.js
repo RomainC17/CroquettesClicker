@@ -9,10 +9,13 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
+      // enableRemoteModule: true,
     },
   });
 
   win.loadFile('jeu/index.html');
+    // // Ouvre les DevTools automatiquement
+    // win.webContents.openDevTools();
 
   // Écouter l'événement "close-app" pour fermer l'application
   ipcMain.on("close-app", () => {

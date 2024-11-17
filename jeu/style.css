@@ -11,6 +11,14 @@ body, html {
   height: 100vh;
 }
 
+#fin {
+  position : absolute;
+  bottom : 0px;
+  color: white;
+  left:90%;
+  font-size: 20px;
+}
+
 .container {
   position: relative;
   width: 100%;
@@ -19,6 +27,29 @@ body, html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+#scoreTotal{
+  color: brown;
+  z-index: 1;
+}
+
+#scoreSeconde{
+  color: brown;
+  z-index: 1;
+}
+
+#quitButton{
+  z-index: 1;
+}
+
+#resetGame{
+  z-index: 1;
+}
+
+#titre{
+  z-index: 1;
+  color: brown;
 }
 
 .game-area {
@@ -63,8 +94,8 @@ body, html {
 /* Styles de base pour l'image d'animation */
 #EauImage {
   position: absolute;
-  top: 70%;
-  left: 55%;
+  top: 75%;
+  left: 60%;
   transform: translate(-50%, -50%);
   width: 103px; /* Ajustez la taille de l'image */
   pointer-events: none; /* Empêche toute interaction avec l'image */
@@ -183,7 +214,7 @@ button.purchased::after {
   color: #555;
 }
 
-/* Fond noir pour l'animation des étoiles */
+/* Fond noir pour les étoiles */
 #background-stars {
   position: fixed;
   top: 0;
@@ -191,7 +222,7 @@ button.purchased::after {
   width: 100%;
   height: 100%;
   background-color: black;
-  z-index: -1; /* Derrière tout le reste */
+  z-index: 0; /* Derrière tout le reste */
   display: none; /* Caché par défaut */
   overflow: hidden;
 }
@@ -206,12 +237,12 @@ button.purchased::after {
   animation: twinkle 2s infinite ease-in-out;
 }
 
-/* Animation de scintillement */
+/* Animation des étoiles */
 @keyframes twinkle {
   0%, 100% {
-      opacity: 0;
+    opacity: 0;
   }
   50% {
-      opacity: 1;
+    opacity: 1;
   }
 }
