@@ -246,3 +246,9 @@ button.purchased::after {
     opacity: 1;
   }
 }
+
+* {
+  user-select: none; /* Désactive la sélection de texte et d'éléments */
+  -webkit-user-select: none; /* Support pour anciens navigateurs WebKit */
+  -ms-user-select: none; /* Support pour IE/Edge */
+}
