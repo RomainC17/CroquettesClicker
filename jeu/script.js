@@ -38,7 +38,7 @@ backgroundMusic.play();
 
 // Mise à jour du score affiché
 function updateScore() {
-  document.getElementById("scoreTotal").textContent = "Croquettes totales : " + score;
+  document.getElementById("scoreTotal").textContent = "Croquettes totales : " + Math.floor(score);
   document.getElementById("scoreSeconde").textContent = "Croquettes par seconde : " + croquettesParSeconde;
 }
 
@@ -468,7 +468,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Gamelle (décoration)
-  nuitButton.textContent = `nuit (coût : ${nuitDecorationCost} croquettes)`;
+  nuitButton.textContent = `La nuit des chats (coût : ${nuitDecorationCost} croquettes)`;
   if (nuitPurchased || score < nuitDecorationCost) {
     nuitButton.classList.add("disabled");
     nuitButton.disabled = true;
@@ -621,7 +621,26 @@ document.getElementById("clickImage").addEventListener("click", () => {
 });
 
 // Appel de la fonction pour générer des croquettes par seconde
-setInterval(autoCroquettes, 1000);
+//setInterval(autoCroquettes, 1000);
+
+let lastUpdateTime = Date.now(); // Pour calculer le temps écoulé
+
+function animateScore() {
+  const now = Date.now();
+  const elapsedTime = now - lastUpdateTime; // Temps écoulé depuis la dernière mise à jour
+  lastUpdateTime = now;
+
+  // Ajoutez au score en fonction du temps écoulé et des croquettes par seconde
+  score += (croquettesParSeconde * (elapsedTime / 1000));
+  updateScore(); // Mettez à jour l'affichage en temps réel
+  updateButtons();
+
+  // Continuez la boucle d'animation
+  requestAnimationFrame(animateScore);
+}
+
+// Démarrez l'animation lors du chargement de la page
+animateScore();
 
 // Fonction pour afficher une animation de fade quand une amélioration est achetée
 function showFadeImage() {
