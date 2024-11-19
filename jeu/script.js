@@ -23,6 +23,14 @@ let gamelleDecorationCost = 100;
 let gamellePurchased = false;
 let eauDecorationCost = 10;
 let eauPurchased = false;
+let distributeurDecorationCost = 10;
+let distributeurPurchased = false;
+let arbreDecorationCost = 10;
+let arbrePurchased = false;
+let coffreDecorationCost = 10;
+let coffrePurchased = false;
+let chemineeDecorationCost = 10;
+let chemineePurchased = false;
 let nuitDecorationCost = 10;
 let nuitPurchased = false;
 
@@ -34,6 +42,12 @@ const backgroundMusic = new Audio('sons/Fabrice-Tonnellier.mp3');
 backgroundMusic.volume = 0.2; // Volume réduit pour ne pas gêner
 backgroundMusic.loop = true; // Boucle
 backgroundMusic.play();
+
+// Gestionnaire de volume
+const volumeSlider = document.getElementById('volume-slider');
+volumeSlider.addEventListener('input', (event) => {
+  backgroundMusic.volume = event.target.value; // Ajuste le volume en fonction de la position du curseur
+});
 
 
 // Mise à jour du score affiché
@@ -227,6 +241,10 @@ document.getElementById("gamelleDecoration").addEventListener("click", () => {
     updateScore();
     updateButtons();
     markAsPurchased("gamelleDecoration");
+    const fadeImage = document.getElementById("fadeImage");
+    fadeImage.style.display = "block";
+    fadeImage.style.zIndex = "5"; // S'assurer qu'elle est au-dessus
+    fadeImage.classList.add("fade-in");
     showFadeImage();
   }
 });
@@ -240,6 +258,54 @@ document.getElementById("eauDecoration").addEventListener("click", () => {
     updateButtons();
     markAsPurchased("eauDecoration");
     showEauImage();
+  }
+});
+
+// Fonction pour gérer l'achat de la décoration de gamelle
+document.getElementById("distributeurDecoration").addEventListener("click", () => {
+  if (!distributeurPurchased && score >= distributeurDecorationCost) {
+    score -= distributeurDecorationCost;
+    distributeurPurchased = true;
+    updateScore();
+    updateButtons();
+    markAsPurchased("distributeurDecoration");
+    showDistributeurImage();
+  }
+});
+
+// Fonction pour gérer l'achat de la décoration de gamelle
+document.getElementById("arbreDecoration").addEventListener("click", () => {
+  if (!arbrePurchased && score >= arbreDecorationCost) {
+    score -= arbreDecorationCost;
+    arbrePurchased = true;
+    updateScore();
+    updateButtons();
+    markAsPurchased("arbreDecoration");
+    showArbreImage();
+  }
+});
+
+// Fonction pour gérer l'achat de la décoration de gamelle
+document.getElementById("coffreDecoration").addEventListener("click", () => {
+  if (!coffrePurchased && score >= coffreDecorationCost) {
+    score -= coffreDecorationCost;
+    coffrePurchased = true;
+    updateScore();
+    updateButtons();
+    markAsPurchased("coffreDecoration");
+    showCoffreImage();
+  }
+});
+
+// Fonction pour gérer l'achat de la décoration de gamelle
+document.getElementById("chemineeDecoration").addEventListener("click", () => {
+  if (!chemineePurchased && score >= chemineeDecorationCost) {
+    score -= chemineeDecorationCost;
+    chemineePurchased = true;
+    updateScore();
+    updateButtons();
+    markAsPurchased("chemineeDecoration");
+    showChemineeImage();
   }
 });
 
@@ -284,6 +350,10 @@ function updateButtons() {
 
   const gamelleButton = document.getElementById("gamelleDecoration");
   const eauButton = document.getElementById("eauDecoration");
+  const distributeurButton = document.getElementById("distributeurDecoration");
+  const arbreButton = document.getElementById("arbreDecoration");
+  const coffreButton = document.getElementById("coffreDecoration");
+  const chemineeButton = document.getElementById("chemineeDecoration");
   const nuitButton = document.getElementById("nuitDecoration");
 
   // Mise à jour du bouton Sac de croquettes
@@ -468,6 +538,46 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Gamelle (décoration)
+  distributeurButton.textContent = `Placer un distributeur automatique (coût : ${distributeurDecorationCost} croquettes)`;
+  if (distributeurPurchased || score < distributeurDecorationCost) {
+    distributeurButton.classList.add("disabled");
+    distributeurButton.disabled = true;
+  } else {
+    distributeurButton.classList.remove("disabled");
+    distributeurButton.disabled = false;
+  }
+
+  // Mise à jour du bouton Gamelle (décoration)
+  arbreButton.textContent = `Installer un arbre à chat (coût : ${arbreDecorationCost} croquettes)`;
+  if (arbrePurchased || score < arbreDecorationCost) {
+    arbreButton.classList.add("disabled");
+    arbreButton.disabled = true;
+  } else {
+    arbreButton.classList.remove("disabled");
+    arbreButton.disabled = false;
+  }
+
+  // Mise à jour du bouton Gamelle (décoration)
+  coffreButton.textContent = `Placer un coffre de croquettes (coût : ${coffreDecorationCost} croquettes)`;
+  if (coffrePurchased || score < coffreDecorationCost) {
+    coffreButton.classList.add("disabled");
+    coffreButton.disabled = true;
+  } else {
+    coffreButton.classList.remove("disabled");
+    coffreButton.disabled = false;
+  }
+
+  // Mise à jour du bouton Gamelle (décoration)
+  chemineeButton.textContent = `Installer une cheminée (coût : ${chemineeDecorationCost} croquettes)`;
+  if (chemineePurchased || score < chemineeDecorationCost) {
+    chemineeButton.classList.add("disabled");
+    chemineeButton.disabled = true;
+  } else {
+    chemineeButton.classList.remove("disabled");
+    chemineeButton.disabled = false;
+  }
+
+  // Mise à jour du bouton Gamelle (décoration)
   nuitButton.textContent = `La nuit des chats (coût : ${nuitDecorationCost} croquettes)`;
   if (nuitPurchased || score < nuitDecorationCost) {
     nuitButton.classList.add("disabled");
@@ -541,6 +651,10 @@ function loadGame() {
     trouNoirCroquettesCost = data.trouNoirCroquettesCost || 10000000;
     gamellePurchased = data.gamellePurchased || false;
     eauPurchased = data.eauPurchased || false;
+    distributeurPurchased = data.distributeurPurchased || false;
+    arbrePurchased = data.arbrePurchased || false;
+    coffrePurchased = data.coffrePurchased || false;
+    chemineePurchased = data.chemineePurchased || false;
     nuitPurchased = data.nuitPurchased || false;
     updateScore();
     updateButtons();
@@ -551,6 +665,22 @@ function loadGame() {
     if (eauPurchased) {
       markAsPurchased("eauDecoration");
       showEauImage();
+    }
+    if (distributeurPurchased) {
+      markAsPurchased("distributeurDecoration");
+      showDistributeurImage();
+    }
+    if (arbrePurchased) {
+      markAsPurchased("arbreDecoration");
+      showArbreImage();
+    }
+    if (coffrePurchased) {
+      markAsPurchased("coffreDecoration");
+      showCoffreImage();
+    }
+    if (chemineePurchased) {
+      markAsPurchased("chemineeDecoration");
+      showChemineeImage();
     }
     if (nuitPurchased) {
       markAsPurchased("nuitDecoration");
@@ -582,6 +712,10 @@ function saveGame() {
     trouNoirCroquettesCost: trouNoirCroquettesCost,
     gamellePurchased: gamellePurchased,
     eauPurchased: eauPurchased,
+    distributeurPurchased: distributeurPurchased,
+    arbrePurchased: arbrePurchased,
+    coffrePurchased: coffrePurchased,
+    chemineePurchased: chemineePurchased,
     nuitPurchased: nuitPurchased
   };
   localStorage.setItem("clickerGameSave", JSON.stringify(data));
@@ -606,6 +740,10 @@ function resetGame() {
   gamellePurchased = false;
   eauPurchased = false;
   nuitPurchased = false;
+  distributeurPurchased = false;
+  arbrePurchased = false;
+  coffrePurchased = false;
+  chemineePurchased = false;
   updateScore();
   updateButtons();
 }
@@ -644,14 +782,44 @@ animateScore();
 
 // Fonction pour afficher une animation de fade quand une amélioration est achetée
 function showFadeImage() {
-  const fadeImage = document.getElementById("fadeImage");
-  fadeImage.style.display = "block";
-  fadeImage.classList.add("fade-in");
+  const bowlImage = document.getElementById("bowlImage");
+  const bowlImageFilled = document.getElementById("fadeImage");
+
+  bowlImage.style.display = "none"; // Cache l'image vide
+  bowlImageFilled.style.display = "block"; // Affiche l'image remplie
 }
 
 // Fonction pour afficher une animation de fade quand une amélioration est achetée
 function showEauImage() {
   const fadeImage = document.getElementById("EauImage");
+  fadeImage.style.display = "block";
+  fadeImage.classList.add("fade-in");
+}
+
+// Fonction pour afficher une animation de fade quand une amélioration est achetée
+function showArbreImage() {
+  const fadeImage = document.getElementById("arbreImage");
+  fadeImage.style.display = "block";
+  fadeImage.classList.add("fade-in");
+}
+
+// Fonction pour afficher une animation de fade quand une amélioration est achetée
+function showDistributeurImage() {
+  const fadeImage = document.getElementById("distributeurImage");
+  fadeImage.style.display = "block";
+  fadeImage.classList.add("fade-in");
+}
+
+// Fonction pour afficher une animation de fade quand une amélioration est achetée
+function showCoffreImage() {
+  const fadeImage = document.getElementById("coffreImage");
+  fadeImage.style.display = "block";
+  fadeImage.classList.add("fade-in");
+}
+
+// Fonction pour afficher une animation de fade quand une amélioration est achetée
+function showChemineeImage() {
+  const fadeImage = document.getElementById("chemineeImage");
   fadeImage.style.display = "block";
   fadeImage.classList.add("fade-in");
 }

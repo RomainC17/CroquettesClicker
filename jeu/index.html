@@ -19,13 +19,16 @@
       <div class="cat-container">
           <img id="clickImage" src="images/ZezeDessin.png" alt="Chat" draggable="false">
           <img id="bowlImage" src="images/GamelleZeze.png" alt="Gamelle" draggable="false">
+          <img id="fadeImage" src="images/GamelleZezeRemplie.png" alt="GamelleRemplie" draggable="false">
       </div>
   </div>
 
   <!-- Image pour l'animation de fondu, invisible par défaut -->  
-<img id="fadeImage" src="images/Croquettes.png" alt="Animation" class="fade-effect" style="display: none;">
 <img id="EauImage" src="images/Eau.png" alt="Animation" class="fade-effect" style="display: none;">
-<img id="distributeurfadeImage" src="images/Distributeur.png" alt="Animation" class="fade-effect" style="display: none;">
+<img id="distributeurImage" src="images/Distributeur.png" alt="Animation" class="fade-effect" style="display: none;">
+<img id="arbreImage" src="images/Arbre.png" alt="Animation" class="fade-effect" style="display: none;">
+<img id="coffreImage" src="images/Coffre.png" alt="Animation" class="fade-effect" style="display: none;">
+<img id="chemineeImage" src="images/Cheminee.png" alt="Animation" class="fade-effect" style="display: none;">
 
 
     <!-- Colonne pour les boutons d'amélioration, alignée à droite -->
@@ -86,8 +89,8 @@
 
     <div class="decoration-buttons">
       <h1>Boutique</h1>
-      <button id="gamelleDecoration" data-title="Remplir la gamelle" data-description="Merci ! (il était temps)">
-        Remplir la gamelle (coût : 100 croquettes)
+      <button id="gamelleDecoration" data-title="Remplir la gamelle de croquettes" data-description="Merci ! (il était temps)">
+        Remplir la gamelle de croquettes (coût : 100 croquettes)
       </button>
       <button id="distributeurDecoration" data-title="Placer un distributeur automatique" data-description="Je n'ai enfin plus besoin d'attendre pour avoir à manger. ">
         Placer un distributeur automatique (coût : 5 000 croquettes)
@@ -95,14 +98,8 @@
       <button id="eauDecoration" data-title="Installer et remplir la gamelle d'eau" data-description="C'est presque une aberration de ne pas y avoir pensé avant ! ">
         Installer et remplir la gamelle d'eau (coût : 37 000 croquettes)
       </button>
-      <button id="nuitDecoration" data-title="La nuit des chats" data-description="C'est mon moment préféré ! ">
-        La nuit des chats (coût : 100 000 croquettes)
-      </button>
-      <button id="arbreDecoration" data-title="Remplir la gamelle" data-description="500 000 croquettes pour ça ?! Pour 2 croquettes et un bout de carton, mon bonheur est tout trouvé. ">
+      <button id="arbreDecoration" data-title="Installer un arbre à chat" data-description="500 000 croquettes pour ça ?! Pour 2 croquettes et un bout de carton, mon bonheur est tout trouvé. ">
         Installer un arbre à chat (coût : 500 000 croquettes)
-      </button>
-      <button id="pieceDecoration" data-title="Décorer la pièce" data-description="C'est vrai que c'est un peu vide ici. ">
-        Décorer la pièce (coût : 100 croquettes)
       </button>
       <button id="coffreDecoration" data-title="Placer un coffre de croquettes" data-description="Une sorte de gamelle géante ! ">
         Placer un coffre de croquettes (coût : 2 000 000 croquettes)
@@ -110,13 +107,24 @@
       <button id="chemineeDecoration" data-title="Installer une cheminée" data-description="Quoi de mieux que la chaleur naturelle d'une cheminée !">
         Installer une cheminée (coût : 1 350 000 croquettes)
       </button>
+      <button id="nuitDecoration" data-title="La nuit des chats" data-description="C'est mon moment préféré ! ">
+        La nuit des chats (coût : 100 000 croquettes)
+      </button>
+      <button id="pieceDecoration" data-title="Décorer la pièce" data-description="C'est vrai que c'est un peu vide ici. ">
+        Décorer la pièce (coût : 100 croquettes)
+      </button>
       <button id="tableauDecoration" data-title="Accrocher un tableau de famille" data-description="Un joli tableau de mes maîtres et moi ! ">
         Accrocher un tableau de famille (coût : 100 croquettes)
       </button>
     </div>
   </div>
+  <div class="volume-control">
+    <label for="volume-slider">Volume : </label>
+    <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.2">
+  </div>
   <script src="script.js"></script>
   <script src="JS/quitter.js"></script>
+  <div id="credits">🔊Fabrice Tonnellier - Quiétude</div>
   <div id="fin">Double Echap pour quitter</div>
 </body>
 </html>

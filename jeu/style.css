@@ -19,6 +19,14 @@ body, html {
   font-size: 20px;
 }
 
+#credits {
+  position : absolute;
+  bottom : 0px;
+  color: white;
+  right: 90%;
+  font-size: 20px;
+}
+
 .container {
   position: relative;
   width: 100%;
@@ -74,21 +82,22 @@ body, html {
 }
 
 #bowlImage {
-  width: 150px; /* Ajuste la taille de la gamelle */
+  width: 150px; /* Taille de base */
   position: absolute;
-  top: 250px; /* Ajuste cette valeur pour placer la gamelle sous le chat */
-  left: 50%; /* Centre horizontalement par rapport au chat */
-  transform: translateX(-50%); /* Centre la gamelle en fonction de sa largeur */
+  top: 95%; /* Aligne avec le chat */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2; /* Niveau inférieur */
 }
 
-/* Styles de base pour l'image d'animation */
 #fadeImage {
+  width: 270px; /* Taille identique à celle de gamelleZeze */
   position: absolute;
-  top: 70%;
+  top: 35%; /* Même position */
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 103px; /* Ajustez la taille de l'image */
-  pointer-events: none; /* Empêche toute interaction avec l'image */
+  transform: translateX(-50%);
+  z-index: 3; /* Niveau supérieur pour être au-dessus */
+  display: none; /* Cachée par défaut */
 }
 
 /* Styles de base pour l'image d'animation */
@@ -100,6 +109,47 @@ body, html {
   width: 103px; /* Ajustez la taille de l'image */
   pointer-events: none; /* Empêche toute interaction avec l'image */
 }
+
+/* Styles de base pour l'image d'animation */
+#distributeurImage {
+  position: absolute;
+  top: 30%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  width: 250px; /* Ajustez la taille de l'image */
+  pointer-events: none; /* Empêche toute interaction avec l'image */
+}
+
+/* Styles de base pour l'image d'animation */
+#arbreImage {
+  position: absolute;
+  top: 70%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  width: 300px; /* Ajustez la taille de l'image */
+  pointer-events: none; /* Empêche toute interaction avec l'image */
+}
+
+/* Styles de base pour l'image d'animation */
+#coffreImage {
+  position: absolute;
+  top: 70%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  width: 300px; /* Ajustez la taille de l'image */
+  pointer-events: none; /* Empêche toute interaction avec l'image */
+}
+
+/* Styles de base pour l'image d'animation */
+#chemineeImage {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  width: 300px; /* Ajustez la taille de l'image */
+  pointer-events: none; /* Empêche toute interaction avec l'image */
+}
+
 
 /* Classe pour le fondu en entrée */
 .fade-in {
@@ -245,6 +295,42 @@ button.purchased::after {
   50% {
     opacity: 1;
   }
+}
+
+.volume-control {
+  position: absolute;
+  color: white;
+  display: flex;
+  align-items: center;
+  bottom: 20px;
+  left:10%;
+}
+
+#volume-slider {
+  -webkit-appearance: none; /* Supprime le style par défaut */
+  width: 200px; /* Ajustez la largeur */
+  height: 10px; /* Ajustez la hauteur */
+  background: lightgray; /* Couleur de fond */
+  border-radius: 5px; /* Coins arrondis */
+  outline: none; /* Supprime le contour bleu */
+}
+
+/* Barre de progression personnalisée */
+#volume-slider::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #24a201, #ff4500); /* Couleurs du dégradé */
+  height: 10px;
+  border-radius: 5px;
+}
+
+/* Style du curseur (remplacement par une image) */
+#volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 50px; /* Largeur de l'image */
+  height: 50px; /* Hauteur de l'image */
+  background: url('images/Patte.png') no-repeat center; /* Remplacez par votre image */
+  background-size: contain; /* Assure que l'image est bien ajustée */
+  cursor: pointer; /* Garde l'effet clic */
 }
 
 * {
