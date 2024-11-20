@@ -31,6 +31,8 @@ let coffreDecorationCost = 10;
 let coffrePurchased = false;
 let chemineeDecorationCost = 10;
 let chemineePurchased = false;
+let tableauDecorationCost = 10;
+let tableauPurchased = false;
 let nuitDecorationCost = 10;
 let nuitPurchased = false;
 
@@ -293,6 +295,18 @@ document.getElementById("chemineeDecoration").addEventListener("click", () => {
   }
 });
 
+// Fonction pour gérer l'achat de la décoration de gamelle
+document.getElementById("tableauDecoration").addEventListener("click", () => {
+  if (!tableauPurchased && score >= tableauDecorationCost) {
+    score -= tableauDecorationCost;
+    tableauPurchased = true;
+    updateScore();
+    updateButtons();
+    markAsPurchased("tableauDecoration");
+    showTableauImage();
+  }
+});
+
 // Activer l'effet des étoiles lors d'une amélioration
 document.getElementById('nuitDecoration').addEventListener('click', () => {
   if (score >= nuitDecorationCost) {
@@ -338,6 +352,7 @@ function updateButtons() {
   const arbreButton = document.getElementById("arbreDecoration");
   const coffreButton = document.getElementById("coffreDecoration");
   const chemineeButton = document.getElementById("chemineeDecoration");
+  const tableauButton = document.getElementById("tableauDecoration");
   const nuitButton = document.getElementById("nuitDecoration");
 
   // Mise à jour du bouton Sac de croquettes
@@ -562,6 +577,16 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Gamelle (décoration)
+  tableauButton.textContent = `Accrocher un tableau de famille (coût : ${tableauDecorationCost} croquettes)`;
+  if (tableauPurchased || score < tableauDecorationCost) {
+    tableauButton.classList.add("disabled");
+    tableauButton.disabled = true;
+  } else {
+    tableauButton.classList.remove("disabled");
+    tableauButton.disabled = false;
+  }
+
+  // Mise à jour du bouton Gamelle (décoration)
   nuitButton.textContent = `La nuit des chats (coût : ${nuitDecorationCost} croquettes)`;
   if (nuitPurchased || score < nuitDecorationCost) {
     nuitButton.classList.add("disabled");
@@ -601,6 +626,7 @@ function loadGame() {
     arbrePurchased = data.arbrePurchased || false;
     coffrePurchased = data.coffrePurchased || false;
     chemineePurchased = data.chemineePurchased || false;
+    tableauPurchased = data.tableauPurchased || false;
     nuitPurchased = data.nuitPurchased || false;
     updateScore();
     updateButtons();
@@ -627,6 +653,10 @@ function loadGame() {
     if (chemineePurchased) {
       markAsPurchased("chemineeDecoration");
       showChemineeImage();
+    }
+    if (tableauPurchased) {
+      markAsPurchased("tableauDecoration");
+      showTableauImage();
     }
     if (nuitPurchased) {
       markAsPurchased("nuitDecoration");
@@ -662,6 +692,7 @@ function saveGame() {
     arbrePurchased: arbrePurchased,
     coffrePurchased: coffrePurchased,
     chemineePurchased: chemineePurchased,
+    tableauPurchased: tableauPurchased,
     nuitPurchased: nuitPurchased
   };
   localStorage.setItem("clickerGameSave", JSON.stringify(data));
@@ -690,6 +721,7 @@ function resetGame() {
   arbrePurchased = false;
   coffrePurchased = false;
   chemineePurchased = false;
+  tableauPurchased = false;
   updateScore();
   updateButtons();
 }
@@ -763,6 +795,13 @@ function showCoffreImage() {
 // Fonction pour afficher une animation de fade quand une amélioration est achetée
 function showChemineeImage() {
   const fadeImage = document.getElementById("chemineeImage");
+  fadeImage.style.display = "block";
+  fadeImage.classList.add("fade-in");
+}
+
+// Fonction pour afficher une animation de fade quand une amélioration est achetée
+function showTableauImage() {
+  const fadeImage = document.getElementById("tableauImage");
   fadeImage.style.display = "block";
   fadeImage.classList.add("fade-in");
 }

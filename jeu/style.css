@@ -150,6 +150,16 @@ body, html {
   pointer-events: none; /* Empêche toute interaction avec l'image */
 }
 
+/* Styles de base pour l'image d'animation */
+#tableauImage {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px; /* Ajustez la taille de l'image */
+  pointer-events: none; /* Empêche toute interaction avec l'image */
+}
+
 
 /* Classe pour le fondu en entrée */
 .fade-in {
