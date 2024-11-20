@@ -307,7 +307,7 @@ button.purchased::after {
 }
 
 #volume-slider {
-  -webkit-appearance: none; /* Supprime le style par défaut */
+  appearance: none; /* Supprime le style par défaut */
   width: 200px; /* Ajustez la largeur */
   height: 10px; /* Ajustez la hauteur */
   background: lightgray; /* Couleur de fond */

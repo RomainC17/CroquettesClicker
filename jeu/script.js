@@ -577,44 +577,6 @@ function updateButtons() {
   }
 }
 
-// Fonction pour afficher l'infobulle
-function showTooltip(event) {
-  const title = event.target.getAttribute("data-title");
-  const description = event.target.getAttribute("data-description");
-
-  tooltip.innerHTML = `<strong>${title}</strong><br>${description}`;
-  tooltip.style.display = "block";
-
-  const buttonRect = event.target.getBoundingClientRect();
-
-  if (event.target.closest(".decoration-buttons")) {
-    tooltip.style.left = `${buttonRect.right + 10}px`;
-  } else {
-    tooltip.style.left = `${buttonRect.left - tooltip.offsetWidth - 10}px`;
-  }
-
-  tooltip.style.top = `${buttonRect.top + window.scrollY + (buttonRect.height / 2) - (tooltip.offsetHeight / 2)}px`;
-}
-
-// Fonction pour masquer l'infobulle
-function hideTooltip() {
-  tooltip.style.display = "none";
-}
-
-// Ajouter les événements de survol aux boutons d'amélioration
-document.querySelectorAll(".upgrade-buttons button, .decoration-buttons button").forEach(button => {
-  button.addEventListener("mouseover", showTooltip);
-  button.addEventListener("mousemove", showTooltip);
-  button.addEventListener("mouseout", hideTooltip);
-});
-
-// Fonction pour ajouter les croquettes automatiquement
-function autoCroquettes() {
-  score += croquettesParSeconde;
-  updateScore();
-  updateButtons(); // Met à jour les boutons à chaque seconde
-}
-
 // Charger les données sauvegardées (si elles existent)
 function loadGame() {
   const savedGame = localStorage.getItem("clickerGameSave");
@@ -746,9 +708,6 @@ document.getElementById("clickImage").addEventListener("click", () => {
   updateScore();
   updateButtons(); // Mettre à jour les boutons après chaque clic
 });
-
-// Appel de la fonction pour générer des croquettes par seconde
-//setInterval(autoCroquettes, 1000);
 
 let lastUpdateTime = Date.now(); // Pour calculer le temps écoulé
 
