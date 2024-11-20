@@ -34,11 +34,6 @@ let chemineePurchased = false;
 let nuitDecorationCost = 10;
 let nuitPurchased = false;
 
-const tooltip = document.createElement("div");
-tooltip.classList.add("tooltip");
-document.body.appendChild(tooltip);
-
-
 // Mise à jour du score affiché
 function updateScore() {
   document.getElementById("scoreTotal").textContent = "Croquettes totales : " + Math.floor(score);

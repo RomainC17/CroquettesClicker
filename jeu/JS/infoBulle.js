@@ -1,3 +1,7 @@
+const tooltip = document.createElement("div");
+tooltip.classList.add("tooltip");
+document.body.appendChild(tooltip);
+
 // Fonction pour afficher l'infobulle
 function showTooltip(event) {
   const title = event.target.getAttribute("data-title");
