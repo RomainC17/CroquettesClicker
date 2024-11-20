@@ -40,11 +40,13 @@ body, html {
 #scoreTotal{
   color: brown;
   z-index: 1;
+  font-family: "Gill Sans", sans-serif;;
 }
 
 #scoreSeconde{
   color: brown;
   z-index: 1;
+  font-family: "Gill Sans", sans-serif;;
 }
 
 #quitButton{
@@ -56,8 +58,9 @@ body, html {
 }
 
 #titre{
-  z-index: 1;
+  z-index: 2;
   color: brown;
+  font-family: 'cursive';
 }
 
 .game-area {

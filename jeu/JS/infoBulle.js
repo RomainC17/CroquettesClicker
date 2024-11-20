@@ -12,6 +12,10 @@ function showTooltip(event) {
 
   const buttonRect = event.target.getBoundingClientRect();
 
+  if (event.target.closest("titre")) {
+    tooltip.style.left = `${rect.left + window.scrollX}px`;
+    tooltip.style.top = `${rect.bottom + window.scrollY + 10}px`;
+  }
   if (event.target.closest(".decoration-buttons")) {
     tooltip.style.left = `${buttonRect.right + 10}px`;
   } else {
@@ -32,3 +36,9 @@ document.querySelectorAll(".upgrade-buttons button, .decoration-buttons button")
   button.addEventListener("mousemove", showTooltip);
   button.addEventListener("mouseout", hideTooltip);
 });
+
+// Ajouter des événements de survol au titre
+const titleElement = document.getElementById("titre");
+titleElement.addEventListener("mouseover", showTooltip);
+titleElement.addEventListener("mousemove", showTooltip);
+titleElement.addEventListener("mouseout", hideTooltip);
