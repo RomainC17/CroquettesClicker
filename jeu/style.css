@@ -341,6 +341,39 @@ button.purchased::after {
   background: url('images/Patte.png') no-repeat center; /* Remplacez par votre image */
   background-size: contain; /* Assure que l'image est bien ajustée */
   cursor: pointer; /* Garde l'effet clic */
+  position: relative;
+  top: -20px; /* Ajuste cette valeur pour recentrer */
+}
+
+.click-effect {
+  position: absolute;
+  pointer-events: none;
+  animation: fade-out 1s forwards;
+  background-color: transparent; /* Retire la couleur de fond */
+  width: 50px; /* Ajuste la taille si nécessaire */
+  height: 50px; /* Ajuste la hauteur si nécessaire */
+  border: none; /* Retirer la bordure */
+}
+
+#click-effects-container {
+  position: fixed; /* Laisser le conteneur fixe à l'écran */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Recouvre toute la largeur de la fenêtre */
+  height: 100vh; /* Recouvre toute la hauteur de la fenêtre */
+  pointer-events: none; /* Ne pas interférer avec les autres éléments */
+  z-index: 999; /* Assure que ce conteneur reste au-dessus de tout */
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px); /* L'image monte légèrement */
+  }
 }
 
 * {

@@ -310,12 +310,11 @@ document.getElementById("tableauDecoration").addEventListener("click", () => {
 // Activer l'effet des étoiles lors d'une amélioration
 document.getElementById('nuitDecoration').addEventListener('click', () => {
   if (score >= nuitDecorationCost) {
-    console.log('Amélioration Galaxie achetée');
     score -= nuitDecorationCost;
     nuitPurchased = true;
     updateScore();
     updateButtons();
-
+    markAsPurchased("nuitDecoration");
     // Active l'effet des étoiles
     createStars();
   }
@@ -730,10 +729,32 @@ function resetGame() {
 loadGame();
 
 // Ajouter des croquettes lorsqu'on clique sur l'image
-document.getElementById("clickImage").addEventListener("click", () => {
+document.getElementById("clickImage").addEventListener("click", (event) => {
   score++;
   updateScore();
   updateButtons(); // Mettre à jour les boutons après chaque clic
+
+  // Créer une nouvelle image temporaire
+  const tempImage = document.createElement("img");
+  tempImage.src = "images/Patte.png"; // Chemin vers l'image temporaire
+  tempImage.alt = "Effet de clic";
+  tempImage.classList.add("click-effect"); // Applique la classe pour l'animation
+
+  // Positionner l'image temporaire à l'endroit du clic
+  const x = event.clientX;
+  const y = event.clientY;
+  tempImage.style.left = `${x - 25}px`; // Centrer l'image par rapport au clic
+  tempImage.style.top = `${y - 25}px`; // Ajuster pour que l'image soit au-dessus
+
+  // Ajouter l'image au conteneur d'effets
+  const container = document.getElementById("click-effects-container");
+  container.appendChild(tempImage);
+
+  // Supprimer l'image après l'animation (1 seconde ici)
+  setTimeout(() => {
+    console.log("Suppression de l'image");
+    container.removeChild(tempImage);
+  }, 1000);
 });
 
 let lastUpdateTime = Date.now(); // Pour calculer le temps écoulé
