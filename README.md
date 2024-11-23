@@ -39,7 +39,8 @@ Le projet ne peux être utilisé à des fins commerciales snas l'accord de l'aut
 ## Roadmap
 
 - [x] Ajouter README.md
-- [/] Paramétrer les boutons d'amélioration & la boutique
+- [x] Paramétrer les boutons d'amélioration & la boutique
+- [ ] Ajout de mini-jeux pour plus d'intéractivité
 - [ ] Optimisation du code et des traitements
 - [ ] Support Multi-langues
     - [ ] Anglais
