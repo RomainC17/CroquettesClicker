@@ -7,38 +7,39 @@ function showTooltip(event) {
   const title = event.target.getAttribute("data-title");
   const description = event.target.getAttribute("data-description");
 
+  if (!title && !description) return; // Si pas d'infobulle, ne rien faire
+
   tooltip.innerHTML = `<strong>${title}</strong><br>${description}`;
   tooltip.style.display = "block";
 
-  const buttonRect = event.target.getBoundingClientRect();
+  const elementRect = event.target.getBoundingClientRect();
+  
+  // Position par défaut : à droite de l'élément
+  tooltip.style.left = `${elementRect.right + 10 + window.scrollX}px`;
+  tooltip.style.top = `${elementRect.top + window.scrollY}px`;
 
-  if (event.target.closest("titre")) {
-    tooltip.style.left = `${rect.left + window.scrollX}px`;
-    tooltip.style.top = `${rect.bottom + window.scrollY + 10}px`;
-  }
-  if (event.target.closest(".decoration-buttons")) {
-    tooltip.style.left = `${buttonRect.right + 10}px`;
-  } else {
-    tooltip.style.left = `${buttonRect.left - tooltip.offsetWidth - 10}px`;
+  // Ajuster la position si elle dépasse l'écran
+  const tooltipRect = tooltip.getBoundingClientRect();
+  
+  // Si dépassement à droite, mettre à gauche
+  if (tooltipRect.right > window.innerWidth) {
+    tooltip.style.left = `${elementRect.left - tooltipRect.width - 10 + window.scrollX}px`;
   }
   
-  tooltip.style.top = `${buttonRect.top + window.scrollY + (buttonRect.height / 2) - (tooltip.offsetHeight / 2)}px`;
+  // Si dépassement en bas, mettre au-dessus
+  if (tooltipRect.bottom > window.innerHeight) {
+    tooltip.style.top = `${elementRect.top - tooltipRect.height - 10 + window.scrollY}px`;
+  }
 }
-  
+
 // Fonction pour masquer l'infobulle
 function hideTooltip() {
   tooltip.style.display = "none";
 }
-  
-// Ajouter les événements de survol aux boutons d'amélioration
-document.querySelectorAll(".upgrade-buttons button, .decoration-buttons button").forEach(button => {
-  button.addEventListener("mouseover", showTooltip);
-  button.addEventListener("mousemove", showTooltip);
-  button.addEventListener("mouseout", hideTooltip);
-});
 
-// Ajouter des événements de survol au titre
-const titleElement = document.getElementById("titre");
-titleElement.addEventListener("mouseover", showTooltip);
-titleElement.addEventListener("mousemove", showTooltip);
-titleElement.addEventListener("mouseout", hideTooltip);
+// Ajouter les événements de survol
+document.querySelectorAll("#titre, #credits, .upgrade-buttons button, .decoration-buttons button").forEach(element => {
+  element.addEventListener("mouseover", showTooltip);
+  element.addEventListener("mousemove", showTooltip);
+  element.addEventListener("mouseout", hideTooltip);
+});
