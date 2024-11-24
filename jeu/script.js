@@ -863,3 +863,80 @@ function createStars() {
     background.appendChild(star);
   }
 }
+// Référence au bouton de la roulette
+const rouletteButton = document.getElementById("rouletteButton");
+
+// Création de la pop-up HTML
+const roulettePopup = document.createElement("div");
+roulettePopup.id = "roulettePopup";
+roulettePopup.innerHTML = `
+  <button id="closePopupButton" class="close-popup">X</button>
+  <p>Voulez-vous tenter votre chance ?</p>
+  <p>Vous allez miser la TOTALITÉ de vos croquettes de façon ALÉATOIRE.</p>
+  <p>*35% de chance de DOUBLER votre mise.</p>
+  <p>*65% de chance de TOUT PERDRE.</p>
+  <button id="choice1">Choix 1</button>
+  <button id="choice2">Choix 2</button>
+  <p id="popupMessage" style="margin-top: 10px; color: red;"></p>
+`;
+
+// Ajoute la pop-up au body
+document.body.appendChild(roulettePopup);
+
+// Références aux boutons de choix
+let choice1Button = roulettePopup.querySelector("#choice1");
+let choice2Button = roulettePopup.querySelector("#choice2");
+
+// Fonction pour ouvrir la pop-up
+function openRoulettePopup() {
+  if (score > 0) {
+    roulettePopup.style.display = "block";
+  } else {
+    alert("Vous n'avez pas assez de croquettes pour jouer !");
+  }
+}
+
+// Fonction pour fermer la pop-up
+function closeRoulettePopup() {
+  roulettePopup.style.display = "none";
+
+    // Réactiver les boutons de choix après fermeture
+    choice1Button.disabled = false;
+    choice2Button.disabled = false;
+}
+
+// Ajouter un événement à la croix pour fermer la pop-up
+roulettePopup.addEventListener("click", (event) => {
+  if (event.target.id === "closePopupButton") {
+    closeRoulettePopup();
+  }
+});
+
+// Gestion des boutons de choix
+roulettePopup.addEventListener("click", (event) => {
+  if (event.target.id === "choice1" || event.target.id === "choice2") {
+    const bet = score; // Mise toutes les croquettes
+    const result = Math.random(); // Génère un nombre aléatoire entre 0 et 1
+    const message = document.getElementById("popupMessage");
+
+    if (result < 0.65) {
+      // L'utilisateur perd tout
+      score = 0;
+      message.textContent = "Vous avez perdu... dommage ! \n Fermeture...";
+    } else {
+      // L'utilisateur double sa mise
+      score *= 2;
+      message.textContent = `Bien joué ! Vous avez maintenant ${score} croquettes ! \n Fermeture...`;
+    }
+
+    updateScore(); // Met à jour l'affichage des scores
+    // Désactiver les boutons de choix jusqu'à ce que la pop-up se ferme
+    choice1Button.disabled = true;
+    choice2Button.disabled = true;
+
+    setTimeout(closeRoulettePopup, 2000); // Ferme la pop-up après 2 secondes
+  }
+});
+
+// Ajout de l'événement au bouton de la roulette
+rouletteButton.addEventListener("click", openRoulettePopup);
