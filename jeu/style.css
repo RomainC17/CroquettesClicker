@@ -2,8 +2,9 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
-  background-color: #aea79b; /* Couleur de fond douce */
+  font-family: "Comic Sans MS", cursive, sans-serif; /* Police un peu fun */
+  background: url('images/Fond.png') no-repeat center center;
+  background-size: auto;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -40,13 +41,13 @@ body, html {
 #scoreTotal{
   color: brown;
   z-index: 1;
-  font-family: "Gill Sans", sans-serif;;
+  font-family: "Comic Sans MS", cursive, sans-serif; /* Police un peu fun */
 }
 
 #scoreSeconde{
   color: brown;
   z-index: 1;
-  font-family: "Gill Sans", sans-serif;;
+  font-family: "Comic Sans MS", cursive, sans-serif; /* Police un peu fun */
 }
 
 #quitButton{
@@ -96,7 +97,7 @@ body, html {
 #fadeImage {
   width: 270px; /* Taille identique à celle de gamelleZeze */
   position: absolute;
-  top: 35%; /* Même position */
+  top: 20%; /* Même position */
   left: 50%;
   transform: translateX(-50%);
   z-index: 3; /* Niveau supérieur pour être au-dessus */
@@ -106,38 +107,38 @@ body, html {
 /* Styles de base pour l'image d'animation */
 #EauImage {
   position: absolute;
-  top: 75%;
-  left: 60%;
+  top: 78%;
+  left: 59%;
   transform: translate(-50%, -50%);
-  width: 103px; /* Ajustez la taille de l'image */
+  width: 110px; /* Ajustez la taille de l'image */
   pointer-events: none; /* Empêche toute interaction avec l'image */
 }
 
 /* Styles de base pour l'image d'animation */
 #distributeurImage {
   position: absolute;
-  top: 30%;
-  left: 70%;
-  transform: translate(-50%, -50%);
-  width: 250px; /* Ajustez la taille de l'image */
-  pointer-events: none; /* Empêche toute interaction avec l'image */
-}
-
-/* Styles de base pour l'image d'animation */
-#arbreImage {
-  position: absolute;
-  top: 70%;
-  left: 70%;
+  top: 68%;
+  left: 90%;
   transform: translate(-50%, -50%);
   width: 300px; /* Ajustez la taille de l'image */
   pointer-events: none; /* Empêche toute interaction avec l'image */
 }
 
 /* Styles de base pour l'image d'animation */
+#arbreImage {
+  position: absolute;
+  top: 45%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  width: 350px; /* Ajustez la taille de l'image */
+  pointer-events: none; /* Empêche toute interaction avec l'image */
+}
+
+/* Styles de base pour l'image d'animation */
 #coffreImage {
   position: absolute;
-  top: 70%;
-  left: 30%;
+  top: 85%;
+  left: 25%;
   transform: translate(-50%, -50%);
   width: 300px; /* Ajustez la taille de l'image */
   pointer-events: none; /* Empêche toute interaction avec l'image */
@@ -146,8 +147,8 @@ body, html {
 /* Styles de base pour l'image d'animation */
 #chemineeImage {
   position: absolute;
-  top: 30%;
-  left: 30%;
+  top: 50%;
+  left: 6%;
   transform: translate(-50%, -50%);
   width: 300px; /* Ajustez la taille de l'image */
   pointer-events: none; /* Empêche toute interaction avec l'image */
@@ -156,10 +157,10 @@ body, html {
 /* Styles de base pour l'image d'animation */
 #tableauImage {
   position: absolute;
-  top: 30%;
-  left: 50%;
+  top: 23%;
+  left: 49%;
   transform: translate(-50%, -50%);
-  width: 250px; /* Ajustez la taille de l'image */
+  width: 200px; /* Ajustez la taille de l'image */
   pointer-events: none; /* Empêche toute interaction avec l'image */
 }
 
