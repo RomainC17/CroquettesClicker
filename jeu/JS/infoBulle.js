@@ -38,7 +38,7 @@ function hideTooltip() {
 }
 
 // Ajouter les événements de survol
-document.querySelectorAll("#titre, #credits, #fin, .upgrade-buttons button, .decoration-buttons button").forEach(element => {
+document.querySelectorAll("#titre, #credits, .upgrade-buttons button, .decoration-buttons button").forEach(element => {
   element.addEventListener("mouseover", showTooltip);
   element.addEventListener("mousemove", showTooltip);
   element.addEventListener("mouseout", hideTooltip);

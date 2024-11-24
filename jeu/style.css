@@ -12,18 +12,10 @@ body, html {
   height: 100vh;
 }
 
-#fin {
-  position : absolute;
-  bottom : 0px;
-  color: white;
-  left:90%;
-  font-size: 20px;
-}
-
 #credits {
   position: absolute;
   bottom : 0px;
-  color: white;
+  color: rgb(98, 94, 94);
   right: 92%;
   font-size: 17px;
 }
@@ -313,7 +305,7 @@ button.purchased::after {
 
 .volume-control {
   position: absolute;
-  color: white;
+  color: rgb(98, 94, 94);
   display: flex;
   align-items: center;
   bottom: 20px;
