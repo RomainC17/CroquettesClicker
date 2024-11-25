@@ -934,9 +934,136 @@ roulettePopup.addEventListener("click", (event) => {
     choice1Button.disabled = true;
     choice2Button.disabled = true;
 
-    setTimeout(closeRoulettePopup, 2000); // Ferme la pop-up après 2 secondes
+    setTimeout(closeRoulettePopup, 2500); // Ferme la pop-up après 2 secondes
   }
 });
 
 // Ajout de l'événement au bouton de la roulette
 rouletteButton.addEventListener("click", openRoulettePopup);
+
+// Références aux éléments
+const pariButton = document.getElementById("pariButton");
+const mouseRacePopup = document.createElement("div");
+
+// Création de la pop-up HTML
+mouseRacePopup.id = "mouseRacePopup";
+mouseRacePopup.innerHTML = `
+  <button class="close-popup" id="closePopup">&times;</button>
+  <h3>Pariez sur la course !</h3>
+  <p id="bet-info">Remportez le total de vos croquettes multiplié par la côte en cas de victoire. Vous perdez TOUT en cas d'echec.</p>
+  <div class="mouse-options">
+    <button class="mouse-bet" data-mouse="1" data-odds="1.5">Chat (Cote: 1.5)</button>
+    <button class="mouse-bet" data-mouse="2" data-odds="3">Chien (Cote: 3)</button>
+    <button class="mouse-bet" data-mouse="3" data-odds="5">Souris (Cote: 5)</button>
+  </div>
+  <div id="race-track">
+    <div class="mouse" id="mouse-1">🐱</div>
+    <div class="mouse" id="mouse-2">🐶</div>
+    <div class="mouse" id="mouse-3">🐭</div>
+  </div>
+  <p id="race-result" style="margin-top: 20px; color: red; background-color: white; font-weight: bold;"></p>
+`;
+
+document.body.appendChild(mouseRacePopup);
+
+let isRaceRunning = false;
+
+// Ouvre la pop-up
+pariButton.addEventListener("click", () => {
+  if (score <= 0) {
+    alert("Vous n'avez pas assez de croquettes pour jouer !");
+    return;
+  }
+  mouseRacePopup.style.display = "block";
+  document.getElementById("race-result").textContent = ""; // Réinitialise le message
+});
+
+// Ferme la pop-up en cliquant sur la croix
+document.getElementById("closePopup").addEventListener("click", () => {
+  mouseRacePopup.style.display = "none";
+});
+
+// Fonction pour lancer la course
+function startRace(selectedMouse, odds) {
+  if (isRaceRunning) return;
+  isRaceRunning = true;
+
+  const mice = [
+    { id: "mouse-1", speed: 0, chance: 50 }, // 50% chance
+    { id: "mouse-2", speed: 0, chance: 30 }, // 30% chance
+    { id: "mouse-3", speed: 0, chance: 20 }  // 20% chance
+  ];
+
+  const trackLength = document.getElementById("race-track").offsetWidth - 50;
+
+  // Calcul des vitesses pondérées
+  mice.forEach(mouse => {
+    mouse.speed = Math.random() * (mouse.chance / 100) * 25 + 15; // Ajuste les vitesses
+  });
+
+  // Course
+  const interval = setInterval(() => {
+    mice.forEach(mouse => {
+      const mouseElement = document.getElementById(mouse.id);
+      const currentLeft = parseFloat(window.getComputedStyle(mouseElement).left || 0);
+      mouseElement.style.left = `${currentLeft + mouse.speed}px`;
+    });
+
+    // Vérifie si un participant a gagné
+    const winner = mice.find(mouse => {
+      const mouseElement = document.getElementById(mouse.id);
+      const currentLeft = parseFloat(window.getComputedStyle(mouseElement).left || 0);
+      return currentLeft >= trackLength;
+    });
+
+    if (winner) {
+      clearInterval(interval);
+      isRaceRunning = false;
+
+      const winnerId = winner.id;
+      const selectedId = `mouse-${selectedMouse}`;
+      const raceResult = document.getElementById("race-result");
+
+      const bet = score; // Mise totale
+      if (winnerId === selectedId) {
+        const winAmount = Math.floor(bet * odds[selectedMouse - 1]);
+        raceResult.textContent = `Bravo ! ${winnerId === "mouse-1" ? "Le chat" : winnerId === "mouse-2" ? "Le chien" : "La souris"} a gagné ! Vous êtes à ${winAmount} croquettes maintenant.`;
+        score = winAmount;
+      } else {
+        raceResult.textContent = `Dommage, vous avez perdu. ${winnerId === "mouse-1" ? "Le chat" : winnerId === "mouse-2" ? "Le chien" : "La souris"} a gagné.`;
+        score = 0;
+      }
+
+      updateScore();
+      resetRace();
+    }
+  }, 50); // Réduction de l'intervalle pour une course plus rapide
+}
+
+// Réinitialise la course
+function resetRace() {
+  document.querySelectorAll(".mouse").forEach(mouse => {
+    mouse.style.left = "0px";
+  });
+}
+
+// Gestion des paris
+document.querySelectorAll(".mouse-bet").forEach(button => {
+  button.addEventListener("click", () => {
+    if (isRaceRunning) return;
+
+    const selectedMouse = parseInt(button.dataset.mouse);
+    const odds = [1.5, 3, 5];
+    const bet = score;
+
+    if (bet <= 0) {
+      alert("Vous n'avez pas assez de croquettes pour jouer !");
+      return;
+    }
+
+    const raceResult = document.getElementById("race-result");
+    raceResult.textContent = `Vous misez ${bet} croquettes sur ${selectedMouse === 1 ? "le chat" : selectedMouse === 2 ? "le chien" : "la souris"} (Cote : ${odds[selectedMouse - 1]}). La course commence !`;
+
+    startRace(selectedMouse, odds);
+  });
+});
