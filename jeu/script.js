@@ -1067,3 +1067,122 @@ document.querySelectorAll(".mouse-bet").forEach(button => {
     startRace(selectedMouse, odds);
   });
 });
+
+/******************************************************************/
+// Références et création de la pop-up
+const habiliteButton = document.getElementById("habiliteButton");
+const skillPopup = document.createElement("div");
+
+skillPopup.id = "skillPopup";
+skillPopup.innerHTML = `
+  <button class="close-popup">&times;</button>
+  <h3>Testez votre habilité croquette !</h3>
+  <p>Réussissez 3 fois de suite pour ajouter 10% à vos croquettes totales !<p>
+  <div id="skill-bar-container">
+    <div id="moving-bar"></div>
+    <div id="target-zone"></div>
+  </div>
+  <p id="feedback">Appuyez sur "Espace" pour arrêter la barre dans la zone !</p>
+  <button id="startSkillCheck">Commencer</button>
+`;
+
+document.body.appendChild(skillPopup);
+
+const closePopupButton = skillPopup.querySelector(".close-popup");
+const startButton = skillPopup.querySelector("#startSkillCheck");
+const movingBar = skillPopup.querySelector("#moving-bar");
+const targetZone = skillPopup.querySelector("#target-zone");
+const feedback = skillPopup.querySelector("#feedback");
+
+let intervalId;
+let direction = 1;
+let position = 0;
+let scoreSkill = 0; // Score des réussites consécutives
+let isRunning = false;
+
+// Ouvrir la pop-up
+habiliteButton.addEventListener("click", () => {
+  skillPopup.style.display = "block";
+});
+
+// Fermer la pop-up
+closePopupButton.addEventListener("click", () => {
+  skillPopup.style.display = "none";
+  resetSkillCheck();
+});
+
+// Fonction pour démarrer le jeu
+startButton.addEventListener("click", () => {
+  if (isRunning) return;
+  isRunning = true;
+  scoreSkill = 0;
+  feedback.textContent = "Appuyez sur Espace pour arrêter la barre dans la zone !";
+  startButton.disabled = true; // Désactiver le bouton de démarrage pendant la partie
+  generateTargetZone();
+  startMovingBar();
+});
+
+// Fonction pour réinitialiser le jeu
+function resetSkillCheck() {
+  clearInterval(intervalId);
+  movingBar.style.left = "0%";
+  targetZone.style.left = "0%";
+  isRunning = false;
+  feedback.textContent = "";
+  startButton.disabled = false; // Réactiver le bouton de démarrage
+}
+
+// Fonction pour déplacer la barre rouge
+function startMovingBar() {
+  intervalId = setInterval(() => {
+    position += direction; // Ajuste la vitesse de déplacement
+    if (position >= 100) {
+      position = 100;
+      direction = -1; // Inverse la direction
+      generateTargetZone(); // Crée une nouvelle zone au retour
+    } else if (position <= 0) {
+      position = 0;
+      direction = 1; // Inverse la direction
+    }
+    movingBar.style.left = `${position}%`;
+  }, 16); // Fréquence de mise à jour
+}
+
+// Fonction pour générer une zone cible aléatoire
+function generateTargetZone() {
+  const zoneStart = Math.random() * 70; // Position de départ entre 0% et 70%
+  const zoneWidth = 7; // Largeur de la zone en pourcentage
+  targetZone.style.left = `${zoneStart}%`;
+  targetZone.style.width = `${zoneWidth}%`;
+}
+
+// Vérifier si l'utilisateur appuie sur "Espace"
+document.addEventListener("keydown", (event) => {
+  if (!isRunning || event.code !== "Space") return;
+
+  const barPosition = movingBar.getBoundingClientRect();
+  const zonePosition = targetZone.getBoundingClientRect();
+
+  // Vérifie si la barre rouge est dans la zone verte
+  if (
+    barPosition.left >= zonePosition.left &&
+    barPosition.right <= zonePosition.right
+  ) {
+    scoreSkill++;
+    feedback.textContent = `Bien joué ! (${scoreSkill}/3)`;
+    if (scoreSkill === 3) {
+      clearInterval(intervalId); // Arrête la barre rouge
+      feedback.textContent = "Bravo ! Vous avez gagné ! +10% de croquettes.";
+      score += Math.floor(score * 0.1); // Ajout de 10% au score global
+      updateScore(); // Fonction existante pour mettre à jour l'affichage
+      isRunning = false; // Met le jeu en pause
+      startButton.disabled = false; // Réactiver le bouton de démarrage
+    } else {
+      generateTargetZone(); // Génère une nouvelle zone après un succès
+    }
+  } else {
+    feedback.textContent = "Raté ! Vous recommencez à zéro.";
+    scoreSkill = 0;
+    generateTargetZone();
+  }
+});

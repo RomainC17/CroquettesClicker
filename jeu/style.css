@@ -10,6 +10,7 @@ body, html {
   overflow: hidden;
   width: 100vw;
   height: 100vh;
+  z-index: -2;
 }
 
 #credits {
@@ -230,6 +231,7 @@ button {
 button:hover {
   background-color: #e3b735;
   transform: scale(1.05); /* Légère agrandissement */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Ajout d'une ombre plus marquée au survol */
 }
 
 /* Effet pour les boutons désactivés */
@@ -237,6 +239,8 @@ button:disabled {
   background-color: #d9d9d9;
   color: #8c8c8c;
   cursor: not-allowed;
+  transform: scale(1); /* Évite l'agrandissement au survol */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button.purchased {
@@ -278,7 +282,7 @@ button.purchased::after {
   width: 100%;
   height: 100%;
   background-color: black;
-  z-index: 0; /* Derrière tout le reste */
+  z-index: -1; /* Derrière tout le reste */
   display: none; /* Caché par défaut */
   overflow: hidden;
 }
@@ -381,6 +385,7 @@ button.purchased::after {
   flex-direction: row; /* Aligne les éléments en ligne */
   gap: 10px; /* Espace entre les boutons */
   font-size: 13px;
+  z-index: 1000;
 }
 
 #roulettePopup {
@@ -408,6 +413,7 @@ button.purchased::after {
   border-radius: 2px;
   cursor: pointer;
   transition: all 0.2s ease;
+  z-index: 1000;
 }
 
 .close-popup {
@@ -495,6 +501,88 @@ button.purchased::after {
 .close-popup:hover {
   color: #333;
 }
+
+button:active {
+  z-index: 1000;
+  transform: scale(0.98); /* Réduction légère au clic pour un effet de pression */
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); /* Ombre interne pour un effet d'enfoncement */
+}
+
+/* Pop-up */
+#skillPopup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  padding: 20px;
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  display: none;
+  z-index: 1000;
+}
+
+#skillPopup h3 {
+  margin-bottom: 20px;
+}
+
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+.close-popup:hover {
+  color: red;
+}
+
+/* Conteneur de la barre */
+#skill-bar-container {
+  position: relative;
+  width: 100%;
+  height: 20px;
+  background: #ddd;
+  border: 2px solid #aaa;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+/* Barre rouge en mouvement */
+#moving-bar {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 1%;
+  background: red;
+  transition: left 0.01s linear;
+}
+
+/* Zone cible verte */
+#target-zone {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: green;
+  opacity: 0.7;
+  border-radius: 10px;
+}
+
+#background-toggle-container {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  display: none; /* Caché par défaut */
+}
+
 
 * {
   user-select: none; /* Désactive la sélection de texte et d'éléments */
