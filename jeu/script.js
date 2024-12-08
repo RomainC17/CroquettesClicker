@@ -1199,14 +1199,14 @@ const achievements = [
   { id: 14, title: "500 000 croquettes", description: "Obtenez 500 000 croquettes.", image: "images/Coffre.png", unlocked: false },
   { id: 15, title: "999 999 croquettes", description: "Obtenez 999 999 croquettes.", image: "images/Coffre.png", unlocked: false },
   { id: 16, title: "1 500 000 croquettes", description: "Obtenez 1 500 000 croquettes.", image: "images/Coffre.png", unlocked: false },
-  { id: 17, title: "1 CPS", description: "Atteignez 1 croquette par seconde.", image: "images/Eau.png", unlocked: false },
-  { id: 18, title: "50 CPS", description: "Atteignez 50 croquettes par seconde.", image: "images/Eau.png", unlocked: false },
-  { id: 19, title: "1 500 CPS", description: "Atteignez 1 500 croquettes par seconde.", image: "images/Eau.png", unlocked: false },
-  { id: 20, title: "3 000 CPS", description: "Atteignez 3 000 croquettes par seconde.", image: "images/Eau.png", unlocked: false },
-  { id: 21, title: "5 000 CPS", description: "Atteignez 5 000 croquettes par seconde.", image: "images/Eau.png", unlocked: false },
-  { id: 22, title: "7 500 CPS", description: "Atteignez 7 500 croquettes par seconde.", image: "images/Eau.png", unlocked: false },
-  { id: 23, title: "10 000 CPS", description: "Atteignez 10 000 croquettes par seconde.", image: "images/Eau.png", unlocked: false },
-  { id: 24, title: "50 000 CPS", description: "Atteignez 50 000 croquettes par seconde.", image: "images/Eau.png", unlocked: false },
+  { id: 17, title: "1 CPS", description: "Atteignez 1 croquette par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
+  { id: 18, title: "50 CPS", description: "Atteignez 50 croquettes par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
+  { id: 19, title: "1 500 CPS", description: "Atteignez 1 500 croquettes par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
+  { id: 20, title: "3 000 CPS", description: "Atteignez 3 000 croquettes par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
+  { id: 21, title: "5 000 CPS", description: "Atteignez 5 000 croquettes par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
+  { id: 22, title: "7 500 CPS", description: "Atteignez 7 500 croquettes par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
+  { id: 23, title: "10 000 CPS", description: "Atteignez 10 000 croquettes par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
+  { id: 24, title: "50 000 CPS", description: "Atteignez 50 000 croquettes par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
 ];
 
 // Charger les succès depuis le localStorage
