@@ -732,6 +732,7 @@ loadGame();
 document.getElementById("clickImage").addEventListener("click", (event) => {
   score++;
   updateScore();
+  checkAchievements();
   updateButtons(); // Mettre à jour les boutons après chaque clic
 
   // Créer une nouvelle image temporaire
@@ -1185,4 +1186,152 @@ document.addEventListener("keydown", (event) => {
     scoreSkill = 0;
     generateTargetZone();
   }
+});
+
+// Liste initiale des succès
+const achievements = [
+  { id: 1, title: "Premier clic", description: "Cliquez pour la première fois.", image: "images/Patte.png", unlocked: false },
+  { id: 9, title: "100 croquettes", description: "Obtenez 100 croquettes.", image: "images/Coffre.png", unlocked: false },
+  { id: 10, title: "500 croquettes", description: "Obtenez 500 croquettes.", image: "images/Coffre.png", unlocked: false },
+  { id: 11, title: "10 000 croquettes", description: "Obtenez 10 000 croquettes.", image: "images/Coffre.png", unlocked: false },
+  { id: 12, title: "100 000 croquettes", description: "Obtenez 100 000 croquettes.", image: "images/Coffre.png", unlocked: false },
+  { id: 13, title: "250 000 croquettes", description: "Obtenez 250 000 croquettes.", image: "images/Coffre.png", unlocked: false },
+  { id: 14, title: "500 000 croquettes", description: "Obtenez 500 000 croquettes.", image: "images/Coffre.png", unlocked: false },
+  { id: 15, title: "999 999 croquettes", description: "Obtenez 999 999 croquettes.", image: "images/Coffre.png", unlocked: false },
+  { id: 16, title: "1 500 000 croquettes", description: "Obtenez 1 500 000 croquettes.", image: "images/Coffre.png", unlocked: false },
+  { id: 17, title: "1 CPS", description: "Atteignez 1 croquette par seconde.", image: "images/Eau.png", unlocked: false },
+  { id: 18, title: "50 CPS", description: "Atteignez 50 croquettes par seconde.", image: "images/Eau.png", unlocked: false },
+  { id: 19, title: "1 500 CPS", description: "Atteignez 1 500 croquettes par seconde.", image: "images/Eau.png", unlocked: false },
+  { id: 20, title: "3 000 CPS", description: "Atteignez 3 000 croquettes par seconde.", image: "images/Eau.png", unlocked: false },
+  { id: 21, title: "5 000 CPS", description: "Atteignez 5 000 croquettes par seconde.", image: "images/Eau.png", unlocked: false },
+  { id: 22, title: "7 500 CPS", description: "Atteignez 7 500 croquettes par seconde.", image: "images/Eau.png", unlocked: false },
+  { id: 23, title: "10 000 CPS", description: "Atteignez 10 000 croquettes par seconde.", image: "images/Eau.png", unlocked: false },
+  { id: 24, title: "50 000 CPS", description: "Atteignez 50 000 croquettes par seconde.", image: "images/Eau.png", unlocked: false },
+];
+
+// Charger les succès depuis le localStorage
+function loadAchievements() {
+  const savedAchievements = JSON.parse(localStorage.getItem("achievements"));
+  if (savedAchievements) {
+    achievements.forEach((achievement) => {
+      const saved = savedAchievements.find((a) => a.id === achievement.id);
+      if (saved) achievement.unlocked = saved.unlocked;
+    });
+  }
+}
+
+// Sauvegarder les succès dans le localStorage
+function saveAchievements() {
+  localStorage.setItem("achievements", JSON.stringify(achievements));
+}
+
+// Référence au bouton et création de la pop-up
+const successButton = document.getElementById("successButton");
+const successPopup = document.createElement("div");
+successPopup.id = "successPopup";
+successPopup.innerHTML = `
+  <button class="close-popup">&times;</button>
+  <h3>Succès</h3>
+  <h5>Si la liste n'est pas à jour, cliquez une fois sur le chat au milieu pour actualiser<h5>
+  <div class="success-list"></div>
+`;
+document.body.appendChild(successPopup);
+
+const successList = successPopup.querySelector(".success-list");
+
+// Fonction pour afficher les succès
+function renderAchievements() {
+  successList.innerHTML = ""; // Réinitialise la liste
+  achievements.forEach((achievement) => {
+    const card = document.createElement("div");
+    card.className = `success-card ${achievement.unlocked ? "unlocked" : ""}`;
+    card.innerHTML = `
+      <img src="${achievement.image}" alt="${achievement.title}">
+      <div class="tooltip">${achievement.description}</div>
+    `;
+    successList.appendChild(card);
+  });
+}
+
+// Notifications de succès
+function showNotification(message) {
+  const notification = document.createElement("div");
+  notification.className = "notification show";
+  notification.textContent = message;
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.classList.remove("show");
+    document.body.removeChild(notification);
+  }, 3000);
+}
+
+// Débloquer un succès
+function unlockAchievement(id) {
+  const achievement = achievements.find((ach) => ach.id === id);
+  if (achievement && !achievement.unlocked) {
+    achievement.unlocked = true;
+    showNotification(`Succès débloqué : ${achievement.title}`);
+    renderAchievements();
+    saveAchievements(); // Sauvegarde après déblocage
+  }
+}
+
+// Vérifier les conditions des succès
+function checkAchievements() {
+  if (score >= 1) unlockAchievement(1); // Premier clic
+  if (score >= 100) unlockAchievement(9); // 100 croquettes
+  if (score >= 500) unlockAchievement(10); // 100 croquettes
+  if (score >= 10000) unlockAchievement(11); // 100 croquettes
+  if (score >= 100000) unlockAchievement(12); // 100 croquettes
+  if (score >= 250000) unlockAchievement(13); // 100 croquettes
+  if (score >= 500000) unlockAchievement(14); // 100 croquettes
+  if (score >= 999999) unlockAchievement(15); // 100 croquettes
+  if (score >= 1500000) unlockAchievement(16); // 100 croquettes
+  if (croquettesParSeconde >= 1) unlockAchievement(17); // 1 CPS
+  if (croquettesParSeconde >= 50) unlockAchievement(18); // 1 CPS
+  if (croquettesParSeconde >= 1500) unlockAchievement(19); // 1 CPS
+  if (croquettesParSeconde >= 3000) unlockAchievement(20); // 1 CPS
+  if (croquettesParSeconde >= 5000) unlockAchievement(21); // 1 CPS
+  if (croquettesParSeconde >= 7500) unlockAchievement(22); // 1 CPS
+  if (croquettesParSeconde >= 10000) unlockAchievement(23); // 1 CPS
+  if (croquettesParSeconde >= 50000) unlockAchievement(24); // 1 CPS
+}
+
+// Événement pour afficher la pop-up
+successButton.addEventListener("click", () => {
+  successPopup.style.display = "block";
+  renderAchievements();
+});
+
+// Fermeture de la pop-up via la croix
+successPopup.querySelector(".close-popup").addEventListener("click", () => {
+  successPopup.style.display = "none";
+});
+
+// Charger les succès au démarrage
+loadAchievements();
+
+// Référence au bouton et création de la pop-up
+const creditsGameButton = document.getElementById("creditsGameButton");
+const creditsGamePopup = document.createElement("div");
+creditsGamePopup.id = "creditsGamePopup";
+creditsGamePopup.innerHTML = `
+  <button class="close-popup">&times;</button>
+  <h3>Crédits</h3>
+  <h5>Développeur : Griffon<h5>
+  <h5>Testeuse : Maggie<h5>
+  <h5>Bande son : Fabrice Tonnellier. Les droits d'utilisation m'ont été donné pour le jeu CroquettesClicker.<h5>
+  <h5>Images : Toutes les images utilisées ont été crées tout ou partie, par l'intelligence artificielle. Pour les images ayant été générées partiellement par l'intelligence artificielle, je détiens les droits sur les photos d'origine. <h5>
+`;
+document.body.appendChild(creditsGamePopup);
+
+// Événement pour afficher la pop-up
+creditsGameButton.addEventListener("click", () => {
+  creditsGamePopup.style.display = "block";
+});
+
+// Fermeture de la pop-up via la croix
+creditsGamePopup.querySelector(".close-popup").addEventListener("click", () => {
+  creditsGamePopup.style.display = "none";
 });
