@@ -21,19 +21,19 @@ let trouNoirCroquettesCost = 10000000;
 
 let gamelleDecorationCost = 100;
 let gamellePurchased = false;
-let eauDecorationCost = 10;
+let eauDecorationCost = 50000;
 let eauPurchased = false;
-let distributeurDecorationCost = 10;
+let distributeurDecorationCost = 5000;
 let distributeurPurchased = false;
-let arbreDecorationCost = 10;
+let arbreDecorationCost = 100000;
 let arbrePurchased = false;
-let coffreDecorationCost = 10;
+let coffreDecorationCost = 150000;
 let coffrePurchased = false;
-let chemineeDecorationCost = 10;
+let chemineeDecorationCost = 250000;
 let chemineePurchased = false;
-let tableauDecorationCost = 10;
+let tableauDecorationCost = 400000;
 let tableauPurchased = false;
-let nuitDecorationCost = 10;
+let nuitDecorationCost = 1000000;
 let nuitPurchased = false;
 
 // Mise à jour du score affiché

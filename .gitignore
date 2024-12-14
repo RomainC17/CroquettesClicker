@@ -1,3 +1,5 @@
 build/
 node_modules/
 .vscode/settings.json
+jeu/steam/steam_api.dll
+.gitignore
