@@ -40,6 +40,7 @@ Le projet ne peux être utilisé à des fins commerciales snas l'accord de l'aut
 
 - [x] Ajouter README.md
 - [x] Paramétrer les boutons d'amélioration & la boutique
+- [x] Publication du jeu sur steam https://store.steampowered.com/app/3397600/CroquettesClicker/
 - [ ] Ajout de mini-jeux pour plus d'intéractivité
 - [ ] Optimisation du code et des traitements
 - [ ] Support Multi-langues
