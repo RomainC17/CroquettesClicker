@@ -19,6 +19,23 @@ let planeteCroquettesCost = 1200000;
 let galaxieCroquettesCost = 1750000;
 let trouNoirCroquettesCost = 10000000;
 
+let maitresseCroquettesLevel = 0;
+let sacCroquettesLevel = 0;
+let colisCroquettesLevel = 0;
+let champCroquettesLevel = 0;
+let mineCroquettesLevel = 0;
+let usineCroquettesLevel = 0;
+let convoiCroquettesLevel = 0;
+let affretementCroquettesLevel = 0;
+let teleporteurCroquettesLevel = 0;
+let developpeurCroquettesLevel = 0;
+let cgmCroquettesLevel = 0;
+let patrouilleCroquettesLevel = 0;
+let continentCroquettesLevel = 0;
+let planeteCroquettesLevel = 0;
+let galaxieCroquettesLevel = 0;
+let trouNoirCroquettesLevel = 0;
+
 let gamelleDecorationCost = 100;
 let gamellePurchased = false;
 let eauDecorationCost = 50000;
@@ -48,6 +65,7 @@ document.getElementById("maitresseCroquettes").addEventListener("click", () => {
     score -= maitresseCroquettesCost;
     croquettesParSeconde += 1;
     maitresseCroquettesCost = Math.floor(maitresseCroquettesCost * 1.5);
+    maitresseCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -59,6 +77,7 @@ document.getElementById("sacCroquettes").addEventListener("click", () => {
     score -= sacCroquettesCost;
     croquettesParSeconde += 3;
     sacCroquettesCost = Math.floor(sacCroquettesCost * 1.5);
+    sacCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -70,6 +89,7 @@ document.getElementById("colisCroquettes").addEventListener("click", () => {
     score -= colisCroquettesCost;
     croquettesParSeconde += 5;
     colisCroquettesCost = Math.floor(colisCroquettesCost * 1.5);
+    colisCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -81,6 +101,7 @@ document.getElementById("champsCroquettes").addEventListener("click", () => {
     score -= champCroquettesCost;
     croquettesParSeconde += 7;
     champCroquettesCost = Math.floor(champCroquettesCost * 1.5);
+    champCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -92,6 +113,7 @@ document.getElementById("minesCroquettes").addEventListener("click", () => {
     score -= mineCroquettesCost;
     croquettesParSeconde += 12;
     mineCroquettesCost = Math.floor(mineCroquettesCost * 1.5);
+    mineCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -103,6 +125,7 @@ document.getElementById("usineCroquettes").addEventListener("click", () => {
     score -= usineCroquettesCost;
     croquettesParSeconde += 15;
     usineCroquettesCost = Math.floor(usineCroquettesCost * 1.5);
+    usineCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -114,6 +137,7 @@ document.getElementById("convoiCroquettes").addEventListener("click", () => {
     score -= convoiCroquettesCost;
     croquettesParSeconde += 17;
     convoiCroquettesCost = Math.floor(convoiCroquettesCost * 1.5);
+    convoiCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -125,6 +149,7 @@ document.getElementById("affretementCroquettes").addEventListener("click", () =>
     score -= affretementCroquettesCost;
     croquettesParSeconde += 20;
     affretementCroquettesCost = Math.floor(affretementCroquettesCost * 1.5);
+    affretementCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -136,6 +161,7 @@ document.getElementById("teleporteurCroquettes").addEventListener("click", () =>
     score -= teleporteurCroquettesCost;
     croquettesParSeconde += 25;
     teleporteurCroquettesCost = Math.floor(teleporteurCroquettesCost * 1.5);
+    teleporteurCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -147,6 +173,7 @@ document.getElementById("developpeurCroquettes").addEventListener("click", () =>
     score -= developpeurCroquettesCost;
     croquettesParSeconde += 29;
     developpeurCroquettesCost = Math.floor(developpeurCroquettesCost * 1.5);
+    developpeurCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -158,6 +185,7 @@ document.getElementById("cgmCroquettes").addEventListener("click", () => {
     score -= cgmCroquettesCost;
     croquettesParSeconde += 32;
     cgmCroquettesCost = Math.floor(cgmCroquettesCost * 1.5);
+    cgmCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -169,6 +197,7 @@ document.getElementById("patrouilleCroquettes").addEventListener("click", () => 
     score -= patrouilleCroquettesCost;
     croquettesParSeconde += 35;
     patrouilleCroquettesCost = Math.floor(patrouilleCroquettesCost * 1.5);
+    patrouilleCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -180,6 +209,7 @@ document.getElementById("continentCroquettes").addEventListener("click", () => {
     score -= continentCroquettesCost;
     croquettesParSeconde += 40;
     continentCroquettesCost = Math.floor(continentCroquettesCost * 1.5);
+    continentCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -191,6 +221,7 @@ document.getElementById("planeteCroquettes").addEventListener("click", () => {
     score -= planeteCroquettesCost;
     croquettesParSeconde += 42;
     planeteCroquettesCost = Math.floor(planeteCroquettesCost * 1.5);
+    planeteCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -202,6 +233,7 @@ document.getElementById("galaxieCroquettes").addEventListener("click", () => {
     score -= galaxieCroquettesCost;
     croquettesParSeconde += 45;
     galaxieCroquettesCost = Math.floor(galaxieCroquettesCost * 1.5);
+    galaxieCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -213,6 +245,7 @@ document.getElementById("trouNoirCroquettes").addEventListener("click", () => {
     score -= trouNoirCroquettesCost;
     croquettesParSeconde += 100;
     trouNoirCroquettesCost = Math.floor(trouNoirCroquettesCost * 1.5);
+    trouNoirCroquettesLevel += 1;
     updateScore();
     updateButtons();
   }
@@ -355,7 +388,7 @@ function updateButtons() {
   const nuitButton = document.getElementById("nuitDecoration");
 
   // Mise à jour du bouton Sac de croquettes
-  maitresseCroquettesButton.textContent = `Maîtresse (coût: ${maitresseCroquettesCost}) : +1 croq./sec`;
+  maitresseCroquettesButton.textContent = `Maîtresse (coût: ${maitresseCroquettesCost}) : +1 croq./sec (Niv. ${maitresseCroquettesLevel})`;
   if (score < maitresseCroquettesCost) {
     maitresseCroquettesButton.classList.add("disabled");
     maitresseCroquettesButton.disabled = true;
@@ -365,7 +398,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Sac de croquettes
-  sacCroquettesButton.textContent = `Sac de croquettes (coût: ${sacCroquettesCost}) : +3 croq./sec`;
+  sacCroquettesButton.textContent = `Sac de croquettes (coût: ${sacCroquettesCost}) : +3 croq./sec (Niv. ${sacCroquettesLevel})`;
   if (score < sacCroquettesCost) {
     sacCroquettesButton.classList.add("disabled");
     sacCroquettesButton.disabled = true;
@@ -375,7 +408,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Colis de croquettes
-  colisCroquettesButton.textContent = `Colis de croquettes (coût: ${colisCroquettesCost}) : +5 croq./sec`;
+  colisCroquettesButton.textContent = `Colis de croquettes (coût: ${colisCroquettesCost}) : +5 croq./sec (Niv. ${colisCroquettesLevel})`;
   if (score < colisCroquettesCost) {
     colisCroquettesButton.classList.add("disabled");
     colisCroquettesButton.disabled = true;
@@ -385,7 +418,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Champs de croquettes
-  champCroquettesButton.textContent = `Champs de croquettes (coût: ${champCroquettesCost}) : +7 croq./sec`;
+  champCroquettesButton.textContent = `Champs de croquettes (coût: ${champCroquettesCost}) : +7 croq./sec (Niv. ${champCroquettesLevel})`;
   if (score < champCroquettesCost) {
     champCroquettesButton.classList.add("disabled");
     champCroquettesButton.disabled = true;
@@ -395,7 +428,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Mine de croquettes
-  mineCroquettesButton.textContent = `Mine de croquettes (coût: ${mineCroquettesCost}) : +12 croq./sec`;
+  mineCroquettesButton.textContent = `Mine de croquettes (coût: ${mineCroquettesCost}) : +12 croq./sec (Niv. ${mineCroquettesLevel})`;
   if (score < mineCroquettesCost) {
     mineCroquettesButton.classList.add("disabled");
     mineCroquettesButton.disabled = true;
@@ -405,7 +438,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Mine de croquettes
-  usineCroquettesButton.textContent = `Usine (coût: ${usineCroquettesCost}) : +15 croq./sec`;
+  usineCroquettesButton.textContent = `Usine (coût: ${usineCroquettesCost}) : +15 croq./sec (Niv. ${usineCroquettesLevel})`;
   if (score < usineCroquettesCost) {
     usineCroquettesButton.classList.add("disabled");
     usineCroquettesButton.disabled = true;
@@ -415,7 +448,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Mine de croquettes
-  convoiCroquettesButton.textContent = `Convoi exceptionnel (coût: ${convoiCroquettesCost}) : +17 croq./sec`;
+  convoiCroquettesButton.textContent = `Convoi exceptionnel (coût: ${convoiCroquettesCost}) : +17 croq./sec (Niv. ${convoiCroquettesLevel})`;
   if (score < convoiCroquettesCost) {
     convoiCroquettesButton.classList.add("disabled");
     convoiCroquettesButton.disabled = true;
@@ -425,7 +458,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Mine de croquettes
-  affretementCroquettesButton.textContent = `Affrètement (coût: ${affretementCroquettesCost}) : +20 croq./sec`;
+  affretementCroquettesButton.textContent = `Affrètement (coût: ${affretementCroquettesCost}) : +20 croq./sec (Niv. ${affretementCroquettesLevel})`;
   if (score < affretementCroquettesCost) {
     affretementCroquettesButton.classList.add("disabled");
     affretementCroquettesButton.disabled = true;
@@ -435,7 +468,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Mine de croquettes
-  teleporteurCroquettesButton.textContent = `Téléporteur (coût: ${teleporteurCroquettesCost}) : +25 croq./sec`;
+  teleporteurCroquettesButton.textContent = `Téléporteur (coût: ${teleporteurCroquettesCost}) : +25 croq./sec (Niv. ${teleporteurCroquettesLevel})`;
   if (score < teleporteurCroquettesCost) {
     teleporteurCroquettesButton.classList.add("disabled");
     teleporteurCroquettesButton.disabled = true;
@@ -445,7 +478,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Mine de croquettes
-  developpeurCroquettesButton.textContent = `Développeur (coût: ${developpeurCroquettesCost}) : +29 croq./sec`;
+  developpeurCroquettesButton.textContent = `Développeur (coût: ${developpeurCroquettesCost}) : +29 croq./sec (Niv. ${developpeurCroquettesLevel})`;
   if (score < developpeurCroquettesCost) {
     developpeurCroquettesButton.classList.add("disabled");
     developpeurCroquettesButton.disabled = true;
@@ -455,7 +488,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Mine de croquettes
-  cgmCroquettesButton.textContent = `C.G.M (coût: ${cgmCroquettesCost}) : +32 croq./sec`;
+  cgmCroquettesButton.textContent = `C.G.M (coût: ${cgmCroquettesCost}) : +32 croq./sec (Niv. ${cgmCroquettesLevel})`;
   if (score < cgmCroquettesCost) {
     cgmCroquettesButton.classList.add("disabled");
     cgmCroquettesButton.disabled = true;
@@ -465,7 +498,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Mine de croquettes
-  patrouilleCroquettesButton.textContent = `Patrouilles (coût: ${patrouilleCroquettesCost}) : +35 croq./sec`;
+  patrouilleCroquettesButton.textContent = `Patrouilles (coût: ${patrouilleCroquettesCost}) : +35 croq./sec (Niv. ${patrouilleCroquettesLevel})`;
   if (score < patrouilleCroquettesCost) {
     patrouilleCroquettesButton.classList.add("disabled");
     patrouilleCroquettesButton.disabled = true;
@@ -475,7 +508,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Mine de croquettes
-  continentCroquettesButton.textContent = `Continent (coût: ${continentCroquettesCost}) : +40 croq./sec`;
+  continentCroquettesButton.textContent = `Continent (coût: ${continentCroquettesCost}) : +40 croq./sec (Niv. ${continentCroquettesLevel})`;
   if (score < continentCroquettesCost) {
     continentCroquettesButton.classList.add("disabled");
     continentCroquettesButton.disabled = true;
@@ -485,7 +518,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Mine de croquettes
-  planeteCroquettesButton.textContent = `Planète (coût: ${planeteCroquettesCost}) : +42 croq./sec`;
+  planeteCroquettesButton.textContent = `Planète (coût: ${planeteCroquettesCost}) : +42 croq./sec (Niv. ${planeteCroquettesLevel})`;
   if (score < planeteCroquettesCost) {
     planeteCroquettesButton.classList.add("disabled");
     planeteCroquettesButton.disabled = true;
@@ -495,7 +528,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Mine de croquettes
-  galaxieCroquettesButton.textContent = `Galaxie (coût: ${galaxieCroquettesCost}) : +45 croq./sec`;
+  galaxieCroquettesButton.textContent = `Galaxie (coût: ${galaxieCroquettesCost}) : +45 croq./sec (Niv. ${galaxieCroquettesLevel})`;
   if (score < galaxieCroquettesCost) {
     galaxieCroquettesButton.classList.add("disabled");
     galaxieCroquettesButton.disabled = true;
@@ -505,7 +538,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Mine de croquettes
-  trouNoirCroquettesButton.textContent = `Trou noir (coût: ${trouNoirCroquettesCost}) : +100 croq./sec`;
+  trouNoirCroquettesButton.textContent = `Trou noir (coût: ${trouNoirCroquettesCost}) : +100 croq./sec (Niv. ${trouNoirCroquettesLevel})`;
   if (score < trouNoirCroquettesCost) {
     trouNoirCroquettesButton.classList.add("disabled");
     trouNoirCroquettesButton.disabled = true;
@@ -619,6 +652,22 @@ function loadGame() {
     planeteCroquettesCost = data.planeteCroquettesCost || 1200000;
     galaxieCroquettesCost = data.galaxieCroquettesCost || 17500000;
     trouNoirCroquettesCost = data.trouNoirCroquettesCost || 10000000;
+    maitresseCroquettesLevel = data.maitresseCroquettesLevel || 0;
+    sacCroquettesLevel = data.sacCroquettesLevel || 0;
+    colisCroquettesLevel = data.colisCroquettesLevel || 0;
+    champCroquettesLevel = data.champCroquettesLevel || 0;
+    mineCroquettesLevel = data.mineCroquettesLevel || 0;
+    usineCroquettesLevel = data.usineCroquettesLevel || 0;
+    convoiCroquettesLevel = data.convoiCroquettesLevel || 0;
+    affretementCroquettesLevel = data.affretementCroquettesLevel || 0;
+    teleporteurCroquettesLevel = data.teleporteurCroquettesLevel || 0;
+    developpeurCroquettesLevel = data.developpeurCroquettesLevel || 0;
+    cgmCroquettesLevel = data.cgmCroquettesLevel || 0;
+    patrouilleCroquettesLevel = data.patrouilleCroquettesLevel || 0;
+    continentCroquettesLevel = data.continentCroquettesLevel || 0;
+    planeteCroquettesLevel = data.planeteCroquettesLevel || 0;
+    galaxieCroquettesLevel = data.galaxieCroquettesLevel || 0;
+    trouNoirCroquettesLevel = data.trouNoirCroquettesLevel || 0;
     gamellePurchased = data.gamellePurchased || false;
     eauPurchased = data.eauPurchased || false;
     distributeurPurchased = data.distributeurPurchased || false;
@@ -685,6 +734,22 @@ function saveGame() {
     planeteCroquettesCost: planeteCroquettesCost,
     galaxieCroquettesCost: galaxieCroquettesCost,
     trouNoirCroquettesCost: trouNoirCroquettesCost,
+    maitresseCroquettesLevel: maitresseCroquettesLevel,
+    sacCroquettesLevel: sacCroquettesLevel,
+    colisCroquettesLevel: colisCroquettesLevel,
+    champCroquettesLevel: champCroquettesLevel,
+    mineCroquettesLevel: mineCroquettesLevel,
+    usineCroquettesLevel: usineCroquettesLevel,
+    convoiCroquettesLevel: convoiCroquettesLevel,
+    affretementCroquettesLevel: affretementCroquettesLevel,
+    teleporteurCroquettesLevel: teleporteurCroquettesLevel,
+    developpeurCroquettesLevel: developpeurCroquettesLevel,
+    cgmCroquettesLevel: cgmCroquettesLevel,
+    patrouilleCroquettesLevel: patrouilleCroquettesLevel,
+    continentCroquettesLevel: continentCroquettesLevel,
+    planeteCroquettesLevel: planeteCroquettesLevel,
+    galaxieCroquettesLevel: galaxieCroquettesLevel,
+    trouNoirCroquettesLevel: trouNoirCroquettesLevel,
     gamellePurchased: gamellePurchased,
     eauPurchased: eauPurchased,
     distributeurPurchased: distributeurPurchased,
@@ -713,6 +778,7 @@ function resetGame() {
   colisCroquettesCost = 100;
   champCroquettesCost = 1500;
   mineCroquettesCost = 5000;
+  maitresseCroquettesLevel = 0;
   gamellePurchased = false;
   eauPurchased = false;
   nuitPurchased = false;
@@ -951,7 +1017,7 @@ mouseRacePopup.id = "mouseRacePopup";
 mouseRacePopup.innerHTML = `
   <button class="close-popup" id="closePopup">&times;</button>
   <h3>Pariez sur la course !</h3>
-  <p id="bet-info">Remportez le total de vos croquettes multiplié par la côte en cas de victoire. Vous perdez TOUT en cas d'echec.</p>
+  <p id="bet-info">Remportez le total de vos croquettes multiplié par la côte en cas de victoire. Vous perdez 75% de vos croquettes totales en cas d'echec.</p>
   <div class="mouse-options">
     <button class="mouse-bet" data-mouse="1" data-odds="1.5">Chat (Cote: 1.5)</button>
     <button class="mouse-bet" data-mouse="2" data-odds="3">Chien (Cote: 3)</button>
@@ -1032,7 +1098,7 @@ function startRace(selectedMouse, odds) {
         score = winAmount;
       } else {
         raceResult.textContent = `Dommage, vous avez perdu. ${winnerId === "mouse-1" ? "Le chat" : winnerId === "mouse-2" ? "Le chien" : "La souris"} a gagné.`;
-        score = 0;
+        score = Math.floor(score * 0.25);
       }
 
       updateScore();

@@ -2,7 +2,8 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Comic Sans MS", cursive, sans-serif; /* Police un peu fun */
+  font-family: 'Poppins', cursive; 
+  color: #444;
   background: url('images/Fond.png') no-repeat center center;
   background-size: auto;
   margin: 0;
@@ -29,6 +30,10 @@ body, html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+h1, h2, h3, .boutons, .ameliorations {
+  font-family: 'Fredoka One', cursive;
 }
 
 #scoreTotal{
@@ -177,6 +182,10 @@ body, html {
   flex-direction: column;
   gap: 10px; /* Espace entre les boutons */
   font-size: 13px;
+  margin: 20px auto;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2); /* Plus transparent */
 }
 
 .decoration-buttons {
@@ -188,20 +197,23 @@ body, html {
   flex-direction: column;
   gap: 10px; /* Espace entre les boutons */
   font-size: 13px;
+  margin: 20px auto;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2); /* Plus transparent */
 }
 
 /* Style général des boutons */
 button {
-  background-color: #f4c842; /* Couleur de croquette ou de gamelle */
-  color: #4a3c29; /* Couleur brune pour rappeler la nourriture de chat */
-  font-size: 1.2em;
-  font-family: "Comic Sans MS", cursive, sans-serif; /* Police un peu fun */
+  background: #FFCC66; /* Couleur croquette */
+  color: #603813; /* Brun croquette */
+  font-weight: bold;
   padding: 10px 20px;
   border: none;
-  border-radius: 15px;
-  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2); /* Ombre pour un effet 3D */
+  border-radius: 20px;
+  box-shadow: 0px 4px #d9a84e;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .tooltip {
@@ -228,10 +240,10 @@ button {
 }
 
 /* Effet visuel au survol */
-button:hover {
-  background-color: #e3b735;
-  transform: scale(1.05); /* Légère agrandissement */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Ajout d'une ombre plus marquée au survol */
+.bouton:hover {
+  box-shadow: 0px 2px #d9a84e;
+  transform: translateY(2px);
+  background: #FFB84D;
 }
 
 /* Effet pour les boutons désactivés */
