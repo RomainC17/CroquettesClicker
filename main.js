@@ -1,4 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
+const steamworks = require('steamworks.js');
+const steam = steamworks.init(3397600);
+
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -14,6 +17,7 @@ function createWindow() {
   });
 
   win.loadFile('jeu/index.html');
+  console.log(steam.localplayer.getName());
     // // Ouvre les DevTools automatiquement
     // win.webContents.openDevTools();
 
@@ -22,6 +26,15 @@ function createWindow() {
     win.close();
   });
 }
+
+ipcMain.on('unlock-achievement', (event, achievementId) => {
+  try {
+    steam.achievement.activate(achievementId);
+    console.log(`Succès déverrouillé : ${achievementId}`);
+  } catch (error) {
+    console.error(`Erreur lors du déverrouillage du succès : ${achievementId}`, error);
+  }
+});
 
 app.whenReady().then(() => {
   createWindow();
@@ -34,3 +47,4 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
+require('steamworks.js').electronEnableSteamOverlay()

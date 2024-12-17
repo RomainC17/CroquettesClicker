@@ -68,6 +68,19 @@ document.getElementById("maitresseCroquettes").addEventListener("click", () => {
     maitresseCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    // Vérifier et débloquer le succès Steam
+    if (maitresseCroquettesLevel === 1) {
+      unlockSteamAchievement("FIRST_OWNER");
+    }
+
+    if (maitresseCroquettesLevel === 50) {
+      unlockSteamAchievement("OWNER_50");
+    }
+
+    if (maitresseCroquettesLevel === 100) {
+      unlockSteamAchievement("OWNER_100");
+    }
   }
 });
 
@@ -80,6 +93,18 @@ document.getElementById("sacCroquettes").addEventListener("click", () => {
     sacCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    if (sacCroquettesLevel === 1) {
+      unlockSteamAchievement("BAG_FIRST");
+    }
+
+    if (sacCroquettesLevel === 50) {
+      unlockSteamAchievement("BAG_50");
+    }
+
+    if (sacCroquettesLevel === 100) {
+      unlockSteamAchievement("BAG_100");
+    }
   }
 });
 
@@ -92,6 +117,18 @@ document.getElementById("colisCroquettes").addEventListener("click", () => {
     colisCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    if (colisCroquettesLevel === 1) {
+      unlockSteamAchievement("DELIVERY_FIRST");
+    }
+
+    if (colisCroquettesLevel === 50) {
+      unlockSteamAchievement("DELIVERY_50");
+    }
+
+    if (colisCroquettesLevel === 100) {
+      unlockSteamAchievement("DELIVERY_100");
+    }
   }
 });
 
@@ -104,6 +141,17 @@ document.getElementById("champsCroquettes").addEventListener("click", () => {
     champCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    // Vérifier et débloquer le succès Steam
+    if (champCroquettesLevel === 1) {
+      unlockSteamAchievement("FIELD_FIRST");
+    }
+    if (champCroquettesLevel === 50) {
+      unlockSteamAchievement("FIELD_50");
+    }
+    if (champCroquettesLevel === 100) {
+      unlockSteamAchievement("FIELD_100");
+    }
   }
 });
 
@@ -116,6 +164,17 @@ document.getElementById("minesCroquettes").addEventListener("click", () => {
     mineCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    // Vérifier et débloquer le succès Steam
+    if (mineCroquettesLevel === 1) {
+      unlockSteamAchievement("MINE_FIRST");
+    }
+    if (mineCroquettesLevel === 50) {
+      unlockSteamAchievement("MINE_50");
+    }
+    if (mineCroquettesLevel === 100) {
+      unlockSteamAchievement("MINE_100");
+    }
   }
 });
 
@@ -128,6 +187,17 @@ document.getElementById("usineCroquettes").addEventListener("click", () => {
     usineCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    // Vérifier et débloquer le succès Steam
+    if (usineCroquettesLevel === 1) {
+      unlockSteamAchievement("FACTORY_FIRST");
+    }
+    if (usineCroquettesLevel === 50) {
+      unlockSteamAchievement("FACTORY_50");
+    }
+    if (usineCroquettesLevel === 100) {
+      unlockSteamAchievement("FACTORY_100");
+    }
   }
 });
 
@@ -140,6 +210,17 @@ document.getElementById("convoiCroquettes").addEventListener("click", () => {
     convoiCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    // Vérifier et débloquer le succès Steam
+    if (convoiCroquettesLevel === 1) {
+      unlockSteamAchievement("CONVOY_FIRST");
+    }
+    if (convoiCroquettesLevel === 50) {
+      unlockSteamAchievement("CONVOY_50");
+    }
+    if (convoiCroquettesLevel === 100) {
+      unlockSteamAchievement("CONVOY_100");
+    }
   }
 });
 
@@ -152,6 +233,17 @@ document.getElementById("affretementCroquettes").addEventListener("click", () =>
     affretementCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    // Vérifier et débloquer le succès Steam
+    if (affretementCroquettesLevel === 1) {
+      unlockSteamAchievement("AIRPLANE_FIRST");
+    }
+    if (affretementCroquettesLevel === 50) {
+      unlockSteamAchievement("AIRPLANE_50");
+    }
+    if (affretementCroquettesLevel === 100) {
+      unlockSteamAchievement("AIRPLANE_100");
+    }
   }
 });
 
@@ -164,6 +256,17 @@ document.getElementById("teleporteurCroquettes").addEventListener("click", () =>
     teleporteurCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    // Vérifier et débloquer le succès Steam
+    if (teleporteurCroquettesLevel === 1) {
+      unlockSteamAchievement("TELEPORTER_FIRST");
+    }
+    if (teleporteurCroquettesLevel === 50) {
+      unlockSteamAchievement("TELEPORTER_50");
+    }
+    if (teleporteurCroquettesLevel === 100) {
+      unlockSteamAchievement("TELEPORTER_100");
+    }
   }
 });
 
@@ -176,6 +279,17 @@ document.getElementById("developpeurCroquettes").addEventListener("click", () =>
     developpeurCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    // Vérifier et débloquer le succès Steam
+    if (developpeurCroquettesLevel === 1) {
+      unlockSteamAchievement("DEVELOPER_FIRST");
+    }
+    if (developpeurCroquettesLevel === 50) {
+      unlockSteamAchievement("DEVELOPER_50");
+    }
+    if (developpeurCroquettesLevel === 100) {
+      unlockSteamAchievement("DEVELOPER_100");
+    }
   }
 });
 
@@ -188,6 +302,17 @@ document.getElementById("cgmCroquettes").addEventListener("click", () => {
     cgmCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    // Vérifier et débloquer le succès Steam
+    if (cgmCroquettesLevel === 1) {
+      unlockSteamAchievement("CGM_FIRST");
+    }
+    if (cgmCroquettesLevel === 50) {
+      unlockSteamAchievement("CGM_50");
+    }
+    if (cgmCroquettesLevel === 100) {
+      unlockSteamAchievement("CGM_100");
+    }
   }
 });
 
@@ -200,6 +325,17 @@ document.getElementById("patrouilleCroquettes").addEventListener("click", () => 
     patrouilleCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    // Vérifier et débloquer le succès Steam
+    if (patrouilleCroquettesLevel === 1) {
+      unlockSteamAchievement("PATROL_FIRST");
+    }
+    if (patrouilleCroquettesLevel === 50) {
+      unlockSteamAchievement("PATROL_50");
+    }
+    if (patrouilleCroquettesLevel === 100) {
+      unlockSteamAchievement("PATROL_100");
+    }
   }
 });
 
@@ -212,6 +348,17 @@ document.getElementById("continentCroquettes").addEventListener("click", () => {
     continentCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    // Vérifier et débloquer le succès Steam
+    if (continentCroquettesLevel === 1) {
+      unlockSteamAchievement("CONTINENT_FIRST");
+    }
+    if (continentCroquettesLevel === 50) {
+      unlockSteamAchievement("CONTINENT_50");
+    }
+    if (continentCroquettesLevel === 100) {
+      unlockSteamAchievement("CONTINENT_100");
+    }
   }
 });
 
@@ -224,6 +371,17 @@ document.getElementById("planeteCroquettes").addEventListener("click", () => {
     planeteCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    // Vérifier et débloquer le succès Steam
+    if (planeteCroquettesLevel === 1) {
+      unlockSteamAchievement("PLANET_FIRST");
+    }
+    if (planeteCroquettesLevel === 50) {
+      unlockSteamAchievement("PLANET_50");
+    }
+    if (planeteCroquettesLevel === 100) {
+      unlockSteamAchievement("PLANET_100");
+    }
   }
 });
 
@@ -236,6 +394,17 @@ document.getElementById("galaxieCroquettes").addEventListener("click", () => {
     galaxieCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    // Vérifier et débloquer le succès Steam
+    if (galaxieCroquettesLevel === 1) {
+      unlockSteamAchievement("STARS_FIRST");
+    }
+    if (galaxieCroquettesLevel === 50) {
+      unlockSteamAchievement("STARS_50");
+    }
+    if (galaxieCroquettesLevel === 100) {
+      unlockSteamAchievement("STARS_100");
+    }
   }
 });
 
@@ -248,6 +417,17 @@ document.getElementById("trouNoirCroquettes").addEventListener("click", () => {
     trouNoirCroquettesLevel += 1;
     updateScore();
     updateButtons();
+
+    // Vérifier et débloquer le succès Steam
+    if (trouNoirCroquettesLevel === 1) {
+      unlockSteamAchievement("BLACK_FIRST");
+    }
+    if (trouNoirCroquettesLevel === 50) {
+      unlockSteamAchievement("BLACK_50");
+    }
+    if (trouNoirCroquettesLevel === 100) {
+      unlockSteamAchievement("BLACK_100");
+    }
   }
 });
 
@@ -528,7 +708,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Mine de croquettes
-  galaxieCroquettesButton.textContent = `Galaxie (coût: ${galaxieCroquettesCost}) : +45 croq./sec (Niv. ${galaxieCroquettesLevel})`;
+  galaxieCroquettesButton.textContent = `Constellation (coût: ${galaxieCroquettesCost}) : +45 croq./sec (Niv. ${galaxieCroquettesLevel})`;
   if (score < galaxieCroquettesCost) {
     galaxieCroquettesButton.classList.add("disabled");
     galaxieCroquettesButton.disabled = true;
@@ -538,7 +718,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Mine de croquettes
-  trouNoirCroquettesButton.textContent = `Trou noir (coût: ${trouNoirCroquettesCost}) : +100 croq./sec (Niv. ${trouNoirCroquettesLevel})`;
+  trouNoirCroquettesButton.textContent = `Trou Noir (coût: ${trouNoirCroquettesCost}) : +100 croq./sec (Niv. ${trouNoirCroquettesLevel})`;
   if (score < trouNoirCroquettesCost) {
     trouNoirCroquettesButton.classList.add("disabled");
     trouNoirCroquettesButton.disabled = true;
@@ -779,6 +959,21 @@ function resetGame() {
   champCroquettesCost = 1500;
   mineCroquettesCost = 5000;
   maitresseCroquettesLevel = 0;
+  sacCroquettesLevel = 0;
+  colisCroquettesLevel = 0;
+  champCroquettesLevel= 0;
+  mineCroquettesLevel= 0;
+  usineCroquettesLevel= 0;
+  convoiCroquettesLevel= 0;
+  affretementCroquettesLevel= 0;
+  teleporteurCroquettesLevel= 0;
+  developpeurCroquettesLevel= 0;
+  cgmCroquettesLevel= 0;
+  patrouilleCroquettesLevel= 0;
+  continentCroquettesLevel= 0;
+  planeteCroquettesLevel= 0;
+  galaxieCroquettesLevel= 0;
+  trouNoirCroquettesLevel= 0;
   gamellePurchased = false;
   eauPurchased = false;
   nuitPurchased = false;
@@ -1401,3 +1596,7 @@ creditsGameButton.addEventListener("click", () => {
 creditsGamePopup.querySelector(".close-popup").addEventListener("click", () => {
   creditsGamePopup.style.display = "none";
 });
+
+function unlockSteamAchievement(achievementId) {
+  ipcRenderer.send('unlock-achievement', achievementId);
+}
