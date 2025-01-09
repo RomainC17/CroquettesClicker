@@ -10,9 +10,12 @@
 <body>
   <div class="container">
     <div id="background-stars"></div>
-      <h1 id="titre" data-title="Croquettes Clicker" data-description="Un superbe jeu de Griffon !">Croquettes Clicker</h1>
+      <!-- <h1 id="titre" data-title="Croquettes Clicker" data-description="Un superbe jeu de Griffon !">Croquettes Clicker</h1> -->
+      <img id="CCI" src="images/CROQUETTESCLICKER.png" data-title="Croquettes Clicker" data-description="Un superbe jeu de Griffon !" draggable="false">
       <div id="scoreTotal">Croquettes totales : 0</div>
       <div id="scoreSeconde">Croquettes par seconde : 0</div>
+      <div id="cps-icons-container" class="cps-animation"></div>
+
       <button id="resetGame" onclick="resetGame()">Réinitialiser le jeu</button>
 
     <!-- Conteneur principal pour l'image et les boutons -->
@@ -30,7 +33,7 @@
     <img id="distributeurImage" src="images/Distributeur.png" alt="Animation" class="fade-effect" style="display: none;">
     <img id="arbreImage" src="images/Arbre.png" alt="Animation" class="fade-effect" style="display: none;">
     <img id="coffreImage" src="images/Coffre.png" alt="Animation" class="fade-effect" style="display: none;">
-    <img id="chemineeImage" src="images/Cheminee.png" alt="Animation" class="fade-effect" style="display: none;">
+    <!-- <img id="chemineeImage" src="images/Cheminee.png" alt="Animation" class="fade-effect" style="display: none;"> -->
     <img id="tableauImage" src="images/Tableau.png" alt="Animation" class="fade-effect" style="display: none;">
 
 
@@ -92,41 +95,51 @@
 
     <div class="decoration-buttons">
       <h1>Boutique</h1>
-      <button id="gamelleDecoration" data-title="Remplir la gamelle de croquettes" data-description="Merci ! (il était temps)">
-        Remplir la gamelle de croquettes (coût : 100 croquettes)
-      </button>
-      <button id="distributeurDecoration" data-title="Placer un distributeur automatique" data-description="Je n'ai enfin plus besoin d'attendre pour avoir à manger.">
-        Placer un distributeur automatique (coût : 5 000 croquettes)
-      </button>
-      <button id="eauDecoration" data-title="Installer et remplir la gamelle d'eau" data-description="C'est presque une aberration de ne pas y avoir pensé avant !">
-        Installer et remplir la gamelle d'eau (coût : 50 000 croquettes)
-      </button>
-      <button id="arbreDecoration" data-title="Installer un arbre à chat" data-description="500 000 croquettes pour ça ?! Pour 2 croquettes et un bout de carton, mon bonheur est tout trouvé.">
-        Installer un arbre à chat (coût : 100 000 croquettes)
-      </button>
-      <button id="coffreDecoration" data-title="Placer un coffre de croquettes" data-description="Une sorte de gamelle géante !">
-        Placer un coffre de croquettes (coût : 150 000 croquettes)
-      </button>
-      <button id="chemineeDecoration" data-title="Installer une cheminée" data-description="Quoi de mieux que la chaleur naturelle d'une cheminée !">
-        Installer une cheminée (coût : 250 000 croquettes)
-      </button>
-      <button id="tableauDecoration" data-title="Accrocher un tableau de famille" data-description="Un joli tableau de mes maîtres et moi !">
-        Accrocher un tableau de famille (coût : 400 000 croquettes)
-      </button>
-      <button id="nuitDecoration" data-title="La nuit des chats" data-description="C'est mon moment préféré !">
-        La nuit des chats (coût : 1 000 000 croquettes)
-      </button>
+    
+      <!-- Bouton principal pour afficher/masquer les options -->
+      <button class="category-button" data-category="decors" data-title="Améliorer le décors" data-description="Achètes des éléments visuels pour améliorer mon quotidien !">Améliorer le décors</button>
+      <div class="category-content" id="decors">
+        <button id="gamelleDecoration" data-title="Remplir la gamelle de croquettes" data-description="Merci ! (il était temps)">
+          Remplir la gamelle de croquettes (coût : 100 croquettes)
+        </button>
+        <button id="jardinDecoration" data-title="Se rendre dans le jardin" data-description="Une petite balade s'impose !">
+          Se rendre dans le jardin (coût: 5 000 croquettes)
+        </button>
+        <button id="chambreDecoration" data-title="Se rendre dans sa chambre préférée" data-description="La chaleur de l'ordinateur et des écrans... j'adore !">
+          Se rendre dans sa chambre préférée (coût : 50 000 croquettes)
+        </button>
+        <button id="restaurantDecoration" data-title="Aller au restaurant" data-description="Allons manger un beau morceau de poulet avec du steak haché... miam...">
+          Aller au restaurant (coût : 100 000 croquettes)
+        </button>
+        <button id="jetDecoration" data-title="Prendre son premier jet privé" data-description="La célébrité pour un chat extraordinaire, quoi de mieux que mon premier jet privé !">
+          Prendre son premier jet privé (coût : 150 000 croquettes)
+        </button>
+        <button id="conferenceDecoration" data-title="Faire sa première conférence" data-description="Allons dire au monde entier le secret de ma réussite !">
+          Faire sa première conférence (coût : 250 000 croquettes)
+        </button>
+        <button id="famousDecoration" data-title="Accepter l'invitation au MostFamousCat" data-description="Je suis désormais le chat le plus populaire du monde entier !">
+          Accepter l'invitation au MostFamousCat (coût : 400 000 croquettes)
+        </button>
+        <button id="nuitDecoration" data-title="La nuit des chats" data-description="C'est mon moment préféré !">
+          La nuit des chats (coût : 1 000 000 croquettes)
+        </button>
+      </div>
+
+      <button class="category-button" data-category="games" data-title="Acheter des mini-jeux supplémentaires" data-description="Dévérouille des mini-jeux pour gagner encore plus de croquettes !">Acheter des mini-jeux supplémentaires</button>
+      <div class="category-content" id="games">
+        <button id="reflexButton" data-title="Le Défi de la Patte" data-description="Testez vos réflexes et gagnez des croquettes !">Le Défi de la Patte (coût : 1 000 croquettes)</button>
+      </div>
       <br>
       <br>
-      <button id="successButton" data-title="Succès" data-description="Voir tes accomplissements.">Succès</button>
-      <button id="creditsGameButton" data-title="Credits du jeu" data-description="Développeur, bande son...">Crédits</button>
     </div>
+    <!-- <button id="successButton" data-title="Succès" data-description="Voir tes accomplissements.">Succès</button>
+    <button id="creditsGameButton" data-title="Credits du jeu" data-description="Développeur, bande son...">Crédits</button> -->
 
     <div class="jeux-button">
-      <h1>Mini-jeux</h1>
-      <button id="rouletteButton" data-title="Roulette Croquette" data-description="C'est quitte... ou double !">Roulette Croquette</button>
-      <button id="pariButton" data-title="Pari Croquette" data-description="Une course ouverte aux pronostiques !">Pari Souris</button>
-      <button id="habiliteButton" data-title="Habilité Croquette" data-description="Est-tu aussi habile qu'un chat ?">Habilité Croquette</button>
+      <h1>Mini-jeux débloqués</h1>
+      <button id="rouletteButton" data-title="Miaoulette Russe" data-description="C'est quitte... ou double !">Miaoulette Russe</button>
+      <button id="pariButton" data-title="La Grande Course" data-description="Une course ouverte aux pronostiques !">La Grande Course</button>
+      <button id="reflexButtonHidden" data-title="Le Défi de la Patte" alt="Animation" class="fade-effect" style="display: none;" data-description="Testez vos réflexes et gagnez des croquettes !">Le Défi de la Patte</button>
     </div>
     <h3 id="credits" data-title="Avec l'aimable autorisation de Mr.Tonnellier !" data-description="">🔊Fabrice Tonnellier - Coeur Radieux</h3>
     <div class="volume-control">

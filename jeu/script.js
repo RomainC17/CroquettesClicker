@@ -38,20 +38,23 @@ let trouNoirCroquettesLevel = 0;
 
 let gamelleDecorationCost = 100;
 let gamellePurchased = false;
-let eauDecorationCost = 50000;
-let eauPurchased = false;
-let distributeurDecorationCost = 5000;
-let distributeurPurchased = false;
-let arbreDecorationCost = 100000;
-let arbrePurchased = false;
-let coffreDecorationCost = 150000;
-let coffrePurchased = false;
-let chemineeDecorationCost = 250000;
-let chemineePurchased = false;
-let tableauDecorationCost = 400000;
-let tableauPurchased = false;
+let jardinDecorationCost = 5;
+let jardinPurchased = false;
+let chambreDecorationCost = 5;
+let chambrePurchased = false;
+let restaurantDecorationCost = 5;
+let restaurantPurchased = false;
+let jetDecorationCost = 5;
+let jetPurchased = false;
+let conferenceDecorationCost = 5;
+let conferencePurchased = false;
+let famousDecorationCost = 5;
+let famousPurchased = false;
 let nuitDecorationCost = 1000000;
 let nuitPurchased = false;
+
+let reflexGameCost = 1000;
+let reflexGamePurchased = false;
 
 // Mise à jour du score affiché
 function updateScore() {
@@ -445,78 +448,122 @@ document.getElementById("gamelleDecoration").addEventListener("click", () => {
     fadeImage.style.zIndex = "5"; // S'assurer qu'elle est au-dessus
     fadeImage.classList.add("fade-in");
     showFadeImage();
+    changeBackgroundImage('images/FondDeux.png');
+  }
+});
+
+
+function changeBackgroundImage(newImagePath) {
+  document.body.style.background = `url('${newImagePath}') no-repeat center center`;
+  document.body.style.backgroundSize = "cover";
+}
+
+function changeBackgroundVideo(videoPath) {
+  // Vérifie si une vidéo de fond existe déjà, sinon crée-en une
+  let videoElement = document.getElementById("backgroundVideo");
+  if (!videoElement) {
+    videoElement = document.createElement("video");
+    videoElement.id = "backgroundVideo";
+    videoElement.autoplay = true;
+    videoElement.loop = true;
+    videoElement.muted = true; // Pour éviter les problèmes de son
+    videoElement.style.position = "fixed";
+    videoElement.style.top = "0";
+    videoElement.style.left = "0";
+    videoElement.style.width = "100%";
+    videoElement.style.height = "100%";
+    videoElement.style.objectFit = "cover"; // Ajuste la vidéo pour qu'elle remplisse l'écran
+    videoElement.style.zIndex = "-2"; // Place la vidéo derrière les autres éléments
+    document.body.appendChild(videoElement);
+  }
+
+  // Change la source de la vidéo
+  videoElement.src = videoPath;
+  videoElement.play(); // Reprend la lecture au cas où la vidéo aurait été arrêtée
+}
+
+// Fonction pour gérer l'achat de la décoration de gamelle
+document.getElementById("chambreDecoration").addEventListener("click", () => {
+  if (!chambrePurchased && score >= chambreDecorationCost) {
+    score -= chambreDecorationCost;
+    chambrePurchased = true;
+    updateScore();
+    updateButtons();
+    markAsPurchased("chambreDecoration");
+    changeBackgroundVideo('images/FondChambre.mp4')
+  }
+});
+
+// Fonction pour gérer l'achat du jardin
+document.getElementById("jardinDecoration").addEventListener("click", () => {
+  if (!jardinPurchased && score >= jardinDecorationCost) {
+    score -= jardinDecorationCost;
+    jardinPurchased = true;
+    updateScore();
+    updateButtons();
+    markAsPurchased("jardinDecoration");
+    changeBackgroundVideo('images/FondJardin.mp4');
   }
 });
 
 // Fonction pour gérer l'achat de la décoration de gamelle
-document.getElementById("eauDecoration").addEventListener("click", () => {
-  if (!eauPurchased && score >= eauDecorationCost) {
-    score -= eauDecorationCost;
-    eauPurchased = true;
+document.getElementById("restaurantDecoration").addEventListener("click", () => {
+  if (!restaurantPurchased && score >= restaurantDecorationCost) {
+    score -= restaurantDecorationCost;
+    restaurantPurchased = true;
     updateScore();
     updateButtons();
-    markAsPurchased("eauDecoration");
-    showEauImage();
+    markAsPurchased("restaurantDecoration");
+    changeBackgroundVideo('images/FondRestaurant.mp4')
   }
 });
 
 // Fonction pour gérer l'achat de la décoration de gamelle
-document.getElementById("distributeurDecoration").addEventListener("click", () => {
-  if (!distributeurPurchased && score >= distributeurDecorationCost) {
-    score -= distributeurDecorationCost;
-    distributeurPurchased = true;
+document.getElementById("jetDecoration").addEventListener("click", () => {
+  if (!jetPurchased && score >= jetDecorationCost) {
+    score -= jetDecorationCost;
+    jetPurchased = true;
     updateScore();
     updateButtons();
-    markAsPurchased("distributeurDecoration");
-    showDistributeurImage();
+    markAsPurchased("jetDecoration");
+    changeBackgroundVideo('images/FondJet.mp4')
   }
 });
 
 // Fonction pour gérer l'achat de la décoration de gamelle
-document.getElementById("arbreDecoration").addEventListener("click", () => {
-  if (!arbrePurchased && score >= arbreDecorationCost) {
-    score -= arbreDecorationCost;
-    arbrePurchased = true;
+document.getElementById("conferenceDecoration").addEventListener("click", () => {
+  if (!conferencePurchased && score >= conferenceDecorationCost) {
+    score -= conferenceDecorationCost;
+    conferencePurchased = true;
     updateScore();
     updateButtons();
-    markAsPurchased("arbreDecoration");
-    showArbreImage();
+    markAsPurchased("conferenceDecoration");
+    changeBackgroundVideo('images/FondConference.mp4')
   }
 });
 
 // Fonction pour gérer l'achat de la décoration de gamelle
-document.getElementById("coffreDecoration").addEventListener("click", () => {
-  if (!coffrePurchased && score >= coffreDecorationCost) {
-    score -= coffreDecorationCost;
-    coffrePurchased = true;
+document.getElementById("famousDecoration").addEventListener("click", () => {
+  if (!famousPurchased && score >= famousDecorationCost) {
+    score -= famousDecorationCost;
+    famousPurchased = true;
     updateScore();
     updateButtons();
-    markAsPurchased("coffreDecoration");
-    showCoffreImage();
+    markAsPurchased("famousDecoration");
+    changeBackgroundVideo('images/FondFamous.mp4')
   }
 });
 
 // Fonction pour gérer l'achat de la décoration de gamelle
-document.getElementById("chemineeDecoration").addEventListener("click", () => {
-  if (!chemineePurchased && score >= chemineeDecorationCost) {
-    score -= chemineeDecorationCost;
-    chemineePurchased = true;
+document.getElementById("reflexButton").addEventListener("click", () => {
+  if (!reflexGamePurchased && score >= reflexGameCost) {
+    score -= reflexGameCost;
+    reflexGamePurchased = true;
     updateScore();
     updateButtons();
-    markAsPurchased("chemineeDecoration");
-    showChemineeImage();
-  }
-});
-
-// Fonction pour gérer l'achat de la décoration de gamelle
-document.getElementById("tableauDecoration").addEventListener("click", () => {
-  if (!tableauPurchased && score >= tableauDecorationCost) {
-    score -= tableauDecorationCost;
-    tableauPurchased = true;
-    updateScore();
-    updateButtons();
-    markAsPurchased("tableauDecoration");
-    showTableauImage();
+    markAsPurchased("reflexButton");
+    showReflexButtonHidden();
+    unlockSteamAchievement("GAME_PAW");
   }
 });
 
@@ -559,13 +606,15 @@ function updateButtons() {
   const trouNoirCroquettesButton = document.getElementById("trouNoirCroquettes");
 
   const gamelleButton = document.getElementById("gamelleDecoration");
-  const eauButton = document.getElementById("eauDecoration");
-  const distributeurButton = document.getElementById("distributeurDecoration");
-  const arbreButton = document.getElementById("arbreDecoration");
-  const coffreButton = document.getElementById("coffreDecoration");
-  const chemineeButton = document.getElementById("chemineeDecoration");
-  const tableauButton = document.getElementById("tableauDecoration");
+  const chambreButton = document.getElementById("chambreDecoration");
+  const jardinButton = document.getElementById("jardinDecoration");
+  const restaurantButton = document.getElementById("restaurantDecoration");
+  const jetButton = document.getElementById("jetDecoration");
+  const conferenceButton = document.getElementById("conferenceDecoration");
+  const famousButton = document.getElementById("famousDecoration");
   const nuitButton = document.getElementById("nuitDecoration");
+
+  const reflexGameButton = document.getElementById("reflexButton");
 
   // Mise à jour du bouton Sac de croquettes
   maitresseCroquettesButton.textContent = `Maîtresse (coût: ${maitresseCroquettesCost}) : +1 croq./sec (Niv. ${maitresseCroquettesLevel})`;
@@ -739,63 +788,63 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Gamelle (décoration)
-  eauButton.textContent = `Installer et remplir la gamelle d'eau (coût : ${eauDecorationCost} croquettes)`;
-  if (eauPurchased || score < eauDecorationCost) {
-    eauButton.classList.add("disabled");
-    eauButton.disabled = true;
+  chambreButton.textContent = `Se rendre dans sa chambre préférée (coût : ${chambreDecorationCost} croquettes)`;
+  if (chambrePurchased || score < chambreDecorationCost) {
+    chambreButton.classList.add("disabled");
+    chambreButton.disabled = true;
   } else {
-    eauButton.classList.remove("disabled");
-    eauButton.disabled = false;
+    chambreButton.classList.remove("disabled");
+    chambreButton.disabled = false;
   }
 
   // Mise à jour du bouton Gamelle (décoration)
-  distributeurButton.textContent = `Placer un distributeur automatique (coût : ${distributeurDecorationCost} croquettes)`;
-  if (distributeurPurchased || score < distributeurDecorationCost) {
-    distributeurButton.classList.add("disabled");
-    distributeurButton.disabled = true;
+  jardinButton.textContent = `Se rendre dans le jardin (coût : ${jardinDecorationCost} croquettes)`;
+  if (jardinPurchased || score < jardinDecorationCost) {
+    jardinButton.classList.add("disabled");
+    jardinButton.disabled = true;
   } else {
-    distributeurButton.classList.remove("disabled");
-    distributeurButton.disabled = false;
+    jardinButton.classList.remove("disabled");
+    jardinButton.disabled = false;
   }
 
   // Mise à jour du bouton Gamelle (décoration)
-  arbreButton.textContent = `Installer un arbre à chat (coût : ${arbreDecorationCost} croquettes)`;
-  if (arbrePurchased || score < arbreDecorationCost) {
-    arbreButton.classList.add("disabled");
-    arbreButton.disabled = true;
+  restaurantButton.textContent = `Aller au restaurant (coût : ${restaurantDecorationCost} croquettes)`;
+  if (restaurantPurchased || score < restaurantDecorationCost) {
+    restaurantButton.classList.add("disabled");
+    restaurantButton.disabled = true;
   } else {
-    arbreButton.classList.remove("disabled");
-    arbreButton.disabled = false;
+    restaurantButton.classList.remove("disabled");
+    restaurantButton.disabled = false;
   }
 
   // Mise à jour du bouton Gamelle (décoration)
-  coffreButton.textContent = `Placer un coffre de croquettes (coût : ${coffreDecorationCost} croquettes)`;
-  if (coffrePurchased || score < coffreDecorationCost) {
-    coffreButton.classList.add("disabled");
-    coffreButton.disabled = true;
+  jetButton.textContent = `Prendre son premier jet privé (coût : ${jetDecorationCost} croquettes)`;
+  if (jetPurchased || score < jetDecorationCost) {
+    jetButton.classList.add("disabled");
+    jetButton.disabled = true;
   } else {
-    coffreButton.classList.remove("disabled");
-    coffreButton.disabled = false;
+    jetButton.classList.remove("disabled");
+    jetButton.disabled = false;
   }
 
   // Mise à jour du bouton Gamelle (décoration)
-  chemineeButton.textContent = `Installer une cheminée (coût : ${chemineeDecorationCost} croquettes)`;
-  if (chemineePurchased || score < chemineeDecorationCost) {
-    chemineeButton.classList.add("disabled");
-    chemineeButton.disabled = true;
+  conferenceButton.textContent = `Faire sa première conférence (coût : ${conferenceDecorationCost} croquettes)`;
+  if (conferencePurchased || score < conferenceDecorationCost) {
+    conferenceButton.classList.add("disabled");
+    conferenceButton.disabled = true;
   } else {
-    chemineeButton.classList.remove("disabled");
-    chemineeButton.disabled = false;
+    conferenceButton.classList.remove("disabled");
+    conferenceButton.disabled = false;
   }
 
   // Mise à jour du bouton Gamelle (décoration)
-  tableauButton.textContent = `Accrocher un tableau de famille (coût : ${tableauDecorationCost} croquettes)`;
-  if (tableauPurchased || score < tableauDecorationCost) {
-    tableauButton.classList.add("disabled");
-    tableauButton.disabled = true;
+  famousButton.textContent = `Accepter l'invitation au MostFamousCat (coût : ${famousDecorationCost} croquettes)`;
+  if (famousPurchased || score < famousDecorationCost) {
+    famousButton.classList.add("disabled");
+    famousButton.disabled = true;
   } else {
-    tableauButton.classList.remove("disabled");
-    tableauButton.disabled = false;
+    famousButton.classList.remove("disabled");
+    famousButton.disabled = false;
   }
 
   // Mise à jour du bouton Gamelle (décoration)
@@ -806,6 +855,16 @@ function updateButtons() {
   } else {
     nuitButton.classList.remove("disabled");
     nuitButton.disabled = false;
+  }
+
+  // Mise à jour du bouton Gamelle (décoration)
+  reflexGameButton.textContent = `Le Défi de la Patte (coût : ${reflexGameCost} croquettes)`;
+  if (reflexGamePurchased || score < reflexGameCost) {
+    reflexGameButton.classList.add("disabled");
+    reflexGameButton.disabled = true;
+  } else {
+    reflexGameButton.classList.remove("disabled");
+    reflexGameButton.disabled = false;
   }
 }
 
@@ -849,46 +908,51 @@ function loadGame() {
     galaxieCroquettesLevel = data.galaxieCroquettesLevel || 0;
     trouNoirCroquettesLevel = data.trouNoirCroquettesLevel || 0;
     gamellePurchased = data.gamellePurchased || false;
-    eauPurchased = data.eauPurchased || false;
-    distributeurPurchased = data.distributeurPurchased || false;
-    arbrePurchased = data.arbrePurchased || false;
-    coffrePurchased = data.coffrePurchased || false;
-    chemineePurchased = data.chemineePurchased || false;
-    tableauPurchased = data.tableauPurchased || false;
+    chambrePurchased = data.chambrePurchased || false;
+    jardinPurchased = data.jardinPurchased || false;
+    restaurantPurchased = data.restaurantPurchased || false;
+    jetPurchased = data.jetPurchased || false;
+    conferencePurchased = data.conferencePurchased || false;
+    famousPurchased = data.famousPurchased || false;
     nuitPurchased = data.nuitPurchased || false;
+    reflexGamePurchased = data.reflexGamePurchased || false;
     updateScore();
     updateButtons();
     if (gamellePurchased) {
       markAsPurchased("gamelleDecoration");
       showFadeImage();
     }
-    if (eauPurchased) {
-      markAsPurchased("eauDecoration");
-      showEauImage();
+    if (jardinPurchased) {
+      markAsPurchased("jardinDecoration");
+      changeBackgroundVideo('images/FondJardin.mp4')
     }
-    if (distributeurPurchased) {
-      markAsPurchased("distributeurDecoration");
-      showDistributeurImage();
+    if (chambrePurchased) {
+      markAsPurchased("chambreDecoration");
+      changeBackgroundVideo('images/FondChambre.mp4')
     }
-    if (arbrePurchased) {
-      markAsPurchased("arbreDecoration");
-      showArbreImage();
+    if (restaurantPurchased) {
+      markAsPurchased("restaurantDecoration");
+      changeBackgroundVideo('images/FondRestaurant.mp4')
     }
-    if (coffrePurchased) {
-      markAsPurchased("coffreDecoration");
-      showCoffreImage();
+    if (jetPurchased) {
+      markAsPurchased("jetDecoration");
+      changeBackgroundVideo('images/FondJet.mp4')
     }
-    if (chemineePurchased) {
-      markAsPurchased("chemineeDecoration");
-      showChemineeImage();
+    if (conferencePurchased) {
+      markAsPurchased("conferenceDecoration");
+      changeBackgroundVideo('images/FondConference.mp4')
     }
-    if (tableauPurchased) {
-      markAsPurchased("tableauDecoration");
-      showTableauImage();
+    if (famousPurchased) {
+      markAsPurchased("famousDecoration");
+      changeBackgroundVideo('images/FondFamous.mp4')
     }
     if (nuitPurchased) {
       markAsPurchased("nuitDecoration");
       createStars();
+    }
+    if (reflexGamePurchased) {
+      markAsPurchased("reflexButton");
+      showReflexButtonHidden();
     }
   }
 }
@@ -931,13 +995,14 @@ function saveGame() {
     galaxieCroquettesLevel: galaxieCroquettesLevel,
     trouNoirCroquettesLevel: trouNoirCroquettesLevel,
     gamellePurchased: gamellePurchased,
-    eauPurchased: eauPurchased,
-    distributeurPurchased: distributeurPurchased,
-    arbrePurchased: arbrePurchased,
-    coffrePurchased: coffrePurchased,
-    chemineePurchased: chemineePurchased,
-    tableauPurchased: tableauPurchased,
-    nuitPurchased: nuitPurchased
+    chambrePurchased: chambrePurchased,
+    jardinPurchased: jardinPurchased,
+    restaurantPurchased: restaurantPurchased,
+    jetPurchased: jetPurchased,
+    conferencePurchased: conferencePurchased,
+    famousPurchased: famousPurchased,
+    nuitPurchased: nuitPurchased,
+    reflexGamePurchased: reflexGamePurchased
   };
   localStorage.setItem("clickerGameSave", JSON.stringify(data));
 }
@@ -975,13 +1040,14 @@ function resetGame() {
   galaxieCroquettesLevel= 0;
   trouNoirCroquettesLevel= 0;
   gamellePurchased = false;
-  eauPurchased = false;
+  chambrePurchased = false;
   nuitPurchased = false;
-  distributeurPurchased = false;
-  arbrePurchased = false;
-  coffrePurchased = false;
-  chemineePurchased = false;
-  tableauPurchased = false;
+  jardinPurchased = false;
+  restaurantPurchased = false;
+  jetPurchased = false;
+  conferencePurchased = false;
+  famousPurchased = false;
+  reflexGamePurchased = false;
   updateScore();
   updateButtons();
 }
@@ -1048,43 +1114,8 @@ function showFadeImage() {
 }
 
 // Fonction pour afficher une animation de fade quand une amélioration est achetée
-function showEauImage() {
-  const fadeImage = document.getElementById("EauImage");
-  fadeImage.style.display = "block";
-  fadeImage.classList.add("fade-in");
-}
-
-// Fonction pour afficher une animation de fade quand une amélioration est achetée
-function showArbreImage() {
-  const fadeImage = document.getElementById("arbreImage");
-  fadeImage.style.display = "block";
-  fadeImage.classList.add("fade-in");
-}
-
-// Fonction pour afficher une animation de fade quand une amélioration est achetée
-function showDistributeurImage() {
-  const fadeImage = document.getElementById("distributeurImage");
-  fadeImage.style.display = "block";
-  fadeImage.classList.add("fade-in");
-}
-
-// Fonction pour afficher une animation de fade quand une amélioration est achetée
-function showCoffreImage() {
-  const fadeImage = document.getElementById("coffreImage");
-  fadeImage.style.display = "block";
-  fadeImage.classList.add("fade-in");
-}
-
-// Fonction pour afficher une animation de fade quand une amélioration est achetée
-function showChemineeImage() {
-  const fadeImage = document.getElementById("chemineeImage");
-  fadeImage.style.display = "block";
-  fadeImage.classList.add("fade-in");
-}
-
-// Fonction pour afficher une animation de fade quand une amélioration est achetée
-function showTableauImage() {
-  const fadeImage = document.getElementById("tableauImage");
+function showReflexButtonHidden() {
+  const fadeImage = document.getElementById("reflexButtonHidden");
   fadeImage.style.display = "block";
   fadeImage.classList.add("fade-in");
 }
@@ -1185,10 +1216,12 @@ roulettePopup.addEventListener("click", (event) => {
       // L'utilisateur perd tout
       score = 0;
       message.textContent = "Vous avez perdu... dommage ! \n Fermeture...";
+      unlockSteamAchievement("RUSSIANR_LOOSE");
     } else {
       // L'utilisateur double sa mise
       score *= 2;
       message.textContent = `Bien joué ! Vous avez maintenant ${score} croquettes ! \n Fermeture...`;
+      unlockSteamAchievement("RUSSIANR_WIN");
     }
 
     updateScore(); // Met à jour l'affichage des scores
@@ -1330,272 +1363,117 @@ document.querySelectorAll(".mouse-bet").forEach(button => {
   });
 });
 
-/******************************************************************/
-// Références et création de la pop-up
-const habiliteButton = document.getElementById("habiliteButton");
-const skillPopup = document.createElement("div");
+document.querySelectorAll(".category-button").forEach(button => {
+  button.addEventListener("click", () => {
+    const category = document.getElementById(button.dataset.category);
 
-skillPopup.id = "skillPopup";
-skillPopup.innerHTML = `
+    // Vérifie si le menu cliqué est déjà visible
+    const isVisible = category.style.display === "block";
+
+    // Ferme tous les menus
+    document.querySelectorAll(".category-content").forEach(content => {
+      content.style.display = "none";
+    });
+
+    // Basculer l'affichage du menu cliqué
+    if (!isVisible) {
+      category.style.display = "block";
+    }
+  });
+});
+
+// Référence au bouton du mini-jeu
+const reflexButton = document.getElementById("reflexButtonHidden");
+const reflexPopup = document.createElement("div");
+
+// Création de la pop-up HTML
+reflexPopup.id = "reflexPopup";
+reflexPopup.innerHTML = `
   <button class="close-popup">&times;</button>
-  <h3>Testez votre habilité croquette !</h3>
-  <p>Réussissez 3 fois de suite pour ajouter 10% à vos croquettes totales !<p>
-  <div id="skill-bar-container">
-    <div id="moving-bar"></div>
-    <div id="target-zone"></div>
-  </div>
-  <p id="feedback">Appuyez sur "Espace" pour arrêter la barre dans la zone !</p>
-  <button id="startSkillCheck">Commencer</button>
+  <h3>Jeu du Réflexe</h3>
+  <p>L'image met aléatoirement entre 1 et 3 secondes à apparaître et ne dure qu'une demi seconde à l'affichage !</p>
+  <p>Cliquez sur l'image dès qu'elle apparaît pour gagner 10% du total de vos croquettes.</p>
+  <div id="game-area"></div>
+  <p id="reflex-feedback"></p>
+  <button id="startReflex">Démarrer</button>
 `;
 
-document.body.appendChild(skillPopup);
+document.body.appendChild(reflexPopup);
 
-const closePopupButton = skillPopup.querySelector(".close-popup");
-const startButton = skillPopup.querySelector("#startSkillCheck");
-const movingBar = skillPopup.querySelector("#moving-bar");
-const targetZone = skillPopup.querySelector("#target-zone");
-const feedback = skillPopup.querySelector("#feedback");
-
-let intervalId;
-let direction = 1;
-let position = 0;
-let scoreSkill = 0; // Score des réussites consécutives
-let isRunning = false;
+let reflexGameActive = false; // Indique si le jeu est en cours
+let timeoutId;
 
 // Ouvrir la pop-up
-habiliteButton.addEventListener("click", () => {
-  skillPopup.style.display = "block";
+reflexButton.addEventListener("click", () => {
+  reflexPopup.style.display = "block";
 });
 
 // Fermer la pop-up
-closePopupButton.addEventListener("click", () => {
-  skillPopup.style.display = "none";
-  resetSkillCheck();
+reflexPopup.querySelector(".close-popup").addEventListener("click", () => {
+  reflexPopup.style.display = "none";
+  resetReflexGame();
 });
 
-// Fonction pour démarrer le jeu
-startButton.addEventListener("click", () => {
-  if (isRunning) return;
-  isRunning = true;
-  scoreSkill = 0;
-  feedback.textContent = "Appuyez sur Espace pour arrêter la barre dans la zone !";
-  startButton.disabled = true; // Désactiver le bouton de démarrage pendant la partie
-  generateTargetZone();
-  startMovingBar();
-});
+// Fonction pour démarrer le mini-jeu
+document.getElementById("startReflex").addEventListener("click", () => {
+  if (reflexGameActive) return;
+  reflexGameActive = true;
 
-// Fonction pour réinitialiser le jeu
-function resetSkillCheck() {
-  clearInterval(intervalId);
-  movingBar.style.left = "0%";
-  targetZone.style.left = "0%";
-  isRunning = false;
-  feedback.textContent = "";
-  startButton.disabled = false; // Réactiver le bouton de démarrage
-}
+  const gameArea = document.getElementById("game-area");
+  const feedback = document.getElementById("reflex-feedback");
 
-// Fonction pour déplacer la barre rouge
-function startMovingBar() {
-  intervalId = setInterval(() => {
-    position += direction; // Ajuste la vitesse de déplacement
-    if (position >= 100) {
-      position = 100;
-      direction = -1; // Inverse la direction
-      generateTargetZone(); // Crée une nouvelle zone au retour
-    } else if (position <= 0) {
-      position = 0;
-      direction = 1; // Inverse la direction
-    }
-    movingBar.style.left = `${position}%`;
-  }, 16); // Fréquence de mise à jour
-}
+  feedback.textContent = ""; // Réinitialise les messages
+  gameArea.innerHTML = ""; // Nettoie l'aire de jeu
 
-// Fonction pour générer une zone cible aléatoire
-function generateTargetZone() {
-  const zoneStart = Math.random() * 70; // Position de départ entre 0% et 70%
-  const zoneWidth = 7; // Largeur de la zone en pourcentage
-  targetZone.style.left = `${zoneStart}%`;
-  targetZone.style.width = `${zoneWidth}%`;
-}
+  // Délai avant l'apparition de l'image (entre 1 et 3 secondes)
+  const delay = Math.random() * 2000 + 1000;
 
-// Vérifier si l'utilisateur appuie sur "Espace"
-document.addEventListener("keydown", (event) => {
-  if (!isRunning || event.code !== "Space") return;
+  // Affiche l'image après le délai
+  timeoutId = setTimeout(() => {
+    const targetImage = document.createElement("img");
+    targetImage.src = "images/Patte.png"; // Chemin de votre image
+    targetImage.alt = "Cible";
+    targetImage.style.position = "absolute";
+    targetImage.style.left = `${Math.random() * 80}%`; // Position aléatoire horizontale
+    targetImage.style.top = `${Math.random() * 80}%`; // Position aléatoire verticale
+    targetImage.style.width = "50px";
+    targetImage.style.height = "50px";
+    targetImage.style.cursor = "pointer";
 
-  const barPosition = movingBar.getBoundingClientRect();
-  const zonePosition = targetZone.getBoundingClientRect();
+    // Définit l'attribut draggable
+    targetImage.setAttribute("draggable", "false");
 
-  // Vérifie si la barre rouge est dans la zone verte
-  if (
-    barPosition.left >= zonePosition.left &&
-    barPosition.right <= zonePosition.right
-  ) {
-    scoreSkill++;
-    feedback.textContent = `Bien joué ! (${scoreSkill}/3)`;
-    if (scoreSkill === 3) {
-      clearInterval(intervalId); // Arrête la barre rouge
-      feedback.textContent = "Bravo ! Vous avez gagné ! +10% de croquettes.";
-      score += Math.floor(score * 0.1); // Ajout de 10% au score global
-      updateScore(); // Fonction existante pour mettre à jour l'affichage
-      isRunning = false; // Met le jeu en pause
-      startButton.disabled = false; // Réactiver le bouton de démarrage
-    } else {
-      generateTargetZone(); // Génère une nouvelle zone après un succès
-    }
-  } else {
-    feedback.textContent = "Raté ! Vous recommencez à zéro.";
-    scoreSkill = 0;
-    generateTargetZone();
-  }
-});
+    gameArea.appendChild(targetImage);
 
-// Liste initiale des succès
-const achievements = [
-  { id: 1, title: "Premier clic", description: "Cliquez pour la première fois.", image: "images/Patte.png", unlocked: false },
-  { id: 9, title: "100 croquettes", description: "Obtenez 100 croquettes.", image: "images/Coffre.png", unlocked: false },
-  { id: 10, title: "500 croquettes", description: "Obtenez 500 croquettes.", image: "images/Coffre.png", unlocked: false },
-  { id: 11, title: "10 000 croquettes", description: "Obtenez 10 000 croquettes.", image: "images/Coffre.png", unlocked: false },
-  { id: 12, title: "100 000 croquettes", description: "Obtenez 100 000 croquettes.", image: "images/Coffre.png", unlocked: false },
-  { id: 13, title: "250 000 croquettes", description: "Obtenez 250 000 croquettes.", image: "images/Coffre.png", unlocked: false },
-  { id: 14, title: "500 000 croquettes", description: "Obtenez 500 000 croquettes.", image: "images/Coffre.png", unlocked: false },
-  { id: 15, title: "999 999 croquettes", description: "Obtenez 999 999 croquettes.", image: "images/Coffre.png", unlocked: false },
-  { id: 16, title: "1 500 000 croquettes", description: "Obtenez 1 500 000 croquettes.", image: "images/Coffre.png", unlocked: false },
-  { id: 17, title: "1 CPS", description: "Atteignez 1 croquette par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
-  { id: 18, title: "50 CPS", description: "Atteignez 50 croquettes par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
-  { id: 19, title: "1 500 CPS", description: "Atteignez 1 500 croquettes par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
-  { id: 20, title: "3 000 CPS", description: "Atteignez 3 000 croquettes par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
-  { id: 21, title: "5 000 CPS", description: "Atteignez 5 000 croquettes par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
-  { id: 22, title: "7 500 CPS", description: "Atteignez 7 500 croquettes par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
-  { id: 23, title: "10 000 CPS", description: "Atteignez 10 000 croquettes par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
-  { id: 24, title: "50 000 CPS", description: "Atteignez 50 000 croquettes par seconde.", image: "images/CroquettesSeconde.png", unlocked: false },
-];
+    // Gestion du clic sur l'image
+    targetImage.addEventListener("click", () => {
+      const bonus = Math.floor(score * 0.1);
+      score += bonus;
+      updateScore();
+      feedback.textContent = `Bravo ! Vous gagnez ${bonus} croquettes !`;
+      feedback.style.color = "green";
 
-// Charger les succès depuis le localStorage
-function loadAchievements() {
-  const savedAchievements = JSON.parse(localStorage.getItem("achievements"));
-  if (savedAchievements) {
-    achievements.forEach((achievement) => {
-      const saved = savedAchievements.find((a) => a.id === achievement.id);
-      if (saved) achievement.unlocked = saved.unlocked;
+      resetReflexGame(); // Réinitialise le jeu après le clic
     });
-  }
-}
 
-// Sauvegarder les succès dans le localStorage
-function saveAchievements() {
-  localStorage.setItem("achievements", JSON.stringify(achievements));
-}
-
-// Référence au bouton et création de la pop-up
-const successButton = document.getElementById("successButton");
-const successPopup = document.createElement("div");
-successPopup.id = "successPopup";
-successPopup.innerHTML = `
-  <button class="close-popup">&times;</button>
-  <h3>Succès</h3>
-  <h5>Si la liste n'est pas à jour, cliquez une fois sur le chat au milieu pour actualiser<h5>
-  <div class="success-list"></div>
-`;
-document.body.appendChild(successPopup);
-
-const successList = successPopup.querySelector(".success-list");
-
-// Fonction pour afficher les succès
-function renderAchievements() {
-  successList.innerHTML = ""; // Réinitialise la liste
-  achievements.forEach((achievement) => {
-    const card = document.createElement("div");
-    card.className = `success-card ${achievement.unlocked ? "unlocked" : ""}`;
-    card.innerHTML = `
-      <img src="${achievement.image}" alt="${achievement.title}">
-      <div class="tooltip">${achievement.description}</div>
-    `;
-    successList.appendChild(card);
-  });
-}
-
-// Notifications de succès
-function showNotification(message) {
-  const notification = document.createElement("div");
-  notification.className = "notification show";
-  notification.textContent = message;
-  document.body.appendChild(notification);
-
-  setTimeout(() => {
-    notification.classList.remove("show");
-    document.body.removeChild(notification);
-  }, 3000);
-}
-
-// Débloquer un succès
-function unlockAchievement(id) {
-  const achievement = achievements.find((ach) => ach.id === id);
-  if (achievement && !achievement.unlocked) {
-    achievement.unlocked = true;
-    showNotification(`Succès débloqué : ${achievement.title}`);
-    renderAchievements();
-    saveAchievements(); // Sauvegarde après déblocage
-  }
-}
-
-// Vérifier les conditions des succès
-function checkAchievements() {
-  if (score >= 1) unlockAchievement(1); // Premier clic
-  if (score >= 100) unlockAchievement(9); // 100 croquettes
-  if (score >= 500) unlockAchievement(10); // 100 croquettes
-  if (score >= 10000) unlockAchievement(11); // 100 croquettes
-  if (score >= 100000) unlockAchievement(12); // 100 croquettes
-  if (score >= 250000) unlockAchievement(13); // 100 croquettes
-  if (score >= 500000) unlockAchievement(14); // 100 croquettes
-  if (score >= 999999) unlockAchievement(15); // 100 croquettes
-  if (score >= 1500000) unlockAchievement(16); // 100 croquettes
-  if (croquettesParSeconde >= 1) unlockAchievement(17); // 1 CPS
-  if (croquettesParSeconde >= 50) unlockAchievement(18); // 1 CPS
-  if (croquettesParSeconde >= 1500) unlockAchievement(19); // 1 CPS
-  if (croquettesParSeconde >= 3000) unlockAchievement(20); // 1 CPS
-  if (croquettesParSeconde >= 5000) unlockAchievement(21); // 1 CPS
-  if (croquettesParSeconde >= 7500) unlockAchievement(22); // 1 CPS
-  if (croquettesParSeconde >= 10000) unlockAchievement(23); // 1 CPS
-  if (croquettesParSeconde >= 50000) unlockAchievement(24); // 1 CPS
-}
-
-// Événement pour afficher la pop-up
-successButton.addEventListener("click", () => {
-  successPopup.style.display = "block";
-  renderAchievements();
+    // Supprime l'image après 1 seconde si elle n'est pas cliquée
+    const imageTimeout = setTimeout(() => {
+      if (gameArea.contains(targetImage)) {
+        gameArea.removeChild(targetImage);
+        feedback.textContent = "Trop lent ! Vous avez raté l'image.";
+        feedback.style.color = "red";
+        resetReflexGame();
+      }
+    }, 650);
+  }, delay);
 });
 
-// Fermeture de la pop-up via la croix
-successPopup.querySelector(".close-popup").addEventListener("click", () => {
-  successPopup.style.display = "none";
-});
-
-// Charger les succès au démarrage
-loadAchievements();
-
-// Référence au bouton et création de la pop-up
-const creditsGameButton = document.getElementById("creditsGameButton");
-const creditsGamePopup = document.createElement("div");
-creditsGamePopup.id = "creditsGamePopup";
-creditsGamePopup.innerHTML = `
-  <button class="close-popup">&times;</button>
-  <h3>Crédits</h3>
-  <h5>Développeur : Griffon<h5>
-  <h5>Testeuse : Maggie<h5>
-  <h5>Bande son : Fabrice Tonnellier. Les droits d'utilisation m'ont été donné pour le jeu CroquettesClicker.<h5>
-  <h5>Images : Toutes les images utilisées ont été crées tout ou partie, par l'intelligence artificielle. Pour les images ayant été générées partiellement par l'intelligence artificielle, je détiens les droits sur les photos d'origine. <h5>
-`;
-document.body.appendChild(creditsGamePopup);
-
-// Événement pour afficher la pop-up
-creditsGameButton.addEventListener("click", () => {
-  creditsGamePopup.style.display = "block";
-});
-
-// Fermeture de la pop-up via la croix
-creditsGamePopup.querySelector(".close-popup").addEventListener("click", () => {
-  creditsGamePopup.style.display = "none";
-});
+// Réinitialisation du mini-jeu
+function resetReflexGame() {
+  reflexGameActive = false;
+  clearTimeout(timeoutId);
+  document.getElementById("game-area").innerHTML = ""; // Vide l'aire de jeu
+}
 
 function unlockSteamAchievement(achievementId) {
   ipcRenderer.send('unlock-achievement', achievementId);

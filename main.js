@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
-const steamworks = require('steamworks.js');
-const steam = steamworks.init(3397600);
+// const steamworks = require('steamworks.js');
+// const steam = steamworks.init(3397600);
 
 
 function createWindow() {
@@ -35,8 +35,9 @@ ipcMain.on('unlock-achievement', (event, achievementId) => {
     console.error(`Erreur lors du déverrouillage du succès : ${achievementId}`, error);
   }
 });
-
+app.disableHardwareAcceleration();
 app.whenReady().then(() => {
+
   createWindow();
 
   app.on('activate', () => {
