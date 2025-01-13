@@ -1,27 +1,27 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
-// const steamworks = require('steamworks.js');
-// const steam = steamworks.init(3397600);
+const steamworks = require('steamworks.js');
+const steam = steamworks.init(3397600);
+const path = require('path');
+require('steamworks.js').electronEnableSteamOverlay();
+
 
 
 function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    icon: path.join(__dirname, 'jeu/images/Icone.ico'),
     fullscreen: true,
     frame: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
-      //enableRemoteModule: true,
     },
   });
 
   win.loadFile('jeu/index.html');
   console.log(steam.localplayer.getName());
-    // // Ouvre les DevTools automatiquement
-    // win.webContents.openDevTools();
 
-  // Écouter l'événement "close-app" pour fermer l'application
   ipcMain.on("close-app", () => {
     win.close();
   });
@@ -35,9 +35,10 @@ ipcMain.on('unlock-achievement', (event, achievementId) => {
     console.error(`Erreur lors du déverrouillage du succès : ${achievementId}`, error);
   }
 });
-app.disableHardwareAcceleration();
-app.whenReady().then(() => {
 
+app.disableHardwareAcceleration();
+
+app.whenReady().then(() => {
   createWindow();
 
   app.on('activate', () => {
@@ -48,4 +49,3 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
-require('steamworks.js').electronEnableSteamOverlay()

@@ -2,22 +2,22 @@
 const { ipcRenderer } = require('electron');
 let score = 0;
 let croquettesParSeconde = 0;
-let maitresseCroquettesCost = 2;
-let sacCroquettesCost = 10;
-let colisCroquettesCost = 100;
-let champCroquettesCost = 1500;
-let mineCroquettesCost = 5000;
-let usineCroquettesCost = 15000;
-let convoiCroquettesCost = 30000;
-let affretementCroquettesCost = 100000;
-let teleporteurCroquettesCost = 165000;
-let developpeurCroquettesCost = 215000;
-let cgmCroquettesCost = 350000;
-let patrouilleCroquettesCost = 500000;
-let continentCroquettesCost = 750000;
-let planeteCroquettesCost = 1200000;
-let galaxieCroquettesCost = 1750000;
-let trouNoirCroquettesCost = 10000000;
+let maitresseCroquettesCost = 50;      // Boost initial facile
+let sacCroquettesCost = 500;          // Montée modérée
+let colisCroquettesCost = 5000;       // Nécessite quelques minutes de clics
+let champCroquettesCost = 75000;      // Accessible après plusieurs heures
+let mineCroquettesCost = 300000;      // Grosse amélioration de milieu de jeu
+let usineCroquettesCost = 1500000;    // Transition vers le contenu avancé
+let convoiCroquettesCost = 5000000;   // Début de l'endgame
+let affretementCroquettesCost = 15000000;
+let teleporteurCroquettesCost = 30000000;
+let developpeurCroquettesCost = 50000000;
+let cgmCroquettesCost = 100000000;    // Très cher, nécessite gestion efficace des CPS
+let patrouilleCroquettesCost = 200000000;
+let continentCroquettesCost = 500000000;
+let planeteCroquettesCost = 1000000000;
+let galaxieCroquettesCost = 5000000000;
+let trouNoirCroquettesCost = 20000000000;
 
 let maitresseCroquettesLevel = 0;
 let sacCroquettesLevel = 0;
@@ -36,24 +36,24 @@ let planeteCroquettesLevel = 0;
 let galaxieCroquettesLevel = 0;
 let trouNoirCroquettesLevel = 0;
 
-let gamelleDecorationCost = 100;
+let gamelleDecorationCost = 500;
 let gamellePurchased = false;
-let jardinDecorationCost = 5;
+let jardinDecorationCost = 50000;
 let jardinPurchased = false;
-let chambreDecorationCost = 5;
+let chambreDecorationCost = 250000;
 let chambrePurchased = false;
-let restaurantDecorationCost = 5;
+let restaurantDecorationCost = 500000;
 let restaurantPurchased = false;
-let jetDecorationCost = 5;
+let jetDecorationCost = 2500000;
 let jetPurchased = false;
-let conferenceDecorationCost = 5;
+let conferenceDecorationCost = 10000000;
 let conferencePurchased = false;
-let famousDecorationCost = 5;
+let famousDecorationCost = 50000000;
 let famousPurchased = false;
-let nuitDecorationCost = 1000000;
+let nuitDecorationCost = 100000000;
 let nuitPurchased = false;
 
-let reflexGameCost = 1000;
+let reflexGameCost = 10000;
 let reflexGamePurchased = false;
 
 // Mise à jour du score affiché
@@ -1474,6 +1474,111 @@ function resetReflexGame() {
   clearTimeout(timeoutId);
   document.getElementById("game-area").innerHTML = ""; // Vide l'aire de jeu
 }
+
+
+// Liste initiale des succès
+const achievements = [
+];
+
+// Charger les succès depuis le localStorage
+function loadAchievements() {
+  const savedAchievements = JSON.parse(localStorage.getItem("achievements"));
+  if (savedAchievements) {
+    achievements.forEach((achievement) => {
+      const saved = savedAchievements.find((a) => a.id === achievement.id);
+      if (saved) achievement.unlocked = saved.unlocked;
+    });
+  }
+}
+
+// Référence au bouton et création de la pop-up
+const successButton = document.getElementById("successButton");
+const successPopup = document.createElement("div");
+successPopup.id = "successPopup";
+successPopup.innerHTML = `
+`;
+document.body.appendChild(successPopup);
+
+const successList = successPopup.querySelector(".success-list");
+
+// Fonction pour afficher les succès
+function renderAchievements() {
+  successList.innerHTML = ""; // Réinitialise la liste
+  achievements.forEach((achievement) => {
+    const card = document.createElement("div");
+    card.className = `success-card ${achievement.unlocked ? "unlocked" : ""}`;
+    card.innerHTML = `
+      <img src="${achievement.image}" alt="${achievement.title}">
+      <div class="tooltip">${achievement.description}</div>
+    `;
+    successList.appendChild(card);
+  });
+}
+
+// Notifications de succès
+function showNotification(message) {
+  const notification = document.createElement("div");
+  notification.className = "notification show";
+  notification.textContent = message;
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.classList.remove("show");
+    document.body.removeChild(notification);
+  }, 3000);
+}
+
+// Débloquer un succès
+function unlockAchievement(id) {
+  const achievement = achievements.find((ach) => ach.id === id);
+  if (achievement && !achievement.unlocked) {
+    achievement.unlocked = true;
+    showNotification(`Succès débloqué : ${achievement.title}`);
+    renderAchievements();
+    saveAchievements(); // Sauvegarde après déblocage
+  }
+}
+
+// Vérifier les conditions des succès
+function checkAchievements() {
+  if (score >= 1) unlockAchievement(1); // Premier clic
+  if (score >= 100) unlockAchievement(9); // 100 croquettes
+  if (score >= 500) unlockAchievement(10); // 100 croquettes
+  if (score >= 10000) unlockAchievement(11); // 100 croquettes
+  if (score >= 100000) unlockAchievement(12); // 100 croquettes
+  if (score >= 250000) unlockAchievement(13); // 100 croquettes
+  if (score >= 500000) unlockAchievement(14); // 100 croquettes
+  if (score >= 999999) unlockAchievement(15); // 100 croquettes
+  if (score >= 1500000) unlockAchievement(16); // 100 croquettes
+  if (croquettesParSeconde >= 1) unlockAchievement(17); // 1 CPS
+  if (croquettesParSeconde >= 50) unlockAchievement(18); // 1 CPS
+  if (croquettesParSeconde >= 1500) unlockAchievement(19); // 1 CPS
+  if (croquettesParSeconde >= 3000) unlockAchievement(20); // 1 CPS
+  if (croquettesParSeconde >= 5000) unlockAchievement(21); // 1 CPS
+  if (croquettesParSeconde >= 7500) unlockAchievement(22); // 1 CPS
+  if (croquettesParSeconde >= 10000) unlockAchievement(23); // 1 CPS
+  if (croquettesParSeconde >= 50000) unlockAchievement(24); // 1 CPS
+}
+// Charger les succès au démarrage
+loadAchievements();
+
+// Référence au bouton et création de la pop-up
+const creditsGameButton = document.getElementById("creditsGameButton");
+const creditsGamePopup = document.createElement("div");
+creditsGamePopup.id = "creditsGamePopup";
+creditsGamePopup.innerHTML = `
+`;
+document.body.appendChild(creditsGamePopup);
+
+// Événement pour afficher la pop-up
+creditsGameButton.addEventListener("click", () => {
+  creditsGamePopup.style.display = "block";
+});
+
+// Fermeture de la pop-up via la croix
+creditsGamePopup.querySelector(".close-popup").addEventListener("click", () => {
+  creditsGamePopup.style.display = "none";
+});
 
 function unlockSteamAchievement(achievementId) {
   ipcRenderer.send('unlock-achievement', achievementId);

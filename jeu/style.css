@@ -167,66 +167,6 @@ h1, h2, h3, .boutons, .ameliorations {
   display: none; /* Cachée par défaut */
 }
 
-/* Styles de base pour l'image d'animation */
-#EauImage {
-  position: absolute;
-  top: 78%;
-  left: 59%;
-  transform: translate(-50%, -50%);
-  width: 110px; /* Ajustez la taille de l'image */
-  pointer-events: none; /* Empêche toute interaction avec l'image */
-}
-
-/* Styles de base pour l'image d'animation */
-#distributeurImage {
-  position: absolute;
-  top: 68%;
-  left: 90%;
-  transform: translate(-50%, -50%);
-  width: 300px; /* Ajustez la taille de l'image */
-  pointer-events: none; /* Empêche toute interaction avec l'image */
-}
-
-/* Styles de base pour l'image d'animation */
-#arbreImage {
-  position: absolute;
-  top: 45%;
-  left: 70%;
-  transform: translate(-50%, -50%);
-  width: 350px; /* Ajustez la taille de l'image */
-  pointer-events: none; /* Empêche toute interaction avec l'image */
-}
-
-/* Styles de base pour l'image d'animation */
-#coffreImage {
-  position: absolute;
-  top: 85%;
-  left: 25%;
-  transform: translate(-50%, -50%);
-  width: 300px; /* Ajustez la taille de l'image */
-  pointer-events: none; /* Empêche toute interaction avec l'image */
-}
-
-/* Styles de base pour l'image d'animation */
-/* #chemineeImage {
-  position: absolute;
-  top: 50%;
-  left: 6%;
-  transform: translate(-50%, -50%);
-  width: 300px; /* Ajustez la taille de l'image */
-  /*pointer-events: none;  Empêche toute interaction avec l'image
-}  */
-
-/* Styles de base pour l'image d'animation */
-#tableauImage {
-  position: absolute;
-  top: 23%;
-  left: 49%;
-  transform: translate(-50%, -50%);
-  width: 200px; /* Ajustez la taille de l'image */
-  pointer-events: none; /* Empêche toute interaction avec l'image */
-}
-
 
 /* Classe pour le fondu en entrée */
 .fade-in {
@@ -430,6 +370,34 @@ button.purchased::after {
   width: 50px; /* Ajuste la taille si nécessaire */
   height: 50px; /* Ajuste la hauteur si nécessaire */
   border: none; /* Retirer la bordure */
+  z-index: 9999;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes shrink {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9); /* Rétrécissement temporaire */
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#clickImage.shrinking {
+  animation: shrink 0.2s ease-in-out;
 }
 
 #click-effects-container {
@@ -442,16 +410,6 @@ button.purchased::after {
   z-index: 999; /* Assure que ce conteneur reste au-dessus de tout */
 }
 
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-50px); /* L'image monte légèrement */
-  }
-}
 
 .jeux-buttons {
   position: fixed;
@@ -585,27 +543,6 @@ button:active {
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); /* Ombre interne pour un effet d'enfoncement */
 }
 
-/* Pop-up */
-#skillPopup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  padding: 20px;
-  background: #fff;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  display: none;
-  z-index: 1000;
-}
-
-#skillPopup h3 {
-  margin-bottom: 20px;
-}
-
 .close-popup {
   position: absolute;
   top: 10px;
@@ -621,156 +558,11 @@ button:active {
   color: red;
 }
 
-/* Conteneur de la barre */
-#skill-bar-container {
-  position: relative;
-  width: 100%;
-  height: 20px;
-  background: #ddd;
-  border: 2px solid #aaa;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 20px 0;
-}
-
-/* Barre rouge en mouvement */
-#moving-bar {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 1%;
-  background: red;
-  transition: left 0.01s linear;
-}
-
-/* Zone cible verte */
-#target-zone {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  background: green;
-  opacity: 0.7;
-  border-radius: 10px;
-}
-
 #background-toggle-container {
   background-color: rgba(0, 0, 0, 0.8);
   padding: 10px;
   border-radius: 5px;
   display: none; /* Caché par défaut */
-}
-
-/* Pop-up des succès */
-#successPopup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px; /* Augmente la largeur */
-  height: 400px; /* Augmente la hauteur */
-  background-color: white;
-  border: 2px solid #ccc;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  overflow-y: auto; /* Pour éviter les débordements si beaucoup d'éléments */
-}
-
-/* Pop-up des succès */
-#creditsGamePopup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px; /* Augmente la largeur */
-  height: 400px; /* Augmente la hauteur */
-  background-color: white;
-  border: 2px solid #ccc;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  overflow-y: auto; /* Pour éviter les débordements si beaucoup d'éléments */
-}
-
-#successPopup h3 {
-  margin-bottom: 10px;
-  color: #333;
-  text-align: center;
-}
-
-#creditsGamePopup h3 {
-  margin-bottom: 10px;
-  color: #333;
-  text-align: center;
-}
-
-.success-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-}
-
-.success-card {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f4f4f4;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.success-card img {
-  width: 80px;
-  height: 80px;
-  filter: grayscale(100%); /* Par défaut, grisée */
-  transition: filter 0.3s ease;
-}
-
-.success-card.unlocked img {
-  filter: none; /* Colorée si débloquée */
-}
-
-.success-card .tooltip {
-  display: none;
-  position: absolute;
-  bottom: -40px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
-  color: white;
-  padding: 5px 10px;
-  font-size: 12px;
-  border-radius: 5px;
-  white-space: nowrap;
-}
-
-.success-card:hover .tooltip {
-  display: block;
-}
-
-.notification {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 2000;
-  display: none;
-}
-
-.notification.show {
-  display: block;
 }
 
 /* Style pour la croix de fermeture */

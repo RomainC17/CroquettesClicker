@@ -16,7 +16,7 @@
       <div id="scoreSeconde">Croquettes par seconde : 0</div>
       <div id="cps-icons-container" class="cps-animation"></div>
 
-      <button id="resetGame" onclick="resetGame()">Réinitialiser le jeu</button>
+      <!-- <button id="resetGame" onclick="resetGame()">Réinitialiser le jeu</button> -->
 
     <!-- Conteneur principal pour l'image et les boutons -->
     <div class="game-area">
@@ -28,65 +28,56 @@
       </div>
     </div>
 
-      <!-- Image pour l'animation de fondu, invisible par défaut -->  
-    <img id="EauImage" src="images/Eau.png" alt="Animation" class="fade-effect" style="display: none;">
-    <img id="distributeurImage" src="images/Distributeur.png" alt="Animation" class="fade-effect" style="display: none;">
-    <img id="arbreImage" src="images/Arbre.png" alt="Animation" class="fade-effect" style="display: none;">
-    <img id="coffreImage" src="images/Coffre.png" alt="Animation" class="fade-effect" style="display: none;">
-    <!-- <img id="chemineeImage" src="images/Cheminee.png" alt="Animation" class="fade-effect" style="display: none;"> -->
-    <img id="tableauImage" src="images/Tableau.png" alt="Animation" class="fade-effect" style="display: none;">
-
-
     <!-- Colonne pour les boutons d'amélioration, alignée à droite -->
     <div class="upgrade-buttons">
       <h1>Améliorations</h1>
       <button id="maitresseCroquettes" data-title="Une maîtresse" data-description="Mhhhh, des croquettes au poulet fait maison ! C'est mes préférés !">
-        Maîtresse (coût: 2) : +1 croq./sec
+        Maîtresse (coût: 50) : +1 croq./sec
       </button>
       <button id="sacCroquettes" data-title="Sac de croquettes" data-description="Un petit sac de croquettes. Miam !">
-        Sac (coût: 10) : +3 croq./sec
+        Sac (coût: 500) : +3 croq./sec
       </button>
       <button id="colisCroquettes" data-title="Colis de croquettes" data-description="Un chouette colis de croquettes.">
-        Colis (coût: 100) : +5 croq./sec
+        Colis (coût: 5 000) : +5 croq./sec
       </button>
       <button id="champsCroquettes" data-title="Champ de croquettes" data-description="Cultiver des hectares de croquettes... quelle bonne idée !">
-        Champ (coût: 1 500) : +7 croq./sec
+        Champ (coût: 75 000) : +7 croq./sec
       </button>
       <button id="minesCroquettes" data-title="Mine de croquettes" data-description="Des croquettes sous-terraines ? J'ai hâte de les goûter !">
-        Mine (coût: 5 000) : +12 croq./sec
+        Mine (coût: 300 000) : +12 croq./sec
       </button>
       <button id="usineCroquettes" data-title="Usine de croquettes" data-description="Une ligne de production rien que pour moi !">
-        Usine (coût: 15 000) : +15 croq./sec
+        Usine (coût: 1 500 000) : +15 croq./sec
       </button>
       <button id="convoiCroquettes" data-title="Convoi exceptionnel de croquettes" data-description="Une armée de camions remplis de croquettes !">
-        Convoi exceptionnel (coût: 30 000) : +17 croq./sec
+        Convoi exceptionnel (coût: 5 000 000) : +17 croq./sec
       </button>
       <button id="affretementCroquettes" data-title="Affrètement de croquettes" data-description="Tous les plus gros avions cargos prêts à ravitailler ma gamelle !">
-        Affrètement (coût: 100 000) : +20 croq./sec
+        Affrètement (coût: 15 000 000) : +20 croq./sec
       </button>
       <button id="teleporteurCroquettes" data-title="Téléporteur de croquettes" data-description="Faire venir toutes les croquettes du monde pour moi ? Chouette !">
-        Téléporteur (coût: 165 000) : +25 croq./sec
+        Téléporteur (coût: 30 000 000) : +25 croq./sec
       </button>
       <button id="developpeurCroquettes" data-title="Développeur de croquettes" data-description="Imaginez... un programme qui me fabrique les meilleures croquettes selon mes humeurs...">
-        Développeur (coût: 215 000) : +29 croq./sec
+        Développeur (coût: 50 000 000) : +29 croq./sec
       </button>
       <button id="cgmCroquettes" data-title="Croquettes Génétiquement Modifiées" data-description="Des croquettes qui se dédoublent et changent de goût rien qu'a ma pensée !">
-        C.G.M (coût: 350 000) : +32 croq./sec
+        C.G.M (coût: 100 000 000) : +32 croq./sec
       </button>
       <button id="patrouilleCroquettes" data-title="Patrouille de croquettes" data-description="Un groupe d'hommes armées jusqu'au dents, prêts à défendre et chercher tout ce dont j'ai besoin !">
-        Patrouilles (coût: 500 000) : +35 croq./sec
+        Patrouilles (coût: 200 000 000) : +35 croq./sec
       </button>
       <button id="continentCroquettes" data-title="Continent de croquettes" data-description="Une montagne de croquettes sur tous les continents du monde !">
-        Continent (coût: 750 000 ) : +40 croq./sec
+        Continent (coût: 500 000 000) : +40 croq./sec
       </button>
       <button id="planeteCroquettes" data-title="Planète de croquettes" data-description="Croc'Planet1, Croc'Planet2...">
-        Planète (coût: 1 200 000) : +42 croq./sec
+        Planète (coût: 1 000 000 000) : +42 croq./sec
       </button>
       <button id="galaxieCroquettes" data-title="Constellation de croquettes" data-description="Des croquettes dans le ciel... et bien plus loin encore.">
-        Constellation (coût: 1 750 000) : +45 croq./sec
+        Constellation (coût: 5 000 000 000) : +45 croq./sec
       </button>
       <button id="trouNoirCroquettes" data-title="Trou Noir de croquettes" data-description="Une infinité de croquettes au goût si divin...">
-        Trou Noir (coût: 10 000 000) : +100 croq./sec
+        Trou Noir (coût: 20 000 000 000) : +100 croq./sec
       </button>
       <br>
       <br>
@@ -100,40 +91,38 @@
       <button class="category-button" data-category="decors" data-title="Améliorer le décors" data-description="Achètes des éléments visuels pour améliorer mon quotidien !">Améliorer le décors</button>
       <div class="category-content" id="decors">
         <button id="gamelleDecoration" data-title="Remplir la gamelle de croquettes" data-description="Merci ! (il était temps)">
-          Remplir la gamelle de croquettes (coût : 100 croquettes)
+          Remplir la gamelle de croquettes (coût : 500 croquettes)
         </button>
         <button id="jardinDecoration" data-title="Se rendre dans le jardin" data-description="Une petite balade s'impose !">
-          Se rendre dans le jardin (coût: 5 000 croquettes)
+          Se rendre dans le jardin (coût: 50 000 croquettes)
         </button>
         <button id="chambreDecoration" data-title="Se rendre dans sa chambre préférée" data-description="La chaleur de l'ordinateur et des écrans... j'adore !">
-          Se rendre dans sa chambre préférée (coût : 50 000 croquettes)
+          Se rendre dans sa chambre préférée (coût : 250 000 croquettes)
         </button>
         <button id="restaurantDecoration" data-title="Aller au restaurant" data-description="Allons manger un beau morceau de poulet avec du steak haché... miam...">
-          Aller au restaurant (coût : 100 000 croquettes)
+          Aller au restaurant (coût : 500 000 croquettes)
         </button>
         <button id="jetDecoration" data-title="Prendre son premier jet privé" data-description="La célébrité pour un chat extraordinaire, quoi de mieux que mon premier jet privé !">
-          Prendre son premier jet privé (coût : 150 000 croquettes)
+          Prendre son premier jet privé (coût : 2 500 000 croquettes)
         </button>
         <button id="conferenceDecoration" data-title="Faire sa première conférence" data-description="Allons dire au monde entier le secret de ma réussite !">
-          Faire sa première conférence (coût : 250 000 croquettes)
+          Faire sa première conférence (coût : 10 000 000 croquettes)
         </button>
         <button id="famousDecoration" data-title="Accepter l'invitation au MostFamousCat" data-description="Je suis désormais le chat le plus populaire du monde entier !">
-          Accepter l'invitation au MostFamousCat (coût : 400 000 croquettes)
+          Accepter l'invitation au MostFamousCat (coût : 50 000 000 croquettes)
         </button>
         <button id="nuitDecoration" data-title="La nuit des chats" data-description="C'est mon moment préféré !">
-          La nuit des chats (coût : 1 000 000 croquettes)
+          La nuit des chats (coût : 100 000 000 croquettes)
         </button>
       </div>
 
       <button class="category-button" data-category="games" data-title="Acheter des mini-jeux supplémentaires" data-description="Dévérouille des mini-jeux pour gagner encore plus de croquettes !">Acheter des mini-jeux supplémentaires</button>
       <div class="category-content" id="games">
-        <button id="reflexButton" data-title="Le Défi de la Patte" data-description="Testez vos réflexes et gagnez des croquettes !">Le Défi de la Patte (coût : 1 000 croquettes)</button>
+        <button id="reflexButton" data-title="Le Défi de la Patte" data-description="Testez vos réflexes et gagnez des croquettes !">Le Défi de la Patte (coût : 10 000 croquettes)</button>
       </div>
       <br>
       <br>
     </div>
-    <!-- <button id="successButton" data-title="Succès" data-description="Voir tes accomplissements.">Succès</button>
-    <button id="creditsGameButton" data-title="Credits du jeu" data-description="Développeur, bande son...">Crédits</button> -->
 
     <div class="jeux-button">
       <h1>Mini-jeux débloqués</h1>
