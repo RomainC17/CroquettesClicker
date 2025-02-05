@@ -2,22 +2,22 @@
 const { ipcRenderer } = require('electron');
 let score = 0;
 let croquettesParSeconde = 0;
-let maitresseCroquettesCost = 50;      // Boost initial facile
-let sacCroquettesCost = 500;          // Montée modérée
-let colisCroquettesCost = 5000;       // Nécessite quelques minutes de clics
-let champCroquettesCost = 75000;      // Accessible après plusieurs heures
-let mineCroquettesCost = 300000;      // Grosse amélioration de milieu de jeu
-let usineCroquettesCost = 1500000;    // Transition vers le contenu avancé
-let convoiCroquettesCost = 5000000;   // Début de l'endgame
-let affretementCroquettesCost = 15000000;
-let teleporteurCroquettesCost = 30000000;
-let developpeurCroquettesCost = 50000000;
-let cgmCroquettesCost = 100000000;    // Très cher, nécessite gestion efficace des CPS
-let patrouilleCroquettesCost = 200000000;
-let continentCroquettesCost = 500000000;
-let planeteCroquettesCost = 1000000000;
-let galaxieCroquettesCost = 5000000000;
-let trouNoirCroquettesCost = 20000000000;
+let maitresseCroquettesCost = 2;
+let sacCroquettesCost = 5;
+let colisCroquettesCost = 50;
+let champCroquettesCost = 500;
+let mineCroquettesCost = 1500;
+let usineCroquettesCost = 5000;
+let convoiCroquettesCost = 10000;
+let affretementCroquettesCost = 30000;
+let teleporteurCroquettesCost = 50000;
+let developpeurCroquettesCost = 75000;
+let cgmCroquettesCost = 125000;
+let patrouilleCroquettesCost = 200000;
+let continentCroquettesCost = 350000;
+let planeteCroquettesCost = 500000;
+let galaxieCroquettesCost = 750000;
+let trouNoirCroquettesCost = 2000000;
 
 let maitresseCroquettesLevel = 0;
 let sacCroquettesLevel = 0;
@@ -56,9 +56,22 @@ let nuitPurchased = false;
 let reflexGameCost = 10000;
 let reflexGamePurchased = false;
 
+// Fonction pour formater les nombres
+function formatNumber(num) {
+  if (num >= 1e9) {
+    return (num / 1e9).toFixed(2).replace('.00', '') + ' milliards';
+  } else if (num >= 1e6) {
+    return (num / 1e6).toFixed(2).replace('.00', '') + ' millions';
+  } else if (num >= 1e3) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  } else {
+    return num.toString();
+  }
+}
+
 // Mise à jour du score affiché
 function updateScore() {
-  document.getElementById("scoreTotal").textContent = "Croquettes totales : " + Math.floor(score);
+  document.getElementById("scoreTotal").textContent = `Croquettes totales : ${formatNumber(score)}`;
   document.getElementById("scoreSeconde").textContent = "Croquettes par seconde : " + croquettesParSeconde;
 }
 
@@ -267,7 +280,7 @@ document.getElementById("teleporteurCroquettes").addEventListener("click", () =>
     if (teleporteurCroquettesLevel === 50) {
       unlockSteamAchievement("TELEPORTER_50");
     }
-    if (teleporteurCroquettesLevel === 100) {
+    if (teleporteurCroquettesLevel > 100) {
       unlockSteamAchievement("TELEPORTER_100");
     }
   }
@@ -586,6 +599,49 @@ function markAsPurchased(buttonId) {
   button.classList.add("purchased");
 }
 
+document.getElementById('dailyRewardButton').addEventListener('click', claimDailyReward);
+
+// Fonction pour vérifier la disponibilité de la récompense journalière
+function checkDailyRewardAvailability() {
+  const lastClaimed = localStorage.getItem('lastDailyReward');
+  const today = new Date().toISOString().split('T')[0];
+  const dailyRewardButton = document.getElementById('dailyRewardButton');
+
+  if (lastClaimed === today) {
+    dailyRewardButton.classList.remove('available');
+    dailyRewardButton.classList.add('unavailable');
+    dailyRewardButton.disabled = true;
+  } else {
+    dailyRewardButton.classList.remove('unavailable');
+    dailyRewardButton.classList.add('available');
+    dailyRewardButton.disabled = false;
+  }
+}
+
+// Fonction pour récupérer la récompense journalière
+function claimDailyReward() {
+  const lastClaimed = localStorage.getItem('lastDailyReward');
+  const today = new Date().toISOString().split('T')[0];
+
+  if (lastClaimed === today) {
+    alert("Vous avez déjà récupéré votre récompense journalière aujourd'hui !");
+    return;
+  }
+
+  const reward = Math.floor(score * 0.15);
+  score += reward;
+  updateScore();
+  localStorage.setItem('lastDailyReward', today);
+  alert(`Vous avez reçu ${formatNumber(reward)} croquettes en récompense journalière, soit 15% de vos croquettes totales !`);
+  checkDailyRewardAvailability(); // Mettre à jour l'état du bouton après avoir réclamé la récompense
+}
+
+// Ajouter un écouteur d'événement au bouton de récompense journalière
+document.getElementById('dailyRewardButton').addEventListener('click', claimDailyReward);
+
+// Vérifier la disponibilité de la récompense journalière au chargement de la page
+checkDailyRewardAvailability();
+
 // Fonction pour mettre à jour l'état des boutons en fonction du score
 function updateButtons() {
   const maitresseCroquettesButton = document.getElementById("maitresseCroquettes");
@@ -616,8 +672,8 @@ function updateButtons() {
 
   const reflexGameButton = document.getElementById("reflexButton");
 
-  // Mise à jour du bouton Sac de croquettes
-  maitresseCroquettesButton.textContent = `Maîtresse (coût: ${maitresseCroquettesCost}) : +1 croq./sec (Niv. ${maitresseCroquettesLevel})`;
+  // Mise à jour du bouton Maîtresse de croquettes
+  maitresseCroquettesButton.textContent = `Maîtresse (coût: ${formatNumber(maitresseCroquettesCost)}) : +1 croq./sec (Niv. ${formatNumber(maitresseCroquettesLevel)})`;
   if (score < maitresseCroquettesCost) {
     maitresseCroquettesButton.classList.add("disabled");
     maitresseCroquettesButton.disabled = true;
@@ -627,7 +683,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Sac de croquettes
-  sacCroquettesButton.textContent = `Sac de croquettes (coût: ${sacCroquettesCost}) : +3 croq./sec (Niv. ${sacCroquettesLevel})`;
+  sacCroquettesButton.textContent = `Sac de croquettes (coût: ${formatNumber(sacCroquettesCost)}) : +3 croq./sec (Niv. ${formatNumber(sacCroquettesLevel)})`;
   if (score < sacCroquettesCost) {
     sacCroquettesButton.classList.add("disabled");
     sacCroquettesButton.disabled = true;
@@ -637,7 +693,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Colis de croquettes
-  colisCroquettesButton.textContent = `Colis de croquettes (coût: ${colisCroquettesCost}) : +5 croq./sec (Niv. ${colisCroquettesLevel})`;
+  colisCroquettesButton.textContent = `Colis de croquettes (coût: ${formatNumber(colisCroquettesCost)}) : +5 croq./sec (Niv. ${formatNumber(colisCroquettesLevel)})`;
   if (score < colisCroquettesCost) {
     colisCroquettesButton.classList.add("disabled");
     colisCroquettesButton.disabled = true;
@@ -647,7 +703,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Champs de croquettes
-  champCroquettesButton.textContent = `Champs de croquettes (coût: ${champCroquettesCost}) : +7 croq./sec (Niv. ${champCroquettesLevel})`;
+  champCroquettesButton.textContent = `Champs de croquettes (coût: ${formatNumber(champCroquettesCost)}) : +7 croq./sec (Niv. ${formatNumber(champCroquettesLevel)})`;
   if (score < champCroquettesCost) {
     champCroquettesButton.classList.add("disabled");
     champCroquettesButton.disabled = true;
@@ -657,7 +713,7 @@ function updateButtons() {
   }
 
   // Mise à jour du bouton Mine de croquettes
-  mineCroquettesButton.textContent = `Mine de croquettes (coût: ${mineCroquettesCost}) : +12 croq./sec (Niv. ${mineCroquettesLevel})`;
+  mineCroquettesButton.textContent = `Mine de croquettes (coût: ${formatNumber(mineCroquettesCost)}) : +12 croq./sec (Niv. ${formatNumber(mineCroquettesLevel)})`;
   if (score < mineCroquettesCost) {
     mineCroquettesButton.classList.add("disabled");
     mineCroquettesButton.disabled = true;
@@ -666,8 +722,8 @@ function updateButtons() {
     mineCroquettesButton.disabled = false;
   }
 
-  // Mise à jour du bouton Mine de croquettes
-  usineCroquettesButton.textContent = `Usine (coût: ${usineCroquettesCost}) : +15 croq./sec (Niv. ${usineCroquettesLevel})`;
+  // Mise à jour du bouton Usine de croquettes
+  usineCroquettesButton.textContent = `Usine (coût: ${formatNumber(usineCroquettesCost)}) : +15 croq./sec (Niv. ${formatNumber(usineCroquettesLevel)})`;
   if (score < usineCroquettesCost) {
     usineCroquettesButton.classList.add("disabled");
     usineCroquettesButton.disabled = true;
@@ -676,8 +732,8 @@ function updateButtons() {
     usineCroquettesButton.disabled = false;
   }
 
-  // Mise à jour du bouton Mine de croquettes
-  convoiCroquettesButton.textContent = `Convoi exceptionnel (coût: ${convoiCroquettesCost}) : +17 croq./sec (Niv. ${convoiCroquettesLevel})`;
+  // Mise à jour du bouton Convoi de croquettes
+  convoiCroquettesButton.textContent = `Convoi exceptionnel (coût: ${formatNumber(convoiCroquettesCost)}) : +17 croq./sec (Niv. ${formatNumber(convoiCroquettesLevel)})`;
   if (score < convoiCroquettesCost) {
     convoiCroquettesButton.classList.add("disabled");
     convoiCroquettesButton.disabled = true;
@@ -686,8 +742,8 @@ function updateButtons() {
     convoiCroquettesButton.disabled = false;
   }
 
-  // Mise à jour du bouton Mine de croquettes
-  affretementCroquettesButton.textContent = `Affrètement (coût: ${affretementCroquettesCost}) : +20 croq./sec (Niv. ${affretementCroquettesLevel})`;
+  // Mise à jour du bouton Affrètement de croquettes
+  affretementCroquettesButton.textContent = `Affrètement (coût: ${formatNumber(affretementCroquettesCost)}) : +20 croq./sec (Niv. ${formatNumber(affretementCroquettesLevel)})`;
   if (score < affretementCroquettesCost) {
     affretementCroquettesButton.classList.add("disabled");
     affretementCroquettesButton.disabled = true;
@@ -696,8 +752,8 @@ function updateButtons() {
     affretementCroquettesButton.disabled = false;
   }
 
-  // Mise à jour du bouton Mine de croquettes
-  teleporteurCroquettesButton.textContent = `Téléporteur (coût: ${teleporteurCroquettesCost}) : +25 croq./sec (Niv. ${teleporteurCroquettesLevel})`;
+  // Mise à jour du bouton Téléporteur de croquettes
+  teleporteurCroquettesButton.textContent = `Téléporteur (coût: ${formatNumber(teleporteurCroquettesCost)}) : +25 croq./sec (Niv. ${formatNumber(teleporteurCroquettesLevel)})`;
   if (score < teleporteurCroquettesCost) {
     teleporteurCroquettesButton.classList.add("disabled");
     teleporteurCroquettesButton.disabled = true;
@@ -706,8 +762,8 @@ function updateButtons() {
     teleporteurCroquettesButton.disabled = false;
   }
 
-  // Mise à jour du bouton Mine de croquettes
-  developpeurCroquettesButton.textContent = `Développeur (coût: ${developpeurCroquettesCost}) : +29 croq./sec (Niv. ${developpeurCroquettesLevel})`;
+  // Mise à jour du bouton Développeur de croquettes
+  developpeurCroquettesButton.textContent = `Développeur (coût: ${formatNumber(developpeurCroquettesCost)}) : +29 croq./sec (Niv. ${formatNumber(developpeurCroquettesLevel)})`;
   if (score < developpeurCroquettesCost) {
     developpeurCroquettesButton.classList.add("disabled");
     developpeurCroquettesButton.disabled = true;
@@ -716,8 +772,8 @@ function updateButtons() {
     developpeurCroquettesButton.disabled = false;
   }
 
-  // Mise à jour du bouton Mine de croquettes
-  cgmCroquettesButton.textContent = `C.G.M (coût: ${cgmCroquettesCost}) : +32 croq./sec (Niv. ${cgmCroquettesLevel})`;
+  // Mise à jour du bouton C.G.M de croquettes
+  cgmCroquettesButton.textContent = `C.G.M (coût: ${formatNumber(cgmCroquettesCost)}) : +32 croq./sec (Niv. ${formatNumber(cgmCroquettesLevel)})`;
   if (score < cgmCroquettesCost) {
     cgmCroquettesButton.classList.add("disabled");
     cgmCroquettesButton.disabled = true;
@@ -726,8 +782,8 @@ function updateButtons() {
     cgmCroquettesButton.disabled = false;
   }
 
-  // Mise à jour du bouton Mine de croquettes
-  patrouilleCroquettesButton.textContent = `Patrouilles (coût: ${patrouilleCroquettesCost}) : +35 croq./sec (Niv. ${patrouilleCroquettesLevel})`;
+  // Mise à jour du bouton Patrouille de croquettes
+  patrouilleCroquettesButton.textContent = `Patrouilles (coût: ${formatNumber(patrouilleCroquettesCost)}) : +35 croq./sec (Niv. ${formatNumber(patrouilleCroquettesLevel)})`;
   if (score < patrouilleCroquettesCost) {
     patrouilleCroquettesButton.classList.add("disabled");
     patrouilleCroquettesButton.disabled = true;
@@ -736,8 +792,8 @@ function updateButtons() {
     patrouilleCroquettesButton.disabled = false;
   }
 
-  // Mise à jour du bouton Mine de croquettes
-  continentCroquettesButton.textContent = `Continent (coût: ${continentCroquettesCost}) : +40 croq./sec (Niv. ${continentCroquettesLevel})`;
+  // Mise à jour du bouton Continent de croquettes
+  continentCroquettesButton.textContent = `Continent (coût: ${formatNumber(continentCroquettesCost)}) : +40 croq./sec (Niv. ${formatNumber(continentCroquettesLevel)})`;
   if (score < continentCroquettesCost) {
     continentCroquettesButton.classList.add("disabled");
     continentCroquettesButton.disabled = true;
@@ -746,8 +802,8 @@ function updateButtons() {
     continentCroquettesButton.disabled = false;
   }
 
-  // Mise à jour du bouton Mine de croquettes
-  planeteCroquettesButton.textContent = `Planète (coût: ${planeteCroquettesCost}) : +42 croq./sec (Niv. ${planeteCroquettesLevel})`;
+  // Mise à jour du bouton Planète de croquettes
+  planeteCroquettesButton.textContent = `Planète (coût: ${formatNumber(planeteCroquettesCost)}) : +42 croq./sec (Niv. ${formatNumber(planeteCroquettesLevel)})`;
   if (score < planeteCroquettesCost) {
     planeteCroquettesButton.classList.add("disabled");
     planeteCroquettesButton.disabled = true;
@@ -756,8 +812,8 @@ function updateButtons() {
     planeteCroquettesButton.disabled = false;
   }
 
-  // Mise à jour du bouton Mine de croquettes
-  galaxieCroquettesButton.textContent = `Constellation (coût: ${galaxieCroquettesCost}) : +45 croq./sec (Niv. ${galaxieCroquettesLevel})`;
+  // Mise à jour du bouton Galaxie de croquettes
+  galaxieCroquettesButton.textContent = `Constellation (coût: ${formatNumber(galaxieCroquettesCost)}) : +45 croq./sec (Niv. ${formatNumber(galaxieCroquettesLevel)})`;
   if (score < galaxieCroquettesCost) {
     galaxieCroquettesButton.classList.add("disabled");
     galaxieCroquettesButton.disabled = true;
@@ -766,8 +822,8 @@ function updateButtons() {
     galaxieCroquettesButton.disabled = false;
   }
 
-  // Mise à jour du bouton Mine de croquettes
-  trouNoirCroquettesButton.textContent = `Trou Noir (coût: ${trouNoirCroquettesCost}) : +100 croq./sec (Niv. ${trouNoirCroquettesLevel})`;
+  // Mise à jour du bouton Trou Noir de croquettes
+  trouNoirCroquettesButton.textContent = `Trou Noir (coût: ${formatNumber(trouNoirCroquettesCost)}) : +100 croq./sec (Niv. ${formatNumber(trouNoirCroquettesLevel)})`;
   if (score < trouNoirCroquettesCost) {
     trouNoirCroquettesButton.classList.add("disabled");
     trouNoirCroquettesButton.disabled = true;
@@ -776,9 +832,8 @@ function updateButtons() {
     trouNoirCroquettesButton.disabled = false;
   }
 
-
   // Mise à jour du bouton Gamelle (décoration)
-  gamelleButton.textContent = `Remplir la gamelle (coût : ${gamelleDecorationCost} croquettes)`;
+  gamelleButton.textContent = `Remplir la gamelle (coût : ${formatNumber(gamelleDecorationCost)} croquettes)`;
   if (gamellePurchased || score < gamelleDecorationCost) {
     gamelleButton.classList.add("disabled");
     gamelleButton.disabled = true;
@@ -787,8 +842,8 @@ function updateButtons() {
     gamelleButton.disabled = false;
   }
 
-  // Mise à jour du bouton Gamelle (décoration)
-  chambreButton.textContent = `Se rendre dans sa chambre préférée (coût : ${chambreDecorationCost} croquettes)`;
+  // Mise à jour du bouton Chambre (décoration)
+  chambreButton.textContent = `Se rendre dans sa chambre préférée (coût : ${formatNumber(chambreDecorationCost)} croquettes)`;
   if (chambrePurchased || score < chambreDecorationCost) {
     chambreButton.classList.add("disabled");
     chambreButton.disabled = true;
@@ -797,8 +852,8 @@ function updateButtons() {
     chambreButton.disabled = false;
   }
 
-  // Mise à jour du bouton Gamelle (décoration)
-  jardinButton.textContent = `Se rendre dans le jardin (coût : ${jardinDecorationCost} croquettes)`;
+  // Mise à jour du bouton Jardin (décoration)
+  jardinButton.textContent = `Se rendre dans le jardin (coût : ${formatNumber(jardinDecorationCost)} croquettes)`;
   if (jardinPurchased || score < jardinDecorationCost) {
     jardinButton.classList.add("disabled");
     jardinButton.disabled = true;
@@ -807,8 +862,8 @@ function updateButtons() {
     jardinButton.disabled = false;
   }
 
-  // Mise à jour du bouton Gamelle (décoration)
-  restaurantButton.textContent = `Aller au restaurant (coût : ${restaurantDecorationCost} croquettes)`;
+  // Mise à jour du bouton Restaurant (décoration)
+  restaurantButton.textContent = `Aller au restaurant (coût : ${formatNumber(restaurantDecorationCost)} croquettes)`;
   if (restaurantPurchased || score < restaurantDecorationCost) {
     restaurantButton.classList.add("disabled");
     restaurantButton.disabled = true;
@@ -817,8 +872,8 @@ function updateButtons() {
     restaurantButton.disabled = false;
   }
 
-  // Mise à jour du bouton Gamelle (décoration)
-  jetButton.textContent = `Prendre son premier jet privé (coût : ${jetDecorationCost} croquettes)`;
+  // Mise à jour du bouton Jet (décoration)
+  jetButton.textContent = `Prendre son premier jet privé (coût : ${formatNumber(jetDecorationCost)} croquettes)`;
   if (jetPurchased || score < jetDecorationCost) {
     jetButton.classList.add("disabled");
     jetButton.disabled = true;
@@ -827,8 +882,8 @@ function updateButtons() {
     jetButton.disabled = false;
   }
 
-  // Mise à jour du bouton Gamelle (décoration)
-  conferenceButton.textContent = `Faire sa première conférence (coût : ${conferenceDecorationCost} croquettes)`;
+  // Mise à jour du bouton Conférence (décoration)
+  conferenceButton.textContent = `Faire sa première conférence (coût : ${formatNumber(conferenceDecorationCost)} croquettes)`;
   if (conferencePurchased || score < conferenceDecorationCost) {
     conferenceButton.classList.add("disabled");
     conferenceButton.disabled = true;
@@ -837,8 +892,8 @@ function updateButtons() {
     conferenceButton.disabled = false;
   }
 
-  // Mise à jour du bouton Gamelle (décoration)
-  famousButton.textContent = `Accepter l'invitation au MostFamousCat (coût : ${famousDecorationCost} croquettes)`;
+  // Mise à jour du bouton Famous (décoration)
+  famousButton.textContent = `Accepter l'invitation au MostFamousCat (coût : ${formatNumber(famousDecorationCost)} croquettes)`;
   if (famousPurchased || score < famousDecorationCost) {
     famousButton.classList.add("disabled");
     famousButton.disabled = true;
@@ -847,8 +902,8 @@ function updateButtons() {
     famousButton.disabled = false;
   }
 
-  // Mise à jour du bouton Gamelle (décoration)
-  nuitButton.textContent = `La nuit des chats (coût : ${nuitDecorationCost} croquettes)`;
+  // Mise à jour du bouton Nuit (décoration)
+  nuitButton.textContent = `La nuit des chats (coût : ${formatNumber(nuitDecorationCost)} croquettes)`;
   if (nuitPurchased || score < nuitDecorationCost) {
     nuitButton.classList.add("disabled");
     nuitButton.disabled = true;
@@ -857,8 +912,8 @@ function updateButtons() {
     nuitButton.disabled = false;
   }
 
-  // Mise à jour du bouton Gamelle (décoration)
-  reflexGameButton.textContent = `Le Défi de la Patte (coût : ${reflexGameCost} croquettes)`;
+  // Mise à jour du bouton Reflex Game
+  reflexGameButton.textContent = `Le Défi de la Patte (coût : ${formatNumber(reflexGameCost)} croquettes)`;
   if (reflexGamePurchased || score < reflexGameCost) {
     reflexGameButton.classList.add("disabled");
     reflexGameButton.disabled = true;
@@ -868,6 +923,24 @@ function updateButtons() {
   }
 }
 
+// Récupère le slider de volume
+const volumeSlider = document.getElementById('volume-slider');
+let volumeLevel = parseFloat(volumeSlider.value); // Initialise avec la valeur par défaut du slider
+
+// Fonction pour appliquer le volume aux éléments audio
+function setVolume(level) {
+  const audioElements = document.querySelectorAll('audio'); // Sélectionne tous les éléments audio
+  audioElements.forEach(audio => {
+    audio.volume = level; // Met à jour le volume
+  });
+}
+
+// Écoute les changements de volume
+volumeSlider.addEventListener('input', (event) => {
+  volumeLevel = parseFloat(event.target.value); // Mets à jour la variable
+  setVolume(volumeLevel); // Applique le volume
+});
+
 // Charger les données sauvegardées (si elles existent)
 function loadGame() {
   const savedGame = localStorage.getItem("clickerGameSave");
@@ -876,21 +949,21 @@ function loadGame() {
     score = data.score || 0;
     croquettesParSeconde = data.croquettesParSeconde || 0;
     maitresseCroquettesCost = data.maitresseCroquettesCost || 2;
-    sacCroquettesCost = data.sacCroquettesCost || 10;
-    colisCroquettesCost = data.colisCroquettesCost || 100;
-    champCroquettesCost = data.champCroquettesCost || 1500;
-    mineCroquettesCost = data.mineCroquettesCost || 5000;
-    usineCroquettesCost = data.usineCroquettesCost || 15000;
-    convoiCroquettesCost = data.convoiCroquettesCost || 30000;
-    affretementCroquettesCost = data.affretementCroquettesCost || 100000;
-    teleporteurCroquettesCost = data.teleporteurCroquettesCost || 165000;
-    developpeurCroquettesCost = data.developpeurCroquettesCost || 215000;
-    cgmCroquettesCost = data.cgmCroquettesCost || 350000;
-    patrouilleCroquettesCost = data.patrouilleCroquettesCost || 500000;
-    continentCroquettesCost = data.continentCroquettesCost || 750000;
-    planeteCroquettesCost = data.planeteCroquettesCost || 1200000;
-    galaxieCroquettesCost = data.galaxieCroquettesCost || 17500000;
-    trouNoirCroquettesCost = data.trouNoirCroquettesCost || 10000000;
+    sacCroquettesCost = data.sacCroquettesCost || 5;
+    colisCroquettesCost = data.colisCroquettesCost || 50;
+    champCroquettesCost = data.champCroquettesCost || 500;
+    mineCroquettesCost = data.mineCroquettesCost || 1500;
+    usineCroquettesCost = data.usineCroquettesCost || 5000;
+    convoiCroquettesCost = data.convoiCroquettesCost || 10000;
+    affretementCroquettesCost = data.affretementCroquettesCost || 30000;
+    teleporteurCroquettesCost = data.teleporteurCroquettesCost || 50000;
+    developpeurCroquettesCost = data.developpeurCroquettesCost || 75000;
+    cgmCroquettesCost = data.cgmCroquettesCost || 125000;
+    patrouilleCroquettesCost = data.patrouilleCroquettesCost || 200000;
+    continentCroquettesCost = data.continentCroquettesCost || 350000;
+    planeteCroquettesCost = data.planeteCroquettesCost || 500000;
+    galaxieCroquettesCost = data.galaxieCroquettesCost || 750000;
+    trouNoirCroquettesCost = data.trouNoirCroquettesCost || 2000000;
     maitresseCroquettesLevel = data.maitresseCroquettesLevel || 0;
     sacCroquettesLevel = data.sacCroquettesLevel || 0;
     colisCroquettesLevel = data.colisCroquettesLevel || 0;
@@ -916,8 +989,15 @@ function loadGame() {
     famousPurchased = data.famousPurchased || false;
     nuitPurchased = data.nuitPurchased || false;
     reflexGamePurchased = data.reflexGamePurchased || false;
+    if (data.volumeLevel !== undefined) {
+      volumeLevel = data.volumeLevel;
+    } else {
+      volumeLevel = 0.2; // Valeur par défaut
+    }
+    volumeSlider.value = volumeLevel;
     updateScore();
     updateButtons();
+    setVolume(volumeLevel);
     if (gamellePurchased) {
       markAsPurchased("gamelleDecoration");
       showFadeImage();
@@ -1002,7 +1082,8 @@ function saveGame() {
     conferencePurchased: conferencePurchased,
     famousPurchased: famousPurchased,
     nuitPurchased: nuitPurchased,
-    reflexGamePurchased: reflexGamePurchased
+    reflexGamePurchased: reflexGamePurchased,
+    volumeLevel: volumeLevel !== undefined ? volumeLevel : 0.2
   };
   localStorage.setItem("clickerGameSave", JSON.stringify(data));
 }
@@ -1016,6 +1097,7 @@ window.addEventListener("beforeunload", saveGame);
 // Réinitialiser le jeu (pour tester, par exemple)
 function resetGame() {
   localStorage.removeItem("clickerGameSave");
+  localStorage.removeItem("lastDailyReward");
   score = 0;
   croquettesParSeconde = 0;
   maitresseCroquettesCost = 2;
@@ -1050,7 +1132,7 @@ function resetGame() {
   reflexGamePurchased = false;
   updateScore();
   updateButtons();
-}
+};
 
 // Charger le jeu au démarrage
 loadGame();
@@ -1119,18 +1201,6 @@ function showReflexButtonHidden() {
   fadeImage.style.display = "block";
   fadeImage.classList.add("fade-in");
 }
-
-window.onload = function() {
-  if (document.documentElement.requestFullscreen) {
-    document.documentElement.requestFullscreen();
-  } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-    document.documentElement.mozRequestFullScreen();
-  } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
-    document.documentElement.webkitRequestFullscreen();
-  } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-    document.documentElement.msRequestFullscreen();
-  }
-};
 
 // Fonction pour créer les étoiles
 function createStars() {
@@ -1220,7 +1290,7 @@ roulettePopup.addEventListener("click", (event) => {
     } else {
       // L'utilisateur double sa mise
       score *= 2;
-      message.textContent = `Bien joué ! Vous avez maintenant ${score} croquettes ! \n Fermeture...`;
+      message.textContent = `Bien joué ! Vous avez maintenant ${formatNumber(score)} croquettes ! \n Fermeture...`;
       unlockSteamAchievement("RUSSIANR_WIN");
     }
 
@@ -1322,7 +1392,7 @@ function startRace(selectedMouse, odds) {
       const bet = score; // Mise totale
       if (winnerId === selectedId) {
         const winAmount = Math.floor(bet * odds[selectedMouse - 1]);
-        raceResult.textContent = `Bravo ! ${winnerId === "mouse-1" ? "Le chat" : winnerId === "mouse-2" ? "Le chien" : "La souris"} a gagné ! Vous êtes à ${winAmount} croquettes maintenant.`;
+        raceResult.textContent = `Bravo ! ${winnerId === "mouse-1" ? "Le chat" : winnerId === "mouse-2" ? "Le chien" : "La souris"} a gagné ! Vous êtes à ${formatNumber(winAmount)} croquettes maintenant.`;
         score = winAmount;
       } else {
         raceResult.textContent = `Dommage, vous avez perdu. ${winnerId === "mouse-1" ? "Le chat" : winnerId === "mouse-2" ? "Le chien" : "La souris"} a gagné.`;
@@ -1501,41 +1571,12 @@ document.body.appendChild(successPopup);
 
 const successList = successPopup.querySelector(".success-list");
 
-// Fonction pour afficher les succès
-function renderAchievements() {
-  successList.innerHTML = ""; // Réinitialise la liste
-  achievements.forEach((achievement) => {
-    const card = document.createElement("div");
-    card.className = `success-card ${achievement.unlocked ? "unlocked" : ""}`;
-    card.innerHTML = `
-      <img src="${achievement.image}" alt="${achievement.title}">
-      <div class="tooltip">${achievement.description}</div>
-    `;
-    successList.appendChild(card);
-  });
-}
-
-// Notifications de succès
-function showNotification(message) {
-  const notification = document.createElement("div");
-  notification.className = "notification show";
-  notification.textContent = message;
-  document.body.appendChild(notification);
-
-  setTimeout(() => {
-    notification.classList.remove("show");
-    document.body.removeChild(notification);
-  }, 3000);
-}
-
 // Débloquer un succès
 function unlockAchievement(id) {
   const achievement = achievements.find((ach) => ach.id === id);
   if (achievement && !achievement.unlocked) {
     achievement.unlocked = true;
     showNotification(`Succès débloqué : ${achievement.title}`);
-    renderAchievements();
-    saveAchievements(); // Sauvegarde après déblocage
   }
 }
 
@@ -1561,24 +1602,6 @@ function checkAchievements() {
 }
 // Charger les succès au démarrage
 loadAchievements();
-
-// Référence au bouton et création de la pop-up
-const creditsGameButton = document.getElementById("creditsGameButton");
-const creditsGamePopup = document.createElement("div");
-creditsGamePopup.id = "creditsGamePopup";
-creditsGamePopup.innerHTML = `
-`;
-document.body.appendChild(creditsGamePopup);
-
-// Événement pour afficher la pop-up
-creditsGameButton.addEventListener("click", () => {
-  creditsGamePopup.style.display = "block";
-});
-
-// Fermeture de la pop-up via la croix
-creditsGamePopup.querySelector(".close-popup").addEventListener("click", () => {
-  creditsGamePopup.style.display = "none";
-});
 
 function unlockSteamAchievement(achievementId) {
   ipcRenderer.send('unlock-achievement', achievementId);

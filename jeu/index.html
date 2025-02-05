@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mon Clicker</title>
+  <title>CroquettesClicker</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 </head>
@@ -13,10 +13,10 @@
       <!-- <h1 id="titre" data-title="Croquettes Clicker" data-description="Un superbe jeu de Griffon !">Croquettes Clicker</h1> -->
       <img id="CCI" src="images/CROQUETTESCLICKER.png" data-title="Croquettes Clicker" data-description="Un superbe jeu de Griffon !" draggable="false">
       <div id="scoreTotal">Croquettes totales : 0</div>
-      <div id="scoreSeconde">Croquettes par seconde : 0</div>
+      <div id="scoreSeconde" data-i18n="cps">Croquettes par seconde : 0</div>
       <div id="cps-icons-container" class="cps-animation"></div>
 
-      <!-- <button id="resetGame" onclick="resetGame()">Réinitialiser le jeu</button> -->
+      <button id="resetGame" onclick="resetGame()">Réinitialiser le jeu</button>
 
     <!-- Conteneur principal pour l'image et les boutons -->
     <div class="game-area">
@@ -32,56 +32,58 @@
     <div class="upgrade-buttons">
       <h1>Améliorations</h1>
       <button id="maitresseCroquettes" data-title="Une maîtresse" data-description="Mhhhh, des croquettes au poulet fait maison ! C'est mes préférés !">
-        Maîtresse (coût: 50) : +1 croq./sec
+        Maîtresse (coût: 2) : +1 croq./sec
       </button>
       <button id="sacCroquettes" data-title="Sac de croquettes" data-description="Un petit sac de croquettes. Miam !">
-        Sac (coût: 500) : +3 croq./sec
+        Sac (coût: 5) : +3 croq./sec
       </button>
       <button id="colisCroquettes" data-title="Colis de croquettes" data-description="Un chouette colis de croquettes.">
-        Colis (coût: 5 000) : +5 croq./sec
+        Colis (coût: 50) : +5 croq./sec
       </button>
       <button id="champsCroquettes" data-title="Champ de croquettes" data-description="Cultiver des hectares de croquettes... quelle bonne idée !">
-        Champ (coût: 75 000) : +7 croq./sec
+        Champ (coût: 500) : +7 croq./sec
       </button>
       <button id="minesCroquettes" data-title="Mine de croquettes" data-description="Des croquettes sous-terraines ? J'ai hâte de les goûter !">
-        Mine (coût: 300 000) : +12 croq./sec
+        Mine (coût: 1 500) : +12 croq./sec
       </button>
       <button id="usineCroquettes" data-title="Usine de croquettes" data-description="Une ligne de production rien que pour moi !">
-        Usine (coût: 1 500 000) : +15 croq./sec
+        Usine (coût: 5 000) : +15 croq./sec
       </button>
       <button id="convoiCroquettes" data-title="Convoi exceptionnel de croquettes" data-description="Une armée de camions remplis de croquettes !">
-        Convoi exceptionnel (coût: 5 000 000) : +17 croq./sec
+        Convoi exceptionnel (coût: 10 000) : +17 croq./sec
       </button>
       <button id="affretementCroquettes" data-title="Affrètement de croquettes" data-description="Tous les plus gros avions cargos prêts à ravitailler ma gamelle !">
-        Affrètement (coût: 15 000 000) : +20 croq./sec
+        Affrètement (coût: 30 000) : +20 croq./sec
       </button>
       <button id="teleporteurCroquettes" data-title="Téléporteur de croquettes" data-description="Faire venir toutes les croquettes du monde pour moi ? Chouette !">
-        Téléporteur (coût: 30 000 000) : +25 croq./sec
+        Téléporteur (coût: 50 000) : +25 croq./sec
       </button>
       <button id="developpeurCroquettes" data-title="Développeur de croquettes" data-description="Imaginez... un programme qui me fabrique les meilleures croquettes selon mes humeurs...">
-        Développeur (coût: 50 000 000) : +29 croq./sec
+        Développeur (coût: 75 000) : +29 croq./sec
       </button>
       <button id="cgmCroquettes" data-title="Croquettes Génétiquement Modifiées" data-description="Des croquettes qui se dédoublent et changent de goût rien qu'a ma pensée !">
-        C.G.M (coût: 100 000 000) : +32 croq./sec
+        C.G.M (coût: 125 000) : +32 croq./sec
       </button>
       <button id="patrouilleCroquettes" data-title="Patrouille de croquettes" data-description="Un groupe d'hommes armées jusqu'au dents, prêts à défendre et chercher tout ce dont j'ai besoin !">
-        Patrouilles (coût: 200 000 000) : +35 croq./sec
+        Patrouilles (coût: 200 000) : +35 croq./sec
       </button>
       <button id="continentCroquettes" data-title="Continent de croquettes" data-description="Une montagne de croquettes sur tous les continents du monde !">
-        Continent (coût: 500 000 000) : +40 croq./sec
+        Continent (coût: 350 000) : +40 croq./sec
       </button>
       <button id="planeteCroquettes" data-title="Planète de croquettes" data-description="Croc'Planet1, Croc'Planet2...">
-        Planète (coût: 1 000 000 000) : +42 croq./sec
+        Planète (coût: 500 000) : +42 croq./sec
       </button>
       <button id="galaxieCroquettes" data-title="Constellation de croquettes" data-description="Des croquettes dans le ciel... et bien plus loin encore.">
-        Constellation (coût: 5 000 000 000) : +45 croq./sec
+        Constellation (coût: 750 000) : +45 croq./sec
       </button>
       <button id="trouNoirCroquettes" data-title="Trou Noir de croquettes" data-description="Une infinité de croquettes au goût si divin...">
-        Trou Noir (coût: 20 000 000 000) : +100 croq./sec
+        Trou Noir (coût: 2 000 000) : +100 croq./sec
       </button>
       <br>
+      <button id="dailyRewardButton" data-title ="Récupérer la récompense journalière" data-description="Une récompense chaque jour à 00h00 !">Récupérer la récompense journalière</button>
       <br>
-      <button id="quitButton" data-title="Quitter le jeu" data-description="Tu t'en vas déjà ? :(">Quitter le jeu</button>
+      <br>
+      <button id="quitButton" data-title="Quitter le jeu" data-description="Tu t'en vas déjà ? :(">Quitter le jeu</button>    
     </div>
 
     <div class="decoration-buttons">
@@ -134,10 +136,10 @@
     <div class="volume-control">
       <label for="volume-slider">Volume : </label>
       <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.2">
+      <audio id="background-music" src="sons/Fabrice-Tonnellier.mp3" autoplay loop></audio>
     </div>
   </div>
   <script src="script.js"></script>
-  <script src="JS/rouletteCroquette.js"></script>
   <script src="JS/infoBulle.js"></script>
   <script src="JS/quitter.js"></script>
   <script src="JS/son.js"></script>

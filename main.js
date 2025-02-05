@@ -4,15 +4,15 @@ const steam = steamworks.init(3397600);
 const path = require('path');
 require('steamworks.js').electronEnableSteamOverlay();
 
-
-
 function createWindow() {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1920,
+    height: 1080,
     icon: path.join(__dirname, 'jeu/images/Icone.ico'),
-    fullscreen: true,
-    frame: false,
+    fullscreen: false,
+    resizable: true,
+    frame: true,
+    autoHideMenuBar: true, // Hide the menu bar
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -21,6 +21,14 @@ function createWindow() {
 
   win.loadFile('jeu/index.html');
   console.log(steam.localplayer.getName());
+
+  // Ensure the window is not in fullscreen mode
+  win.once('ready-to-show', () => {
+    if (win.isFullScreen()) {
+      win.setFullScreen(false);
+    }
+    win.show(); // Ensure the window is shown
+  });
 
   ipcMain.on("close-app", () => {
     win.close();
@@ -40,12 +48,16 @@ app.disableHardwareAcceleration();
 
 app.whenReady().then(() => {
   createWindow();
-
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
-  });
 });
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
 });
