@@ -12,22 +12,24 @@ function createWindow() {
     fullscreen: false,
     resizable: true,
     frame: true,
-    autoHideMenuBar: true, // Hide the menu bar
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
     },
   });
 
-  win.loadFile('jeu/index.html');
-  console.log(steam.localplayer.getName());
+  win.loadFile('jeu/index.html').then(() => {
+    console.log(steam.localplayer.getName());
+  }).catch((error) => {
+    console.error('Failed to load the file:', error);
+  });
 
-  // Ensure the window is not in fullscreen mode
   win.once('ready-to-show', () => {
     if (win.isFullScreen()) {
       win.setFullScreen(false);
     }
-    win.show(); // Ensure the window is shown
+    win.show();
   });
 
   ipcMain.on("close-app", () => {
@@ -43,8 +45,6 @@ ipcMain.on('unlock-achievement', (event, achievementId) => {
     console.error(`Erreur lors du déverrouillage du succès : ${achievementId}`, error);
   }
 });
-
-app.disableHardwareAcceleration();
 
 app.whenReady().then(() => {
   createWindow();

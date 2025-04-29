@@ -38,19 +38,19 @@ let trouNoirCroquettesLevel = 0;
 
 let gamelleDecorationCost = 500;
 let gamellePurchased = false;
-let jardinDecorationCost = 50000;
+let jardinDecorationCost = 1; //50000;
 let jardinPurchased = false;
-let chambreDecorationCost = 250000;
+let chambreDecorationCost = 1; //250000;
 let chambrePurchased = false;
-let restaurantDecorationCost = 500000;
+let restaurantDecorationCost = 1; //500000;
 let restaurantPurchased = false;
-let jetDecorationCost = 2500000;
+let jetDecorationCost = 1; //2500000;
 let jetPurchased = false;
-let conferenceDecorationCost = 10000000;
+let conferenceDecorationCost = 1; //10000000;
 let conferencePurchased = false;
-let famousDecorationCost = 50000000;
+let famousDecorationCost = 1; //50000000;
 let famousPurchased = false;
-let nuitDecorationCost = 100000000;
+let nuitDecorationCost = 1; //100000000;
 let nuitPurchased = false;
 
 let reflexGameCost = 10000;
@@ -58,7 +58,43 @@ let reflexGamePurchased = false;
 
 // Fonction pour formater les nombres
 function formatNumber(num) {
-  if (num >= 1e9) {
+  if (num >= 1e303) {
+    return (num / 1e303).toFixed(2).replace('.00', '') + ' vigintillions';
+  } else if (num >= 1e300) {
+    return (num / 1e300).toFixed(2).replace('.00', '') + ' centillions';
+  } else if (num >= 1e57) {
+    return (num / 1e57).toFixed(2).replace('.00', '') + ' novemdécillions';
+  } else if (num >= 1e54) {
+    return (num / 1e54).toFixed(2).replace('.00', '') + ' octodécillions';
+  } else if (num >= 1e51) {
+    return (num / 1e51).toFixed(2).replace('.00', '') + ' septendécillions';
+  } else if (num >= 1e48) {
+    return (num / 1e48).toFixed(2).replace('.00', '') + ' sexdécillions';
+  } else if (num >= 1e45) {
+    return (num / 1e45).toFixed(2).replace('.00', '') + ' quindécillions';
+  } else if (num >= 1e42) {
+    return (num / 1e42).toFixed(2).replace('.00', '') + ' quattuordécillions';
+  } else if (num >= 1e39) {
+    return (num / 1e39).toFixed(2).replace('.00', '') + ' trédécillions';
+  } else if (num >= 1e36) {
+    return (num / 1e36).toFixed(2).replace('.00', '') + ' duodécillions';
+  } else if (num >= 1e33) {
+    return (num / 1e33).toFixed(2).replace('.00', '') + ' undécillions';
+  } else if (num >= 1e30) {
+    return (num / 1e30).toFixed(2).replace('.00', '') + ' décillions';
+  } else if (num >= 1e27) {
+    return (num / 1e27).toFixed(2).replace('.00', '') + ' nonillions';
+  } else if (num >= 1e24) {
+    return (num / 1e24).toFixed(2).replace('.00', '') + ' octillions';
+  } else if (num >= 1e21) {
+    return (num / 1e21).toFixed(2).replace('.00', '') + ' septillions';
+  } else if (num >= 1e18) {
+    return (num / 1e18).toFixed(2).replace('.00', '') + ' sextillions';
+  } else if (num >= 1e15) {
+    return (num / 1e15).toFixed(2).replace('.00', '') + ' quintillions';
+  } else if (num >= 1e12) {
+    return (num / 1e12).toFixed(2).replace('.00', '') + ' billiards';
+  } else if (num >= 1e9) {
     return (num / 1e9).toFixed(2).replace('.00', '') + ' milliards';
   } else if (num >= 1e6) {
     return (num / 1e6).toFixed(2).replace('.00', '') + ' millions';
@@ -69,10 +105,11 @@ function formatNumber(num) {
   }
 }
 
+
 // Mise à jour du score affiché
 function updateScore() {
-  document.getElementById("scoreTotal").textContent = `Croquettes totales : ${formatNumber(score)}`;
-  document.getElementById("scoreSeconde").textContent = "Croquettes par seconde : " + croquettesParSeconde;
+  document.getElementById("scoreTotal").textContent = `Croquettes totales : ${formatNumber(Math.floor(score))}`;
+  document.getElementById("scoreSeconde").textContent = `Croquettes par seconde : ${formatNumber(croquettesParSeconde)}`;
 }
 
 // Fonction pour gérer l'achat d'une maitresse
@@ -1130,6 +1167,26 @@ function resetGame() {
   conferencePurchased = false;
   famousPurchased = false;
   reflexGamePurchased = false;
+
+  // Réinitialiser le fond d'écran au fond par défaut
+  document.body.style.background = "url('images/Fond.png') no-repeat center center";
+  document.body.style.backgroundSize = "cover";
+
+  // Supprimer les marques d'achat des améliorations
+  document.querySelectorAll(".purchased").forEach((button) => {
+    button.classList.remove("purchased");
+  });
+
+  // Réinitialiser les autres éléments visuels
+  const fadeImage = document.getElementById("fadeImage");
+  if (fadeImage) fadeImage.style.display = "none";
+
+  const bowlImage = document.getElementById("bowlImage");
+  if (bowlImage) bowlImage.style.display = "block";
+
+  const backgroundVideo = document.getElementById("backgroundVideo");
+  if (backgroundVideo) backgroundVideo.remove();
+
   updateScore();
   updateButtons();
 };
@@ -1290,7 +1347,7 @@ roulettePopup.addEventListener("click", (event) => {
     } else {
       // L'utilisateur double sa mise
       score *= 2;
-      message.textContent = `Bien joué ! Vous avez maintenant ${formatNumber(score)} croquettes ! \n Fermeture...`;
+      message.textContent = `Bien joué ! Vous avez maintenant ${formatNumber(Math.floor(score))} croquettes ! \n Fermeture...`;
       unlockSteamAchievement("RUSSIANR_WIN");
     }
 
@@ -1427,7 +1484,7 @@ document.querySelectorAll(".mouse-bet").forEach(button => {
     }
 
     const raceResult = document.getElementById("race-result");
-    raceResult.textContent = `Vous misez ${bet} croquettes sur ${selectedMouse === 1 ? "le chat" : selectedMouse === 2 ? "le chien" : "la souris"} (Cote : ${odds[selectedMouse - 1]}). La course commence !`;
+    raceResult.textContent = `Vous misez ${Math.floor(bet)} croquettes sur ${selectedMouse === 1 ? "le chat" : selectedMouse === 2 ? "le chien" : "la souris"} (Cote : ${odds[selectedMouse - 1]}). La course commence !`;
 
     startRace(selectedMouse, odds);
   });
@@ -1462,7 +1519,7 @@ reflexPopup.innerHTML = `
   <button class="close-popup">&times;</button>
   <h3>Jeu du Réflexe</h3>
   <p>L'image met aléatoirement entre 1 et 3 secondes à apparaître et ne dure qu'une demi seconde à l'affichage !</p>
-  <p>Cliquez sur l'image dès qu'elle apparaît pour gagner 10% du total de vos croquettes.</p>
+  <p>Cliquez sur l'image dès qu'elle apparaît pour gagner 3% du total de vos croquettes.</p>
   <div id="game-area"></div>
   <p id="reflex-feedback"></p>
   <button id="startReflex">Démarrer</button>
@@ -1517,7 +1574,7 @@ document.getElementById("startReflex").addEventListener("click", () => {
 
     // Gestion du clic sur l'image
     targetImage.addEventListener("click", () => {
-      const bonus = Math.floor(score * 0.1);
+      const bonus = Math.floor(score * 0.03); // 3% du score total
       score += bonus;
       updateScore();
       feedback.textContent = `Bravo ! Vous gagnez ${bonus} croquettes !`;
